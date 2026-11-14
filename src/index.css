@@ -1,0 +1,15 @@
+@import 'tailwindcss';
+
+/* Design tokens are finalised in Phase 3. Base only for now. */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #050a1a;
+  color: #e6ecff;
+  font-family: system-ui, sans-serif;
+}
