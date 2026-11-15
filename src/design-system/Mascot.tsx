@@ -83,7 +83,7 @@ function SpeechBubble({ side, children }: { side: 'left' | 'right' | 'top'; chil
   return (
     <p
       className={cn(
-        'relative max-w-[15rem] rounded-2xl bg-white px-4 py-2.5 text-left text-lg leading-6 font-bold max-sm:max-w-[11rem] max-sm:px-3 max-sm:py-2 max-sm:text-base max-sm:leading-5 short:max-w-[11rem] short:px-3 short:py-1.5 short:text-sm short:leading-4 text-slate-900 shadow-lg',
+        'relative max-w-[15rem] rounded-2xl bg-white px-4 py-2.5 text-left text-lg leading-6 font-bold max-sm:max-w-[11rem] max-sm:px-3 max-sm:py-2 max-sm:text-base max-sm:leading-5 short:max-w-[11rem] short:px-3 short:py-1.5 short:text-base short:leading-snug text-slate-900 shadow-lg',
         // Little tail pointing at the robot.
         'after:absolute after:size-3.5 after:rotate-45 after:bg-white',
         side === 'left' && 'after:top-1/2 after:-right-1.5 after:-translate-y-1/2',

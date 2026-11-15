@@ -40,6 +40,11 @@ export function GameplayScreen() {
     if (known && (!run || run.missionId !== missionId)) start(missionId);
   }, [known, run, missionId, start]);
 
+  // Each new day eases in: first the scene, then the story card, then the options and the problem
+  // (red glow + fix button). Day 1 is slower, as it is the player's first look at the outpost.
+  const firstDay = run?.history.length === 0;
+  const stage = useRevealStage(`${run?.missionId}:${run?.day}:${outcome ? 'feedback' : 'play'}`, firstDay ? [2200, 4200] : [350, 1100]);
+
   // Phones: full screen and sideways while playing (the tap on "Begin Mission" already asked for it;
   // this covers a reload or a direct link), and back to normal when leaving the game.
   useEffect(() => {
@@ -86,8 +91,8 @@ export function GameplayScreen() {
   const shownDay = outcome ? outcome.run.history.at(-1)!.day : run.day;
   const scenario: Scenario = outcome ? outcome.scenario : currentScenario(mission, run);
 
-  const highlights = outcome ? [] : scenario.mapHighlights;
-  const problem = outcome ? undefined : scenario.problem;
+  const highlights = outcome || stage < 2 ? [] : scenario.mapHighlights;
+  const problem = outcome || stage < 2 ? undefined : scenario.problem;
   const fixDecision = problem && scenario.decisions.find((d) => d.id === problem.fixDecisionId);
   const fix = fixDecision ? { decision: fixDecision, onChoose: () => choose(fixDecision.id) } : undefined;
   const panel = selected && !outcome && (
@@ -153,6 +158,7 @@ export function GameplayScreen() {
                 scenario={scenario}
                 note={<FlareNote run={run} scenario={scenario} />}
                 onChoose={choose}
+                stage={stage}
                 mascot={scenarioPose(shownDay, phaseOf(mission, shownDay), scenario, lowResources(mission, run))}
                 className="portrait:order-4 landscape:mt-auto"
               />
@@ -182,11 +188,31 @@ export function GameplayScreen() {
   );
 }
 
+/**
+ * 0 = just the scene, 1 = the story card, 2 = the options and the problem on the map.
+ * Restarts whenever `key` changes (a new day, or coming back from the feedback card).
+ */
+function useRevealStage(key: string, [storyAt, optionsAt]: [number, number]): number {
+  // The stage is stored with the key it belongs to, so a new day reads as 0 on its very first render.
+  const [state, setState] = useState({ key, stage: 0 });
+  useEffect(() => {
+    const a = setTimeout(() => setState({ key, stage: 1 }), storyAt);
+    const b = setTimeout(() => setState({ key, stage: 2 }), optionsAt);
+    return () => {
+      clearTimeout(a);
+      clearTimeout(b);
+    };
+    // The delays only change together with the key.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [key]);
+  return state.key === key ? state.stage : 0;
+}
+
 function DayChip({ mission, day }: { mission: Mission; day: number }) {
   const phase = phaseOf(mission, day);
   return (
     <div className="flex w-fit flex-wrap items-center gap-x-5 gap-y-2 rounded-2xl border-2 border-blue-400/40 bg-slate-950/75 px-4 py-2.5 backdrop-blur-sm max-sm:w-full max-sm:flex-nowrap max-sm:gap-x-3 max-sm:rounded-xl max-sm:border max-sm:px-3 max-sm:py-1.5 short:rounded-xl short:px-3 short:py-1">
-      <p className="flex items-center gap-2.5 text-lg font-bold text-white max-sm:shrink-0 max-sm:text-sm short:gap-2 short:text-sm">
+      <p className="flex items-center gap-2.5 text-lg font-bold text-white max-sm:shrink-0 max-sm:text-sm short:gap-2 short:text-base">
         {phase === 'day' ? <Sun aria-hidden className="size-6 text-yellow-300 max-sm:size-5 short:size-4" /> : <Moon aria-hidden className="size-6 text-blue-200 max-sm:size-5 short:size-4" />}
         Day {day} / {mission.balance.durationDays}<span className="max-sm:hidden"> · {phase === 'day' ? 'Lunar Daylight' : 'Lunar Night'}</span>
       </p>
@@ -224,7 +250,7 @@ function FlareNote({ run, scenario }: { run: MissionRun; scenario: Scenario }) {
   const flare = scenario.showsFlare ? solarFlares.find((f) => f.id === run.flareId) : undefined;
   if (!flare) return null;
   return (
-    <p className="rounded-xl border border-amber-500/50 bg-amber-100 px-3 py-2 text-base leading-5 text-amber-950 landscape:py-1.5 landscape:text-sm short:py-1 short:text-xs short:leading-4">
+    <p className="rounded-xl border border-amber-500/50 bg-amber-100 px-3 py-2 text-base leading-5 text-amber-950 landscape:py-1.5 landscape:text-sm short:py-1 short:text-sm short:leading-snug">
       This storm is based on a real solar flare: <strong>{formatDate(flare.date)}</strong>, strength <strong>{flare.classType}</strong>. Archived NASA data.
     </p>
   );

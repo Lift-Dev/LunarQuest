@@ -42,7 +42,7 @@ export function Modal({
         <span className="absolute -top-10 left-1/2 short:-top-6 short:size-12 grid size-20 -translate-x-1/2 place-items-center rounded-full border-4 border-blue-400/70 bg-slate-900 text-white shadow-glow-blue">
           <Icon aria-hidden className="size-9 short:size-6" strokeWidth={2.5} />
         </span>
-        <h2 className="text-center text-4xl font-bold text-white max-sm:text-3xl short:text-2xl">{title}</h2>
+        <h2 className="text-center text-4xl font-bold text-white max-sm:text-3xl short:text-3xl">{title}</h2>
         <div className="mt-6 border-t border-blue-400/30 pt-6 short:mt-2 short:pt-3">{children}</div>
         {mascot && <div className="absolute -right-6 -bottom-8 hidden sm:block">{mascot}</div>}
       </div>

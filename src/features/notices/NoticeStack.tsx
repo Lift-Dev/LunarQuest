@@ -62,8 +62,8 @@ function NoticeCard({ notice, onDismiss }: { notice: Notice; onDismiss: () => vo
         className="-my-1 h-16 w-auto shrink-0 max-sm:h-12 short:h-10"
       />
       <div className="min-w-0 flex-1">
-        <p className="text-xl leading-6 font-bold text-white short:text-base short:leading-5">{title}</p>
-        <p className="text-base leading-5 text-blue-100/85 short:text-sm">{text}</p>
+        <p className="text-xl leading-6 font-bold text-white short:text-lg short:leading-snug">{title}</p>
+        <p className="text-base leading-5 text-blue-100/85 short:text-base">{text}</p>
       </div>
       <button
         type="button"

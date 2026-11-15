@@ -25,10 +25,10 @@ const variants: Record<ButtonVariant, string> = {
 };
 
 const sizes: Record<ButtonVariant, Record<ButtonSize, string>> = {
-  pill: { md: 'px-10 py-3 text-2xl', lg: 'px-20 py-5 text-4xl max-sm:px-14 max-sm:py-4 max-sm:text-3xl short:px-12 short:py-2.5 short:text-2xl' },
-  primary: { md: 'px-8 py-3 text-xl', lg: 'px-12 py-5 text-2xl max-sm:px-8 max-sm:py-4 max-sm:text-xl short:px-8 short:py-2.5 short:text-xl' },
-  raised: { md: 'px-12 py-3 text-xl', lg: 'px-20 py-5 text-2xl max-sm:px-14 max-sm:py-4 max-sm:text-xl short:px-12 short:py-2.5 short:text-xl' },
-  ghost: { md: 'px-6 py-3 text-lg', lg: 'px-10 py-4 text-2xl max-sm:px-6 max-sm:text-xl short:py-2 short:text-lg' },
+  pill: { md: 'px-10 py-3 text-2xl', lg: 'px-20 py-5 text-4xl max-sm:px-14 max-sm:py-4 max-sm:text-3xl short:px-12 short:py-2.5 short:text-3xl' },
+  primary: { md: 'px-8 py-3 text-xl', lg: 'px-12 py-5 text-2xl max-sm:px-8 max-sm:py-4 max-sm:text-xl short:px-8 short:py-2.5 short:text-2xl' },
+  raised: { md: 'px-12 py-3 text-xl', lg: 'px-20 py-5 text-2xl max-sm:px-14 max-sm:py-4 max-sm:text-xl short:px-12 short:py-2.5 short:text-2xl' },
+  ghost: { md: 'px-6 py-3 text-lg', lg: 'px-10 py-4 text-2xl max-sm:px-6 max-sm:text-xl short:py-2 short:text-xl' },
 };
 
 interface CommonProps {

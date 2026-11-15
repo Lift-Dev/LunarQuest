@@ -24,7 +24,7 @@ export function WelcomeScreen() {
         <p className="mt-10 short:mt-2 text-[clamp(1.75rem,3.5vh,2.25rem)] leading-tight font-bold text-white text-glow">
           Explore. Survive. Discover.
         </p>
-        <p className="mt-3 text-xl text-white/90 short:mt-1 short:text-base">A new adventure beyond Earth awaits.</p>
+        <p className="mt-3 text-xl text-white/90 short:mt-1 short:text-lg">A new adventure beyond Earth awaits.</p>
         <Button to={routes.briefing} variant="pill" size="lg" className="mt-12 short:mt-3">
           Start
         </Button>

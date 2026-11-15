@@ -25,7 +25,7 @@ export function ResourceHud({ lifeSupport, power, radiation, stars, low = [], on
           <Star aria-hidden className="size-8 fill-star text-star max-sm:size-5 short:size-5" />
           <div>
             <p className="text-sm text-blue-100/80 max-sm:hidden short:hidden">Science Stars</p>
-            <p className="text-xl leading-none font-bold text-white max-sm:text-base short:text-base">{stars} / 5</p>
+            <p className="text-xl leading-none font-bold text-white max-sm:text-base short:text-lg">{stars} / 5</p>
           </div>
         </div>
       </div>
@@ -61,9 +61,9 @@ function Meter({
     <div className="flex items-center gap-3 max-sm:flex-wrap max-sm:content-start max-sm:gap-x-1.5 max-sm:gap-y-1 short:gap-1.5">
       <Icon aria-hidden className={cn('size-8 shrink-0 max-sm:size-5 short:size-5', icon)} />
       <div className="min-w-0 flex-1 max-sm:contents">
-        <p className="flex items-baseline justify-between gap-2 text-sm text-blue-100/80 max-sm:flex-1 max-sm:justify-start short:text-xs">
+        <p className="flex items-baseline justify-between gap-2 text-sm text-blue-100/80 max-sm:flex-1 max-sm:justify-start short:text-sm">
           <span className="max-sm:sr-only short:sr-only">{label}</span>
-          <span className={cn('flex items-center gap-1 text-xl leading-none font-bold max-sm:text-base short:text-base', low ? 'text-red-300' : 'text-white')}>
+          <span className={cn('flex items-center gap-1 text-xl leading-none font-bold max-sm:text-base short:text-lg', low ? 'text-red-300' : 'text-white')}>
             {low && <TriangleAlert aria-label="Low" className="size-4" />}
             {pct}%
           </span>

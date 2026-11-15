@@ -65,7 +65,7 @@ export function InspectionPanel({
     >
       <div className="flex items-center gap-3 border-b border-blue-400/40 pb-3 short:gap-2 short:pb-2">
         <Icon className="size-10 shrink-0 text-blue-200 short:size-6" />
-        <h2 className="flex-1 text-xl leading-tight font-bold short:text-base">{eq.name}</h2>
+        <h2 className="flex-1 text-xl leading-tight font-bold short:text-lg">{eq.name}</h2>
         <button
           type="button"
           onClick={onClose}
@@ -76,8 +76,8 @@ export function InspectionPanel({
         </button>
       </div>
 
-      <div className="space-y-2 border-b border-blue-400/40 py-3 short:space-y-1 short:py-2 short:text-sm">
-        <p className="flex items-center gap-3 text-lg short:gap-2 short:text-sm">
+      <div className="space-y-2 border-b border-blue-400/40 py-3 short:space-y-1 short:py-2 short:text-base">
+        <p className="flex items-center gap-3 text-lg short:gap-2 short:text-base">
           <StatusIcon aria-hidden className={cn('size-8 shrink-0 short:size-5', tone.text)} />
           <span>
             Status: <strong className={cn('font-semibold', tone.text)}>{info.statusLabel}</strong>
@@ -85,7 +85,7 @@ export function InspectionPanel({
         </p>
         {r && (
           <div>
-            <p className="text-lg short:text-sm">
+            <p className="text-lg short:text-base">
               {r.label}: <strong className="font-semibold">{r.percent}%</strong>
             </p>
             <div
@@ -100,11 +100,11 @@ export function InspectionPanel({
             </div>
           </div>
         )}
-        {info.note && <p className="text-lg leading-6 text-blue-100/90 short:text-sm short:leading-5">{info.note}</p>}
+        {info.note && <p className="text-lg leading-6 text-blue-100/90 short:text-base short:leading-snug">{info.note}</p>}
       </div>
 
       <div className="pt-3 short:pt-2">
-        <p className="flex items-center gap-3 text-lg short:text-sm">
+        <p className="flex items-center gap-3 text-lg short:text-base">
           <Network aria-hidden className="size-7 shrink-0 text-blue-300" />
           Connected to:
         </p>
@@ -114,7 +114,7 @@ export function InspectionPanel({
               <button
                 type="button"
                 onClick={() => onSelect(c)}
-                className="flex w-full items-center gap-3 rounded-lg py-0.5 pl-10 text-left text-lg text-blue-100 transition hover:text-white short:pl-0 short:text-sm"
+                className="flex w-full items-center gap-3 rounded-lg py-0.5 pl-10 text-left text-lg text-blue-100 transition hover:text-white short:pl-0 short:text-base"
               >
                 <span aria-hidden className="size-3 rounded-full bg-blue-500" />
                 {getEquipment(c).name}

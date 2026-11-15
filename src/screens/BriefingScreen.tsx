@@ -18,7 +18,7 @@ export function BriefingScreen() {
 
         <div className="relative flex flex-col items-start max-lg:mx-auto max-lg:-mt-32 max-lg:w-full max-lg:max-w-xl max-lg:px-2 short:mx-0 short:mt-0 short:max-w-none short:px-0">
           <Chip tone="blue">Briefing initiated</Chip>
-          <h1 className="mt-2.5 text-[clamp(2.75rem,5vw,3.75rem)] leading-none font-bold uppercase max-sm:text-[2.5rem] short:text-3xl">
+          <h1 className="mt-2.5 text-[clamp(2.75rem,5vw,3.75rem)] leading-none font-bold uppercase max-sm:text-[2.5rem] short:text-4xl">
             <span className="block text-white text-glow">You are the</span>
             <span className="block bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-[0_0_18px_rgb(96_165_250/0.45)]">
               Mission
@@ -28,11 +28,11 @@ export function BriefingScreen() {
           </h1>
 
           <Panel variant="solid" className="mt-10 w-full max-w-[552px] p-8 max-sm:mt-6 max-sm:p-5 short:mt-3 short:p-3">
-            <p className="text-2xl leading-8 text-blue-100 max-sm:text-lg max-sm:leading-7 short:text-sm short:leading-5">
+            <p className="text-2xl leading-8 text-blue-100 max-sm:text-lg max-sm:leading-7 short:text-base short:leading-snug">
               Humanity is preparing to live beyond Earth. Your job is to lead a space crew, manage an outpost, and
               make decisions that keep everyone alive.
             </p>
-            <p className="mt-6 border-l-4 border-blue-500 pl-6 text-xl leading-7 max-sm:mt-4 max-sm:pl-4 max-sm:text-base max-sm:leading-6 short:mt-2 short:pl-3 short:text-sm short:leading-5 text-blue-200/80 italic">
+            <p className="mt-6 border-l-4 border-blue-500 pl-6 text-xl leading-7 max-sm:mt-4 max-sm:pl-4 max-sm:text-base max-sm:leading-6 short:mt-2 short:pl-3 short:text-base short:leading-snug text-blue-200/80 italic">
               Every decision matters. Can you survive and make new discoveries?
             </p>
           </Panel>

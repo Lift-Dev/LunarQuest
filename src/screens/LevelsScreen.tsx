@@ -21,7 +21,7 @@ export function LevelsScreen() {
         Home
       </NavPill>
       <main className="flex min-h-dvh flex-col items-center justify-center py-20 short:py-2">
-        <h1 className="text-center text-[clamp(2.25rem,4vw,3.5rem)] leading-none font-bold text-white uppercase text-glow max-sm:text-3xl short:text-3xl">
+        <h1 className="text-center text-[clamp(2.25rem,4vw,3.5rem)] leading-none font-bold text-white uppercase text-glow max-sm:text-3xl short:text-4xl">
           Your <span className="text-blue-400">Journey</span>
         </h1>
         <p className="mt-3 px-4 text-center text-xl text-blue-100/90 max-sm:text-base short:hidden">Complete missions to explore, survive and discover!</p>
@@ -82,7 +82,7 @@ function LevelCard({ level, unlocked, stars }: { level: Level; unlocked: boolean
           </div>
         )}
       </div>
-      <h2 className={cn('mt-3 flex min-h-12 items-center text-lg leading-5 font-bold uppercase short:mt-2 short:min-h-9 short:text-sm short:leading-4', unlocked ? 'text-white' : 'text-slate-300')}>
+      <h2 className={cn('mt-3 flex min-h-12 items-center text-lg leading-5 font-bold uppercase short:mt-2 short:min-h-9 short:text-base short:leading-snug', unlocked ? 'text-white' : 'text-slate-300')}>
         {level.title}
       </h2>
       <StarRating earned={stars} size="sm" dim={!unlocked} className="mt-2" />

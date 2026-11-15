@@ -17,11 +17,11 @@ export function MissionOverviewScreen() {
       <NavPill to={routes.levels}>Back</NavPill>
       <main className="mx-auto flex min-h-dvh max-w-6xl flex-col items-center justify-center gap-6 px-6 py-24 max-sm:px-4 max-sm:pt-20 max-sm:pb-10 short:safe-x short:[--safe-min:1.5rem] short:gap-3 short:pt-12 short:pb-4 lg:items-end">
         <div className="flex w-full max-w-[1000px] flex-col items-center gap-6 short:gap-3">
-          <h1 className="text-center text-[clamp(2rem,3.5vw,2.75rem)] leading-none font-bold text-white uppercase text-glow max-sm:text-[1.75rem] max-sm:leading-tight short:text-2xl">
+          <h1 className="text-center text-[clamp(2rem,3.5vw,2.75rem)] leading-none font-bold text-white uppercase text-glow max-sm:text-[1.75rem] max-sm:leading-tight short:text-3xl">
             Mission 01 — <span className="text-blue-400">{level.title}</span>
           </h1>
 
-          <ul className="flex flex-wrap justify-center gap-x-8 gap-y-2 rounded-full border-2 border-blue-400/40 bg-slate-950/70 px-8 py-3 text-lg text-white backdrop-blur-sm max-sm:flex-col max-sm:gap-y-1 max-sm:rounded-2xl max-sm:px-5 max-sm:text-base short:gap-x-5 short:py-1 short:text-sm">
+          <ul className="flex flex-wrap justify-center gap-x-8 gap-y-2 rounded-full border-2 border-blue-400/40 bg-slate-950/70 px-8 py-3 text-lg text-white backdrop-blur-sm max-sm:flex-col max-sm:gap-y-1 max-sm:rounded-2xl max-sm:px-5 max-sm:text-base short:gap-x-5 short:py-1 short:text-base">
             <Fact icon={<CalendarDays aria-hidden className="size-6 text-blue-300" />}>14 Earth Days</Fact>
             <Fact icon={<Sun aria-hidden className="size-6 text-yellow-300" />}>7 Days of Daylight</Fact>
             <Fact icon={<Moon aria-hidden className="size-6 text-blue-200" />}>7 Days of Night</Fact>
@@ -37,7 +37,7 @@ export function MissionOverviewScreen() {
                 alt="A lunar outpost with a dome habitat, solar panels and a rover"
                 className="size-44 shrink-0 self-center rounded-xl max-sm:size-32 short:size-24 object-cover"
               />
-              <div className="space-y-4 text-xl leading-7 text-blue-100 max-sm:space-y-3 max-sm:text-base max-sm:leading-6 short:space-y-1 short:text-sm short:leading-5">
+              <div className="space-y-4 text-xl leading-7 text-blue-100 max-sm:space-y-3 max-sm:text-base max-sm:leading-6 short:space-y-1 short:text-base short:leading-snug">
                 <p>
                   Your crew has arrived at a lunar outpost for a 14-day mission. Collect samples, gather scientific
                   data, and explore the surrounding environment.
@@ -86,8 +86,8 @@ function Goal({ icon, title, tone, children }: { icon: string; title: string; to
     <Panel variant="solid" className="flex items-center gap-5 p-5 max-sm:gap-4 max-sm:p-4 short:gap-3 short:p-2.5">
       <img src={icon} alt="" aria-hidden className="h-20 w-auto shrink-0 max-sm:h-14 short:h-12 [mask-image:radial-gradient(closest-side,#000_70%,transparent)]" />
       <div>
-        <h2 className={`text-2xl font-bold uppercase short:text-lg ${tone}`}>{title}</h2>
-        <p className="mt-1 text-lg leading-6 text-blue-100/90 max-sm:text-base short:mt-0 short:text-sm short:leading-4">{children}</p>
+        <h2 className={`text-2xl font-bold uppercase short:text-xl ${tone}`}>{title}</h2>
+        <p className="mt-1 text-lg leading-6 text-blue-100/90 max-sm:text-base short:mt-0 short:text-base short:leading-snug">{children}</p>
       </div>
     </Panel>
   );

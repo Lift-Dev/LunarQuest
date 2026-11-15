@@ -47,10 +47,10 @@ export function LearnToSurviveScreen() {
   return (
     <ScreenBackground glow="center" stars={false}>
       <main className="flex min-h-dvh flex-col items-center px-6 pt-11 pb-12 text-center max-sm:px-4 max-sm:pt-8 max-sm:pb-8 short:safe-x short:[--safe-min:1.5rem] short:pt-3 short:pb-3">
-        <h1 className="text-[clamp(2.25rem,4vw,3rem)] leading-none font-bold text-white uppercase text-glow max-sm:text-[1.75rem] short:text-2xl">
+        <h1 className="text-[clamp(2.25rem,4vw,3rem)] leading-none font-bold text-white uppercase text-glow max-sm:text-[1.75rem] short:text-3xl">
           Three resources. One mission.
         </h1>
-        <p className="mt-6 max-w-3xl text-xl leading-7 text-blue-200 max-sm:mt-4 max-sm:text-base max-sm:leading-6 short:mt-1 short:text-sm short:leading-5">
+        <p className="mt-6 max-w-3xl text-xl leading-7 text-blue-200 max-sm:mt-4 max-sm:text-base max-sm:leading-6 short:mt-1 short:text-base short:leading-snug">
           Keep an eye on these resources. If any reaches a critical level, your mission will be aborted.
         </p>
 
@@ -60,8 +60,8 @@ export function LearnToSurviveScreen() {
               <li key={r.tone}>
                 <Panel variant="card" className="flex h-full flex-col items-center p-8 max-sm:p-5 short:p-3">
                   <img src={r.icon} alt="" aria-hidden className="size-32 object-contain max-sm:size-20 short:size-14" />
-                  <h2 className={`mt-6 text-2xl font-bold uppercase max-sm:mt-3 short:mt-1 short:text-lg ${r.titleClass}`}>{r.title}</h2>
-                  <p className="mt-3 text-base text-blue-100/80 short:mt-1 short:text-sm short:leading-4">{r.text}</p>
+                  <h2 className={`mt-6 text-2xl font-bold uppercase max-sm:mt-3 short:mt-1 short:text-xl ${r.titleClass}`}>{r.title}</h2>
+                  <p className="mt-3 text-base text-blue-100/80 short:mt-1 short:text-base short:leading-snug">{r.text}</p>
                   <ProgressBar tone={r.tone} label={r.bar} value={r.value} className="mt-5 text-left short:mt-2" />
                 </Panel>
               </li>

@@ -70,12 +70,12 @@ export function AbortedView({ missionId, result }: { missionId: string; result: 
       title="Mission Aborted"
       subtitle="The outpost could not be saved. Try again next time!"
     >
-      <p className="mt-4 text-lg font-bold tracking-wide text-red-300 uppercase short:mt-1 short:text-base">{causeText[result.cause]}</p>
+      <p className="mt-4 text-lg font-bold tracking-wide text-red-300 uppercase short:mt-1 short:text-lg">{causeText[result.cause]}</p>
       <Panel variant="solid" className="mt-6 flex items-center justify-center gap-6 py-5 short:mt-2 short:py-2">
         <Calendar aria-hidden className="size-14 text-blue-300" strokeWidth={1.5} />
         <div className="text-left">
           <p className="text-lg text-blue-100/90">Days Survived</p>
-          <p className="text-4xl leading-none font-bold text-white short:text-2xl">
+          <p className="text-4xl leading-none font-bold text-white short:text-3xl">
             {result.days} / {result.totalDays}
           </p>
         </div>
@@ -98,8 +98,8 @@ function ResultFrame({ badge, title, subtitle, children }: { badge: ReactNode; t
       <main className="grid min-h-dvh place-items-center px-4 pt-36 pb-16 max-sm:pb-8 short:safe-x short:[--safe-min:1rem] short:pt-20 short:pb-2">
         <section className="relative w-full max-w-[560px] rounded-3xl border-2 border-blue-400/60 bg-slate-900/85 px-8 pt-16 pb-8 text-center max-sm:px-5 short:px-6 short:pt-10 short:pb-4 shadow-glow-panel backdrop-blur-sm">
           <div className="absolute -top-28 left-1/2 -translate-x-1/2 short:-top-16">{badge}</div>
-          <h1 className="text-5xl leading-tight font-bold text-white max-sm:text-4xl short:text-3xl">{title}</h1>
-          <p className="mx-auto mt-3 max-w-sm text-xl leading-7 text-blue-100 max-sm:text-lg short:mt-1 short:max-w-none short:text-base short:leading-5">{subtitle}</p>
+          <h1 className="text-5xl leading-tight font-bold text-white max-sm:text-4xl short:text-4xl">{title}</h1>
+          <p className="mx-auto mt-3 max-w-sm text-xl leading-7 text-blue-100 max-sm:text-lg short:mt-1 short:max-w-none short:text-lg short:leading-snug">{subtitle}</p>
           {children}
         </section>
       </main>
@@ -111,7 +111,7 @@ function Stat({ icon, value, label }: { icon: ReactNode; value: string; label: s
   return (
     <div className="flex flex-col items-center gap-1 px-2 [&_svg]:size-8">
       {icon}
-      <p className="text-3xl leading-tight font-bold text-white max-sm:text-xl short:text-xl">{value}</p>
+      <p className="text-3xl leading-tight font-bold text-white max-sm:text-xl short:text-2xl">{value}</p>
       <p className="text-sm text-blue-100/80 max-sm:text-xs">{label}</p>
     </div>
   );

@@ -42,13 +42,13 @@ export function FeedbackCard({
           <Lightbulb aria-hidden className="size-4" strokeWidth={2.5} />
           Real Space Fact
         </p>
-        <p className="mt-3 text-2xl leading-9 text-white max-sm:text-xl max-sm:leading-8 short:mt-1 short:text-base short:leading-6">
+        <p className="mt-3 text-2xl leading-9 text-white max-sm:text-xl max-sm:leading-8 short:mt-1 short:text-lg short:leading-snug">
           <RichText text={fact.text} />
         </p>
         {names.length > 0 && <p className="mt-3 text-sm text-blue-200/60">Source: {names.join(', ')}</p>}
 
         <div className="mt-6 flex flex-col items-center gap-3 border-t border-white/10 pt-5 short:mt-2 short:items-start short:gap-1.5 short:pt-2">
-          <p className="text-lg text-blue-100 short:text-sm">
+          <p className="text-lg text-blue-100 short:text-base">
             You chose <strong className="font-bold text-white">{outcome.decision.title}</strong>
           </p>
           {outcome.overrideNote && <p className="text-lg font-bold text-emerald-300">{outcome.overrideNote}</p>}

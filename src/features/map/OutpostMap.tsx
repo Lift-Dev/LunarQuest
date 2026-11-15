@@ -117,7 +117,11 @@ export function OutpostMap({ selected, highlights, onSelect, fit, problem, fix, 
           );
         })}
 
-        {problem && <ProblemFx problem={problem} />}
+        {problem && (
+          <g className="animate-fade-in">
+            <ProblemFx problem={problem} />
+          </g>
+        )}
         {selected && <Pin equipment={equipment.find((e) => e.id === selected)!} />}
       </svg>
       {problem && fix && <FixButton problem={problem} decision={fix.decision} onChoose={fix.onChoose} />}
@@ -172,7 +176,7 @@ function FixButton({ problem, decision, onChoose }: { problem: Problem; decision
   const top = Math.min(...rects.map((r) => r[1]));
   return (
     <div
-      className="absolute z-10"
+      className="absolute z-10 animate-fade-in"
       style={{ left: `${(((left + right) / 2) / MAP_SIZE.width) * 100}%`, top: `${(top / MAP_SIZE.height) * 100}%` }}
     >
       <div className="-translate-x-1/2 -translate-y-full pb-3">
@@ -188,7 +192,7 @@ function FixButton({ problem, decision, onChoose }: { problem: Problem; decision
             <Wrench className="size-5" />
           </span>
           <span className="min-w-0">
-            <span className="block text-base leading-tight font-bold short:text-sm">{decision.title}</span>
+            <span className="block text-base leading-tight font-bold short:text-base">{decision.title}</span>
             <span className="block text-xs leading-4 text-white/95">{decision.explanation}</span>
           </span>
           {/* Little tail pointing down at the problem. */}

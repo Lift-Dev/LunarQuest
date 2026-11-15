@@ -14,10 +14,10 @@ export function HowToPlayScreen() {
   return (
     <ScreenBackground scene>
       <main className="mx-auto flex min-h-dvh max-w-5xl flex-col items-center justify-center px-6 py-12 text-center max-sm:px-4 max-sm:py-10 short:safe-x short:[--safe-min:1.5rem] short:py-3">
-        <h1 className="text-[clamp(2.5rem,5vw,3.75rem)] leading-none font-bold text-white text-glow max-sm:text-[2rem] short:text-3xl">
+        <h1 className="text-[clamp(2.5rem,5vw,3.75rem)] leading-none font-bold text-white text-glow max-sm:text-[2rem] short:text-4xl">
           Explore. Decide. <span className="text-blue-400">Survive.</span>
         </h1>
-        <p className="mt-4 text-xl text-blue-100/90 max-sm:text-base short:mt-1 short:text-sm">Follow these simple steps to complete your mission.</p>
+        <p className="mt-4 text-xl text-blue-100/90 max-sm:text-base short:mt-1 short:text-base">Follow these simple steps to complete your mission.</p>
 
         <ol className="mt-16 flex w-full flex-col items-stretch gap-6 max-sm:mt-12 max-sm:gap-8 md:flex-row md:items-center short:mt-8 short:flex-row short:items-center short:gap-3">
           {steps.map((step, i) => (
@@ -34,8 +34,8 @@ export function HowToPlayScreen() {
                     aria-hidden
                     className="h-24 object-contain short:h-12 [mask-image:radial-gradient(closest-side,#000_70%,transparent)]"
                   />
-                  <h2 className="mt-4 text-2xl font-bold text-white short:mt-1 short:text-lg">{step.title}</h2>
-                  <p className="mt-2 text-lg leading-6 text-blue-100/80 short:mt-0.5 short:text-sm short:leading-4">{step.text}</p>
+                  <h2 className="mt-4 text-2xl font-bold text-white short:mt-1 short:text-xl">{step.title}</h2>
+                  <p className="mt-2 text-lg leading-6 text-blue-100/80 short:mt-0.5 short:text-base short:leading-snug">{step.text}</p>
                 </Panel>
               </li>
             </Fragment>
