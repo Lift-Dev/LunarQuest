@@ -2,12 +2,13 @@ import { ChevronRight } from 'lucide-react';
 import { Fragment } from 'react';
 import { routes } from '../app/routes';
 import { Button, Mascot, Panel, ScreenBackground } from '../design-system';
+import { asset } from '../lib/asset';
 
 /** "How to Play" — matches image-assets/Explore, Decide, Survive_ Moon Mission Tutorial.png */
 const steps = [
-  { icon: '/assets/how-to-play/observe.png', title: 'Observe', text: 'Read the situation.' },
-  { icon: '/assets/how-to-play/investigate.png', title: 'Investigate', text: 'Check the equipment on the map.' },
-  { icon: '/assets/how-to-play/decide.png', title: 'Decide & Discover', text: 'Choose between options and make progress.' },
+  { icon: asset('assets/how-to-play/observe.png'), title: 'Observe', text: 'Read the situation.' },
+  { icon: asset('assets/how-to-play/investigate.png'), title: 'Investigate', text: 'Check the equipment on the map.' },
+  { icon: asset('assets/how-to-play/decide.png'), title: 'Decide & Discover', text: 'Choose between options and make progress.' },
 ];
 
 export function HowToPlayScreen() {

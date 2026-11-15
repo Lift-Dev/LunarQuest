@@ -3,6 +3,7 @@ import { AnimatePresence, MotionConfig, motion } from 'motion/react';
 import { useEffect } from 'react';
 import type { Notice } from '../../game/notices';
 import { cn } from '../../design-system';
+import { asset } from '../../lib/asset';
 
 /**
  * Short notices under the HUD: "night has fallen" and "resource is getting low".
@@ -56,7 +57,7 @@ function NoticeCard({ notice, onDismiss }: { notice: Notice; onDismiss: () => vo
     >
       {/* The robot: thoughtful at nightfall, holding a warning sign when something runs low. */}
       <img
-        src={`/assets/mascot/${night ? 'pondering' : 'caution'}.webp`}
+        src={asset(`assets/mascot/${night ? 'pondering' : 'caution'}.webp`)}
         alt=""
         aria-hidden
         className="-my-1 h-16 w-auto shrink-0 max-sm:h-12 short:h-10"

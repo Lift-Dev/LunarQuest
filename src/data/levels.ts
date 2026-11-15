@@ -4,6 +4,7 @@
  * once unlocked. Titles match the supplied Mission Levels design.
  */
 import type { Level } from '../game/types';
+import { asset } from '../lib/asset';
 
 const titles = [
   'Lunar Outpost',
@@ -31,7 +32,7 @@ export const levels: Level[] = titles.map((title, i) => {
     id: `level-${nn}`,
     title,
     // Only Level 01 has a colour thumbnail so far; 02–15 use the greyscale locked art.
-    thumbnail: number === 1 ? '/assets/levels/thumb-01.jpg' : `/assets/levels/thumb-${nn}-locked.png`,
+    thumbnail: number === 1 ? asset('assets/levels/thumb-01.jpg') : asset(`assets/levels/thumb-${nn}-locked.png`),
     contentId: number === 1 ? 'mission-01' : null,
   };
 });

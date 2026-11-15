@@ -24,7 +24,7 @@ const DevPreviewScreen = import.meta.env.DEV
 
 export function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       {/* The page is the same dark space colour while a screen loads, so there is no flash. */}
       <Suspense fallback={<div className="min-h-dvh bg-space" />}>
         <Routes>

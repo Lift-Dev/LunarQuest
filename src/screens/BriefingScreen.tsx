@@ -1,5 +1,6 @@
 import { routes } from '../app/routes';
 import { Button, Chip, Mascot, Panel, ScreenBackground } from '../design-system';
+import { asset } from '../lib/asset';
 
 /** Screen 2 "Your Mission" — matches image-assets/uxpilot-export-11-14-26 (1).pdf */
 export function BriefingScreen() {
@@ -8,7 +9,7 @@ export function BriefingScreen() {
       <main className="mx-auto grid min-h-dvh max-w-[1176px] items-center justify-center gap-12 px-6 py-12 max-sm:gap-8 max-sm:py-8 short:grid-cols-[minmax(0,42vh)_minmax(0,1fr)] short:gap-6 short:py-3 short:safe-x short:[--safe-min:1.5rem] lg:grid-cols-[minmax(0,508px)_minmax(0,552px)] lg:gap-[68px]">
         <div className="relative mx-auto w-full max-w-[min(508px,38vh)] overflow-hidden rounded-3xl max-lg:max-w-xl lg:max-w-[508px] short:max-w-none border-4 border-blue-500/20 shadow-glow-panel">
           <img
-            src="/assets/briefing/outpost.jpg"
+            src={asset('assets/briefing/outpost.jpg')}
             alt="A lunar outpost with dome habitats, solar panels, a rover and astronauts"
             className="aspect-square w-full rounded-[20px] object-cover max-lg:aspect-[4/3] short:aspect-square"
           />

@@ -4,6 +4,7 @@ import { MAP_SIZE, centerOf, connectionsOf, equipment, getEquipment, type Equipm
 import { cn } from '../../design-system';
 import type { Decision, Problem } from '../../game/types';
 import { ProblemFx } from './ProblemFx';
+import { asset } from '../../lib/asset';
 
 /**
  * The outpost picture with clickable equipment on top (inspect only).
@@ -37,7 +38,7 @@ export function OutpostMap({ selected, highlights, onSelect, fit, problem, fix, 
     <div ref={ref} className={cn('overflow-hidden', className)}>
       <div className="absolute" style={fit === 'cover' ? stage : { inset: 0 }}>
       <img
-        src="/assets/backdrop/outpost.jpg"
+        src={asset('assets/backdrop/outpost.jpg')}
         alt=""
         aria-hidden
         className={cn(

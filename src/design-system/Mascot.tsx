@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import type { ReactNode } from 'react';
 import { cn } from './cn';
+import { asset } from '../lib/asset';
 
 /**
  * The robot mascot. Poses were cropped from image-assets/mascot-assets/*.png (labels removed)
@@ -68,7 +69,7 @@ export function Mascot({ pose, height, say, bubble = 'left', float = true, class
     >
       {say && <SpeechBubble side={bubble}>{say}</SpeechBubble>}
       <img
-        src={`/assets/mascot/${pose}.webp`}
+        src={asset(`assets/mascot/${pose}.webp`)}
         alt=""
         aria-hidden
         draggable={false}

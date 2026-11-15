@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { cn } from './cn';
+import { asset } from '../lib/asset';
 
 /**
  * Deep-space page background (#050b1a) with the soft coloured glows and
@@ -45,7 +46,7 @@ export function ScreenBackground({
       {scene && (
         <>
           <img
-            src={`/assets/backdrop/${scene === 'outpost' ? 'outpost' : 'surface'}.jpg`}
+            src={asset(`assets/backdrop/${scene === 'outpost' ? 'outpost' : 'surface'}.jpg`)}
             alt=""
             aria-hidden
             className="pointer-events-none absolute inset-0 size-full object-cover object-[50%_35%]"

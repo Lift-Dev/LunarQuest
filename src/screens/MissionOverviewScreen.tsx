@@ -4,6 +4,7 @@ import { routes } from '../app/routes';
 import { levels } from '../data/levels';
 import { enterImmersive } from '../lib/immersive';
 import { Button, NavPill, Panel, ScreenBackground, Mascot } from '../design-system';
+import { asset } from '../lib/asset';
 
 /** Mission Overview — matches image-assets/Lunar Outpost Mission Briefing.png */
 export function MissionOverviewScreen() {
@@ -33,7 +34,7 @@ export function MissionOverviewScreen() {
             </span>
             <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
               <img
-                src="/assets/briefing/outpost.jpg"
+                src={asset('assets/briefing/outpost.jpg')}
                 alt="A lunar outpost with a dome habitat, solar panels and a rover"
                 className="size-44 shrink-0 self-center rounded-xl max-sm:size-32 short:size-24 object-cover"
               />
@@ -51,10 +52,10 @@ export function MissionOverviewScreen() {
           </Panel>
 
           <div className="grid w-full gap-4 sm:grid-cols-2 short:gap-2">
-            <Goal icon="/assets/overview/survive.png" title="Survive" tone="text-cyan-300">
+            <Goal icon={asset('assets/overview/survive.png')} title="Survive" tone="text-cyan-300">
               Keep the crew safe and the outpost operational for 14 days.
             </Goal>
-            <Goal icon="/assets/overview/explore.png" title="Explore" tone="text-yellow-300">
+            <Goal icon={asset('assets/overview/explore.png')} title="Explore" tone="text-yellow-300">
               Collect lunar samples and scientific data.
             </Goal>
           </div>

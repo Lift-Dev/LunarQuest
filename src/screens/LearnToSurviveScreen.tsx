@@ -1,5 +1,6 @@
 import { routes } from '../app/routes';
 import { Button, Panel, ProgressBar, ScreenBackground, type ResourceTone, Mascot } from '../design-system';
+import { asset } from '../lib/asset';
 
 /**
  * Screen 3 — matches image-assets/uxpilot-export-11-14-26 (2).pdf, with the
@@ -18,7 +19,7 @@ const RESOURCES: Array<{
     tone: 'life',
     title: 'Life Support',
     titleClass: 'text-life',
-    icon: '/assets/resources/life-support.png',
+    icon: asset('assets/resources/life-support.png'),
     text: 'Keep enough oxygen for your crew.',
     bar: 'Oxygen level',
     value: 85,
@@ -27,7 +28,7 @@ const RESOURCES: Array<{
     tone: 'power',
     title: 'Power',
     titleClass: 'text-power',
-    icon: '/assets/resources/power.png',
+    icon: asset('assets/resources/power.png'),
     text: 'Keep your outpost running.',
     bar: 'Energy core',
     value: 62,
@@ -36,7 +37,7 @@ const RESOURCES: Array<{
     tone: 'radiation',
     title: 'Radiation',
     titleClass: 'text-radiation',
-    icon: '/assets/resources/radiation.png',
+    icon: asset('assets/resources/radiation.png'),
     text: 'Protect your crew. Radiation adds up and never goes away.',
     bar: 'Radiation dose',
     value: 6,

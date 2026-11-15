@@ -1,12 +1,13 @@
 import { routes } from '../app/routes';
 import { Button, Mascot } from '../design-system';
+import { asset } from '../lib/asset';
 
 /** Screen 1 — matches image-assets/uxpilot-export-11-14-26.pdf */
 export function WelcomeScreen() {
   return (
     <main className="relative min-h-dvh overflow-hidden bg-space">
       <img
-        src="/assets/welcome/background.jpg"
+        src={asset('assets/welcome/background.jpg')}
         alt=""
         aria-hidden
         className="absolute inset-0 size-full object-cover object-[60%_center]"
@@ -17,7 +18,7 @@ export function WelcomeScreen() {
       <div className="relative flex min-h-dvh flex-col items-center justify-center px-4 py-10 text-center short:py-2">
         <h1 className="sr-only">LunarQuest</h1>
         <img
-          src="/assets/welcome/logo.png"
+          src={asset('assets/welcome/logo.png')}
           alt="LunarQuest"
           className="w-[clamp(240px,41vh,420px)] max-sm:w-[min(80vw,320px)] short:w-[clamp(150px,34vh,300px)] drop-shadow-[0_8px_32px_rgb(0_0_0/0.35)]"
         />
