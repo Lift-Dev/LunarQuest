@@ -15,6 +15,10 @@ import { PauseMenu } from '../features/pause/PauseMenu';
 import { FeedbackCard } from '../features/scenario/FeedbackCard';
 import { EffectChips } from '../features/scenario/EffectChips';
 import { RichText } from '../features/scenario/RichText';
+import { InspectionPanel } from '../features/map/InspectionPanel';
+import { OutpostMap } from '../features/map/OutpostMap';
+import { inspect } from '../features/map/inspect';
+import type { EquipmentId } from '../data/maps/outpost-01';
 import { useGameStore } from '../store/gameStore';
 import type { AbortedResult, CompleteResult } from './MissionResultScreens';
 
@@ -27,12 +31,21 @@ export function GameplayScreen() {
   const navigate = useNavigate();
   const { run, outcome, notices, start, choose, next, clear, dismissNotice } = useGameStore();
   const [paused, setPaused] = useState(false);
+  const [selected, setSelected] = useState<EquipmentId | null>(null);
 
   const known = missionId === 'mission-01';
   // Phase 7 will resume a saved run; until then, opening the screen without a run starts a fresh one.
   useEffect(() => {
     if (known && (!run || run.missionId !== missionId)) start(missionId);
   }, [known, run, missionId, start]);
+
+  // Esc closes the inspection panel.
+  useEffect(() => {
+    if (!selected) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setSelected(null);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [selected]);
 
   if (!known) return <Navigate to={routes.levels} replace />;
   if (!run || run.missionId !== missionId) return null;
@@ -64,40 +77,64 @@ export function GameplayScreen() {
   const shownDay = outcome ? outcome.run.day - (outcome.run.status === 'playing' ? 1 : 0) : run.day;
   const scenario: Scenario = outcome ? outcome.scenario : currentScenario(mission, run);
 
+  const highlights = outcome ? [] : scenario.mapHighlights;
+  const panel = selected && !outcome && (
+    <div className="landscape:absolute landscape:top-24 landscape:right-6 landscape:w-[22rem]">
+      <InspectionPanel id={selected} info={inspect(mission, run, selected)} onSelect={setSelected} onClose={() => setSelected(null)} />
+    </div>
+  );
+
   return (
-    <ScreenBackground scene="outpost">
-      <main className="mx-auto flex min-h-dvh max-w-[1440px] flex-col gap-4 p-4 md:p-6">
-        <ResourceHud
-          lifeSupport={run.resources.lifeSupport}
-          power={run.resources.power}
-          radiation={radiationPercent(mission, run)}
-          stars={stars}
-          low={lowResources(mission, run)}
-          onPause={() => setPaused(true)}
+    <ScreenBackground glow="none" stars={false}>
+      <div className="relative min-h-dvh">
+        {/* Wide screens: the outpost fills the screen behind everything (as in the design). */}
+        <OutpostMap
+                    selected={outcome ? null : selected}
+          highlights={highlights}
+          onSelect={setSelected}
+          className="absolute inset-0 hidden landscape:block"
         />
+        <main className="pointer-events-none relative mx-auto flex min-h-dvh max-w-[1440px] flex-col gap-4 p-4 md:p-6 [&>*]:pointer-events-auto">
+          <ResourceHud
+            lifeSupport={run.resources.lifeSupport}
+            power={run.resources.power}
+            radiation={radiationPercent(mission, run)}
+            stars={stars}
+            low={lowResources(mission, run)}
+            onPause={() => setPaused(true)}
+          />
 
-        {!outcome && <NoticeStack notices={notices} onDismiss={dismissNotice} />}
+          {!outcome && <NoticeStack notices={notices} onDismiss={dismissNotice} />}
 
-        {outcome ? (
-          <>
-            {/* Dims the scene so the fact is the only thing to read. */}
-            <div aria-hidden className="pointer-events-none fixed inset-0 bg-space/55" />
-            <div className="relative flex flex-1 items-center py-10">
-              <FeedbackCard outcome={outcome} bigAt={mission.balance.bigEffectThreshold} onContinue={onContinue} />
-            </div>
-          </>
-        ) : (
-          <>
-            <ScenarioCard mission={mission} run={run} day={shownDay} scenario={scenario} />
-            <div className="flex-1" />
-            <section aria-label="Choose what to do" className="grid gap-4 md:grid-cols-2">
-            {scenario.decisions.map((d) => (
-              <DecisionCard key={d.id} decision={d} bigAt={mission.balance.bigEffectThreshold} onChoose={() => choose(d.id)} />
-            ))}
-            </section>
-          </>
-        )}
-      </main>
+          {outcome ? (
+            <>
+              {/* Dims the scene so the fact is the only thing to read. */}
+              <div aria-hidden className="pointer-events-none fixed inset-0 bg-space/55" />
+              <div className="relative flex flex-1 items-center py-10">
+                <FeedbackCard outcome={outcome} bigAt={mission.balance.bigEffectThreshold} onContinue={onContinue} />
+              </div>
+            </>
+          ) : (
+            <>
+              <ScenarioCard mission={mission} run={run} day={shownDay} scenario={scenario} />
+              {/* Portrait tablets: the whole outpost, uncropped, between the story and the choices. */}
+              <OutpostMap
+                                selected={selected}
+                highlights={highlights}
+                onSelect={setSelected}
+                className="relative aspect-video w-full rounded-2xl border border-blue-500/30 landscape:hidden"
+              />
+              {panel}
+              <div className="pointer-events-none! flex-1" />
+              <section aria-label="Choose what to do" className="pointer-events-none! grid gap-4 md:grid-cols-2 [&>*]:pointer-events-auto">
+                {scenario.decisions.map((d) => (
+                  <DecisionCard key={d.id} decision={d} bigAt={mission.balance.bigEffectThreshold} onChoose={() => choose(d.id)} />
+                ))}
+              </section>
+            </>
+          )}
+        </main>
+      </div>
 
       {paused && (
         <PauseMenu

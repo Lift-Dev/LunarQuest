@@ -31,6 +31,24 @@
   --shadow-glow-panel: 0 0 64px rgb(30 58 138 / 0.4);
 
   --animate-twinkle: twinkle 4s ease-in-out infinite;
+  --animate-flow: flow 1.2s linear infinite;
+  --animate-pulse-ring: pulse-ring 1.8s ease-in-out infinite;
+
+  @keyframes flow {
+    to {
+      stroke-dashoffset: -24;
+    }
+  }
+
+  @keyframes pulse-ring {
+    0%,
+    100% {
+      opacity: 0.25;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
 
   @keyframes twinkle {
     0%,

@@ -237,13 +237,13 @@ Each phase ends with: a summary of what was done, what remains, checks run (`tsc
 - **Done when:** you can click from Welcome to Mission Overview and every screen matches its reference
 
 ### Phase 5: Interactive outpost map (~2–3 days)
-- [ ] `outpost-01.ts` map data: equipment, positions, cable paths, connections
-- [ ] Base illustration + equipment layers + SVG hit areas
-- [ ] Hover/focus/selected states, keyboard and touch support
-- [ ] Inspection panel: name, status, resource reading, "Connected to" list
-- [ ] Connection highlighting with animated power/air flow along cables
-- [ ] Scenario-driven highlights (pulse) from `scenario.mapHighlights`
-- [ ] Inspect only. No controls that change game state
+- [x] `outpost-01.ts` map data: equipment, positions, cable paths, connections
+- [x] Base illustration + equipment layers + SVG hit areas
+- [x] Hover/focus/selected states, keyboard and touch support
+- [x] Inspection panel: name, status, resource reading, "Connected to" list
+- [x] Connection highlighting with animated power/air flow along cables
+- [x] Scenario-driven highlights (pulse) from `scenario.mapHighlights`
+- [x] Inspect only. No controls that change game state
 - **Done when:** every object can be inspected, its connections light up correctly, and you approve how it looks
 
 ### Phase 6: Gameplay (~2–3 days)
