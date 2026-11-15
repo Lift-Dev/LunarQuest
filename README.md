@@ -11,13 +11,15 @@ Command a lunar outpost for 14 days, keep your crew alive, and learn real NASA s
 </div>
 
 > [!TIP]
-> **Page not loading?** 🌙 Some internet providers block `vercel.app` links from time to time, especially on mobile data. Turning on a **VPN** usually fixes it right away. The game itself is fine, the network just needs a little detour!
+> **Page not loading?** 🌙 Some internet providers block `vercel.app` links from time to time, especially on mobile data. No worries, the same game is waiting for you on our **[backup link](https://lift-dev.github.io/LunarQuest/)**. Turning on a **VPN** also usually fixes the main link right away.
 >
-> **Sayfa açılmıyor mu?** 🌙 Bazı internet sağlayıcıları `vercel.app` bağlantılarını zaman zaman engelleyebiliyor, özellikle mobil veride. Bir **VPN** açmak genellikle sorunu hemen çözer. Oyun sorunsuz çalışıyor, bağlantının sadece farklı bir yoldan gitmesi gerekiyor!
+> **Sayfa açılmıyor mu?** 🌙 Bazı internet sağlayıcıları `vercel.app` bağlantılarını zaman zaman engelleyebiliyor, özellikle mobil veride. Merak etme, aynı oyun **[yedek bağlantımızda](https://lift-dev.github.io/LunarQuest/)** seni bekliyor. Bir **VPN** açmak da ana bağlantıyı genellikle hemen düzeltir.
 
 <div align="center">
 
 ### [▶ Play it now: lunarquest.vercel.app](https://lunarquest.vercel.app)
+
+Not opening? Try the backup: **[lift-dev.github.io/LunarQuest](https://lift-dev.github.io/LunarQuest/)**
 
 No download. No account. Works on a phone, tablet or laptop.
 
@@ -133,7 +135,7 @@ npm run build      # typecheck + production build
 npm run preview    # serve the production build
 ```
 
-**Stack:** Vite · React · TypeScript · Tailwind CSS v4 · Zustand · Zod · React Router · Motion · Vitest. Deployed as a static site on Vercel (`vercel.json` handles routing and caching).
+**Stack:** Vite · React · TypeScript · Tailwind CSS v4 · Zustand · Zod · React Router · Motion · Vitest. Deployed as a static site on Vercel (`vercel.json` handles routing and caching), with a backup copy on GitHub Pages that a workflow rebuilds on every push to `main`.
 
 ## Project layout
 
@@ -165,7 +167,7 @@ public/assets/   Images used by the game
 
 | | |
 |---|---|
-| ✅ **Done** | Mission 01 playable from start to finish · interactive outpost map with equipment inspection · seven decisions with NASA facts · real solar-storm replay · scoring and Science Stars · mission complete and aborted screens · responsive phone and desktop layouts · deployed on Vercel |
+| ✅ **Done** | Mission 01 playable from start to finish · interactive outpost map with equipment inspection · seven decisions with NASA facts · real solar-storm replay · scoring and Science Stars · mission complete and aborted screens · responsive phone and desktop layouts · deployed on Vercel, with a GitHub Pages backup |
 | 🔜 **Next** | Save and resume progress · balance testing with real 7–12 year olds · an in-app Science Sources screen |
 | 🌙 **Later** | Missions 02–15 (already laid out on the Journey screen) · new scenarios built on more NASA data |
 
