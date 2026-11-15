@@ -5,7 +5,7 @@ import { cn } from '../../design-system';
 import { RichText } from './RichText';
 
 /**
- * Today's situation and the two choices, as a side card (after the Day 1 reference image):
+ * Today's situation and the two choices (styled after the Day 1 reference image):
  * cream card, amber title bar with a warning mark, a blue option A and a green option B.
  * Picking an option is final (no confirm step), as decided.
  */
@@ -35,17 +35,17 @@ export function DecisionSidebar({ day, scenario, note, onChoose, className }: Pr
         </h1>
       </header>
 
-      <div className="space-y-3 p-4">
-        <p className="text-lg leading-6 text-slate-800">
-          <RichText text={scenario.description} strongClass="text-slate-950" />
-        </p>
-        {note}
-
-        <div className="space-y-3 pt-1">
-          {scenario.decisions.map((d, i) => (
-            <OptionButton key={d.id} decision={d} style={STYLES[i]!} onChoose={() => onChoose(d.id)} />
-          ))}
+      {/* Portrait: story, then the options stacked. Wide screens: one low row (story | A | B) along the foreground. */}
+      <div className="flex flex-col gap-3 p-4 landscape:grid landscape:grid-cols-[1.3fr_1fr_1fr] landscape:items-stretch landscape:py-3">
+        <div className="space-y-2 self-center">
+          <p className="text-lg leading-6 text-slate-800 landscape:text-base landscape:leading-[1.35rem]">
+            <RichText text={scenario.description} strongClass="text-slate-950" />
+          </p>
+          {note}
         </div>
+        {scenario.decisions.map((d, i) => (
+          <OptionButton key={d.id} decision={d} style={STYLES[i]!} onChoose={() => onChoose(d.id)} />
+        ))}
       </div>
     </section>
   );

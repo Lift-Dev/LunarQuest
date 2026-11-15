@@ -114,18 +114,14 @@ export function GameplayScreen() {
               </div>
             </>
           ) : (
-            // Wide screens: story card on the left (over the quiet sky and rover), inspection panel on the right.
+            // Wide screens: day bar top-left, inspection panel top-right, story card along the bottom foreground.
             // Portrait: day bar, map, panel, then the story card, stacked.
-            <div className="pointer-events-none! flex flex-1 flex-col gap-4 landscape:flex-row landscape:items-start landscape:justify-between">
-              <div className="pointer-events-none! flex flex-col gap-4 portrait:contents landscape:w-[22rem] [&>*]:pointer-events-auto">
-                <DayChip mission={mission} day={shownDay} />
-                <DecisionSidebar
-                  day={shownDay}
-                  scenario={scenario}
-                  note={<FlareNote run={run} scenario={scenario} />}
-                  onChoose={choose}
-                  className="portrait:order-4"
-                />
+            <div className="pointer-events-none! flex flex-1 flex-col gap-4">
+              <div className="pointer-events-none! flex items-start justify-between gap-4 portrait:contents">
+                <div className="pointer-events-auto">
+                  <DayChip mission={mission} day={shownDay} />
+                </div>
+                {panel && <div className="pointer-events-auto portrait:order-3 landscape:w-[22rem]">{panel}</div>}
               </div>
               <OutpostMap
                 fit="contain"
@@ -134,7 +130,13 @@ export function GameplayScreen() {
                 onSelect={setSelected}
                 className="pointer-events-auto relative aspect-video w-full rounded-2xl border border-blue-500/30 portrait:order-2 landscape:hidden"
               />
-              {panel && <div className="pointer-events-auto portrait:order-3 landscape:w-[22rem]">{panel}</div>}
+              <DecisionSidebar
+                day={shownDay}
+                scenario={scenario}
+                note={<FlareNote run={run} scenario={scenario} />}
+                onChoose={choose}
+                className="pointer-events-auto portrait:order-4 landscape:mt-auto"
+              />
             </div>
           )}
         </main>
@@ -178,7 +180,7 @@ function FlareNote({ run, scenario }: { run: MissionRun; scenario: Scenario }) {
   const flare = scenario.showsFlare ? solarFlares.find((f) => f.id === run.flareId) : undefined;
   if (!flare) return null;
   return (
-    <p className="rounded-xl border border-amber-500/50 bg-amber-100 px-3 py-2 text-base leading-5 text-amber-950">
+    <p className="rounded-xl border border-amber-500/50 bg-amber-100 px-3 py-2 text-base leading-5 text-amber-950 landscape:py-1.5 landscape:text-sm">
       This storm is based on a real solar flare: <strong>{formatDate(flare.date)}</strong>, strength <strong>{flare.classType}</strong>. Archived NASA data.
     </p>
   );
