@@ -1,6 +1,9 @@
 import { useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
-import { MAP_SIZE, centerOf, connectionsOf, equipment, type Equipment, type EquipmentId } from '../../data/maps/outpost-01';
+import { Wrench } from 'lucide-react';
+import { MAP_SIZE, centerOf, connectionsOf, equipment, getEquipment, type Equipment, type EquipmentId } from '../../data/maps/outpost-01';
 import { cn } from '../../design-system';
+import type { Decision, Problem } from '../../game/types';
+import { ProblemFx } from './ProblemFx';
 
 /**
  * The outpost picture with clickable equipment on top (inspect only).
@@ -15,12 +18,16 @@ interface Props {
   highlights: readonly string[];
   onSelect: (id: EquipmentId | null) => void;
   fit: 'cover' | 'contain';
+  /** What is going wrong right now: glows red with an animation, and its fix sits next to it. */
+  problem?: Problem;
+  /** The decision that fixes `problem`. Choosing it from here is the same as choosing it anywhere. */
+  fix?: { decision: Decision; onChoose: () => void };
   /** Cover only: which part of the picture stays in view when it is cropped sideways (0 = left, 1 = right). */
   focusX?: number;
   className?: string;
 }
 
-export function OutpostMap({ selected, highlights, onSelect, fit, focusX = 0.5, className }: Props) {
+export function OutpostMap({ selected, highlights, onSelect, fit, problem, fix, focusX = 0.5, className }: Props) {
   const [hover, setHover] = useState<EquipmentId | null>(null);
   const linked = selected ? connectionsOf(selected) : [];
   const ref = useRef<HTMLDivElement>(null);
@@ -67,7 +74,7 @@ export function OutpostMap({ selected, highlights, onSelect, fit, focusX = 0.5, 
         {equipment.map((e) => {
           const isSel = selected === e.id;
           const isLinked = linked.includes(e.id);
-          const isHi = highlights.includes(e.id) && !selected;
+          const isHi = highlights.includes(e.id) && !selected && !problem?.equipment.includes(e.id);
           const isHover = hover === e.id;
           return (
             <g
@@ -110,8 +117,10 @@ export function OutpostMap({ selected, highlights, onSelect, fit, focusX = 0.5, 
           );
         })}
 
+        {problem && <ProblemFx problem={problem} />}
         {selected && <Pin equipment={equipment.find((e) => e.id === selected)!} />}
       </svg>
+      {problem && fix && <FixButton problem={problem} decision={fix.decision} onChoose={fix.onChoose} />}
       </div>
     </div>
   );
@@ -153,4 +162,39 @@ function useCoverStage(ref: React.RefObject<HTMLDivElement | null>, enabled: boo
   const width = MAP_SIZE.width * scale;
   const height = MAP_SIZE.height * scale;
   return { width, height, left: (box.w - width) * focusX, top: (box.h - height) / 2 };
+}
+
+/** The fix, floating just above the problem like a repair job to walk up to. Positioned in picture percentages. */
+function FixButton({ problem, decision, onChoose }: { problem: Problem; decision: Decision; onChoose: () => void }) {
+  const rects = problem.equipment.map((id) => getEquipment(id as EquipmentId).shapes[0]!);
+  const left = Math.min(...rects.map((r) => r[0]));
+  const right = Math.max(...rects.map((r) => r[0] + r[2]));
+  const top = Math.min(...rects.map((r) => r[1]));
+  return (
+    <div
+      className="absolute z-10"
+      style={{ left: `${(((left + right) / 2) / MAP_SIZE.width) * 100}%`, top: `${(top / MAP_SIZE.height) * 100}%` }}
+    >
+      <div className="-translate-x-1/2 -translate-y-full pb-3">
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onChoose();
+          }}
+          className="group relative flex w-56 animate-float max-sm:w-44 short:w-44 items-center gap-2.5 rounded-2xl border-2 border-green-200 bg-gradient-to-b from-green-400 to-green-500 px-3 py-2 text-left text-white shadow-[0_4px_0_0_rgb(21_128_61)] transition hover:brightness-110 active:translate-y-0.5 active:shadow-none"
+        >
+          <span aria-hidden className="grid size-9 shrink-0 place-items-center rounded-xl bg-white/90 text-green-700">
+            <Wrench className="size-5" />
+          </span>
+          <span className="min-w-0">
+            <span className="block text-base leading-tight font-bold short:text-sm">{decision.title}</span>
+            <span className="block text-xs leading-4 text-white/95">{decision.explanation}</span>
+          </span>
+          {/* Little tail pointing down at the problem. */}
+          <span aria-hidden className="absolute -bottom-2 left-1/2 size-3.5 -translate-x-1/2 rotate-45 border-r-2 border-b-2 border-green-200 bg-green-500" />
+        </button>
+      </div>
+    </div>
+  );
 }

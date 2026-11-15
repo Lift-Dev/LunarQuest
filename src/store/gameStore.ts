@@ -34,7 +34,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   notices: [],
   dismissNotice: (id) => set((s) => ({ notices: s.notices.filter((n) => n.id !== id) })),
   start: (missionId) =>
-    set({ run: startMission(getMission(missionId), solarFlares.map((f) => f.id)), outcome: null, pendingNotices: [], notices: [] }),
+    set({ run: startMission(getMission(missionId), solarFlares), outcome: null, pendingNotices: [], notices: [] }),
   choose: (decisionId) => {
     const { run, outcome } = get();
     if (!run || outcome) return; // ignore double taps while feedback is showing

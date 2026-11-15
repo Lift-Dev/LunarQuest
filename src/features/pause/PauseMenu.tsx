@@ -1,6 +1,6 @@
 import { LogOut, Pause, Play, RotateCcw, Settings, Trash2 } from 'lucide-react';
 import { useState } from 'react';
-import { Button, Modal } from '../../design-system';
+import { Button, Mascot, Modal } from '../../design-system';
 
 /**
  * Pause overlay — matches image-assets/Lunar Base Mission Paused.png. "Settings" opens a
@@ -14,7 +14,7 @@ interface Props {
   onResetProgress: () => void;
 }
 
-const row = 'w-full !rounded-full !justify-start gap-4 !px-8 !py-3 !text-xl !normal-case';
+const row = 'w-full !rounded-full !justify-start gap-4 !px-8 !py-3 !text-xl !normal-case short:!py-1.5 short:!text-lg';
 const icon = 'size-7 shrink-0';
 
 export function PauseMenu({ onResume, onExit, onRestart, onResetProgress }: Props) {
@@ -23,8 +23,13 @@ export function PauseMenu({ onResume, onExit, onRestart, onResetProgress }: Prop
 
   if (view === 'settings') {
     return (
-      <Modal title="Settings" icon={Settings} onClose={() => setView('pause')}>
-        <div className="flex flex-col gap-4">
+      <Modal
+        title="Settings"
+        icon={Settings}
+        onClose={() => setView('pause')}
+        mascot={<Mascot pose={confirming ? 'worried' : 'thinking'} height="7rem" />}
+      >
+        <div className="flex flex-col gap-4 short:gap-2">
           {confirming ? (
             <>
               <p className="text-center text-xl text-blue-100">
@@ -56,8 +61,8 @@ export function PauseMenu({ onResume, onExit, onRestart, onResetProgress }: Prop
   }
 
   return (
-    <Modal title="Game Paused" icon={Pause} onClose={onResume}>
-      <div className="flex flex-col gap-4">
+    <Modal title="Game Paused" icon={Pause} onClose={onResume} mascot={<Mascot pose="happy" height="7rem" />}>
+      <div className="flex flex-col gap-4 short:gap-2">
         <Button variant="primary" size="md" className={row} icon={<Play aria-hidden className={`${icon} fill-current`} />} onClick={onResume}>
           Resume Mission
         </Button>

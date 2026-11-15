@@ -34,7 +34,15 @@ describe('inspect', () => {
   it('solar arrays report dust after the dusty-panels choice, and night later', () => {
     const run = fresh();
     expect(inspect(mission, { ...run, flags: ['dusty-panels'] }, 'solar-array-01').statusLabel).toBe('Dusty');
-    expect(inspect(mission, { ...run, day: 9 }, 'solar-array-01').note).toMatch(/Night/);
+    // Mission 01 sits on a South Pole site with no night; a mission with a lunar night says so.
+    expect(inspect(mission, { ...run, day: 9 }, 'solar-array-01').note).toMatch(/Sunlight/);
+    const withNight = { ...mission, balance: { ...mission.balance, daylightDays: 7 } };
+    expect(inspect(withNight, { ...run, day: 9 }, 'solar-array-01').note).toMatch(/Night/);
+  });
+
+  it('the power hub reports the backup cable after that choice', () => {
+    const run = fresh();
+    expect(inspect(mission, { ...run, flags: ['backup-cable'] }, 'power-distribution')).toMatchObject({ statusLabel: 'Backup cable', status: 'warning' });
   });
   it('radiation shelter shows the dose as a high-is-bad reading', () => {
     expect(inspect(mission, fresh(), 'radiation-shelter').reading?.highIsBad).toBe(true);

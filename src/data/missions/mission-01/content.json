@@ -3,444 +3,393 @@
   "title": "Survive the Lunar Cycle",
   "location": "Lunar Outpost",
   "days": [
-    { "day": 1, "options": [{ "scenarioId": "d01-wake-up" }] },
-    { "day": 2, "options": [{ "scenarioId": "d02-dusty-panels" }] },
-    { "day": 3, "options": [{ "scenarioId": "d03-seeds" }] },
-    { "day": 4, "options": [{ "scenarioId": "d04-build-shield" }] },
-    { "day": 5, "options": [{ "scenarioId": "d05-crater-expedition" }] },
-    { "day": 6, "options": [{ "scenarioId": "d06-solar-storm" }] },
-    { "day": 7, "options": [{ "scenarioId": "d07-last-sunlight" }] },
-    { "day": 8, "options": [{ "scenarioId": "d08-night-falls" }] },
-    { "day": 9, "options": [{ "scenarioId": "d09-air-filter" }] },
     {
-      "day": 10,
-      "selection": "first-match",
+      "day": 1,
       "options": [
-        { "scenarioId": "d10a-harvest", "requiresFlag": "garden-planted" },
-        { "scenarioId": "d10b-low-air" }
+        {
+          "scenarioId": "d01-shadowed-panels"
+        }
+      ]
+    },
+    {
+      "day": 3,
+      "options": [
+        {
+          "scenarioId": "d03-dusty-panels"
+        }
+      ]
+    },
+    {
+      "day": 5,
+      "options": [
+        {
+          "scenarioId": "d05-damaged-cable"
+        }
+      ]
+    },
+    {
+      "day": 7,
+      "options": [
+        {
+          "scenarioId": "d07-solar-storm"
+        }
+      ]
+    },
+    {
+      "day": 9,
+      "options": [
+        {
+          "scenarioId": "d09-oxygen-from-soil"
+        }
       ]
     },
     {
       "day": 11,
-      "selection": "random",
-      "options": [{ "scenarioId": "d11a-moonquake" }, { "scenarioId": "d11b-space-rock" }]
+      "options": [
+        {
+          "scenarioId": "d11-co2-alert"
+        }
+      ]
     },
-    { "day": 12, "options": [{ "scenarioId": "d12-call-home" }] },
-    { "day": 13, "options": [{ "scenarioId": "d13-ice" }] },
-    { "day": 14, "options": [{ "scenarioId": "d14-sunrise" }] }
+    {
+      "day": 13,
+      "options": [
+        {
+          "scenarioId": "d13-final-countdown"
+        }
+      ]
+    }
   ],
   "scenarios": [
     {
-      "id": "d01-wake-up",
-      "title": "Wake Up the Outpost",
-      "description": "Welcome, Commander! Your crew has just landed. The Sun is shining on the solar panels and the batteries are not full yet. What should the outpost do first?",
-      "mapHighlights": ["solar-array-01", "solar-array-02", "battery-storage", "science-lab"],
+      "id": "d01-shadowed-panels",
+      "title": "Shadows on the Panels",
+      "description": "Your crew of four has landed near the Moon's **South Pole**. The Sun sits low in the sky, so a ridge's long shadow covers some solar panels. The battery is only half charged.",
+      "mapHighlights": [
+        "solar-array-01",
+        "solar-array-02",
+        "battery-storage",
+        "science-lab"
+      ],
+      "problem": {
+        "kind": "shadow",
+        "equipment": [
+          "solar-array-01",
+          "solar-array-02"
+        ],
+        "fixDecisionId": "d01-shadowed-panels.b"
+      },
       "decisions": [
         {
-          "id": "d01-wake-up.a",
+          "id": "d01-shadowed-panels.a",
           "title": "Start the science lab",
-          "explanation": "Turn on the lab right away and start research.",
-          "effects": { "science": 10, "power": -10 }
+          "explanation": "Begin research now, using battery power.",
+          "effects": {
+            "power": -30,
+            "science": 10
+          }
         },
         {
-          "id": "d01-wake-up.b",
-          "title": "Aim the panels at the Sun",
-          "explanation": "Two astronauts go outside and tilt the panels to catch more light.",
-          "effects": { "power": 12, "lifeSupport": -2, "radiation": 1 }
+          "id": "d01-shadowed-panels.b",
+          "title": "Save power first",
+          "explanation": "Pause research and let the panels recharge the battery.",
+          "effects": {
+            "power": 10
+          }
         }
       ],
       "fact": {
-        "text": "Solar panels only make electricity when sunlight hits them, and they work best when they face the Sun. On the real Moon, one day lasts about two Earth weeks, and so does one night! We made them shorter in this game.",
-        "sourceIds": ["nasa-moon-facts"]
+        "text": "Near the Moon's South Pole, the Sun stays close to the horizon. Mountains and crater rims cast long shadows that move across the ground, so some spots get long stretches of sunlight while others stay dark.",
+        "sourceIds": [
+          "nasa-south-pole-region"
+        ]
       }
     },
     {
-      "id": "d02-dusty-panels",
-      "title": "Dusty Panels",
-      "description": "Your landing kicked up lots of Moon dust, and now it's covering the solar panels. Dusty panels make less power.",
-      "mapHighlights": ["solar-array-01", "solar-array-02"],
+      "id": "d03-dusty-panels",
+      "title": "Dust on the Panels",
+      "description": "The automatic dust cleaner has stopped working. Dust blasted up by your lander's rocket engines is covering the solar panels, so they make less power.",
+      "mapHighlights": [
+        "solar-array-01",
+        "solar-array-02"
+      ],
+      "problem": {
+        "kind": "dust",
+        "equipment": [
+          "solar-array-01",
+          "solar-array-02"
+        ],
+        "fixDecisionId": "d03-dusty-panels.a"
+      },
       "decisions": [
         {
-          "id": "d02-dusty-panels.a",
-          "title": "Go outside and clean them",
-          "explanation": "Two astronauts put on spacesuits and wipe the panels.",
-          "effects": { "power": 6, "lifeSupport": -6, "radiation": 3 }
+          "id": "d03-dusty-panels.a",
+          "title": "Clean the panels by hand",
+          "explanation": "Two astronauts go outside with brushes. Spacesuits use extra oxygen.",
+          "effects": {
+            "lifeSupport": -9,
+            "radiation": 1
+          }
         },
         {
-          "id": "d02-dusty-panels.b",
-          "title": "Leave the dust for now",
-          "explanation": "Stay safe inside. The panels will charge more slowly.",
+          "id": "d03-dusty-panels.b",
+          "title": "Leave the dust",
+          "explanation": "Stay safe inside. The panels will make less power every day.",
           "effects": {},
-          "setsFlags": ["dusty-panels"],
-          "laterHint": "Panels will charge slower every day"
+          "setsFlags": [
+            "dusty-panels"
+          ],
+          "laterHint": "Dusty panels make less power every day"
         }
       ],
       "fact": {
-        "text": "Moon dust is sharp like tiny bits of glass and sticks to everything. Apollo astronauts found it on their suits, their tools and even inside their spacecraft.",
-        "sourceIds": ["nasa-apollo-reports"]
+        "text": "Moon dust is sharp and sticks to everything. NASA studies show that even a very thin layer of dust can cut a solar panel's power in half. In 2025, NASA's Electrodynamic Dust Shield used electricity to lift dust off surfaces on the Moon.",
+        "sourceIds": [
+          "nasa-lunar-dust-challenge",
+          "nasa-dust-shield-2025"
+        ]
       }
     },
     {
-      "id": "d03-seeds",
-      "title": "Seeds from Earth",
-      "description": "You brought a box of seeds from Earth! Plants make oxygen and food, but they need warm lights, and lights need power.",
-      "mapHighlights": ["habitat"],
+      "id": "d05-damaged-cable",
+      "title": "Damaged Power Cable",
+      "description": "A small space rock crashed near the outpost. Bits of flying rock cut the main power cable that brings electricity from the solar panels.",
+      "mapHighlights": [
+        "power-distribution",
+        "battery-storage",
+        "solar-array-01"
+      ],
+      "problem": {
+        "kind": "damage",
+        "equipment": [
+          "power-distribution"
+        ],
+        "fixDecisionId": "d05-damaged-cable.a"
+      },
       "decisions": [
         {
-          "id": "d03-seeds.a",
-          "title": "Plant a space garden",
-          "explanation": "Set up grow lights and plant the seeds.",
-          "effects": { "science": 10, "power": -8 },
-          "setsFlags": ["garden-planted"],
-          "laterHint": "Your garden will grow later"
+          "id": "d05-damaged-cable.a",
+          "title": "Repair the cable",
+          "explanation": "Two astronauts go outside to fix it. Spacesuits use extra oxygen.",
+          "effects": {
+            "lifeSupport": -9,
+            "power": -2,
+            "radiation": 1
+          }
         },
         {
-          "id": "d03-seeds.b",
-          "title": "Keep the seeds packed",
-          "explanation": "Save the power for other systems.",
-          "effects": { "power": 4 },
-          "laterHint": "No fresh food or oxygen later"
+          "id": "d05-damaged-cable.b",
+          "title": "Switch to the backup cable",
+          "explanation": "Stay inside. The thin backup cable carries only half the power.",
+          "effects": {},
+          "setsFlags": [
+            "backup-cable"
+          ],
+          "laterHint": "The backup cable carries less power every day"
         }
       ],
       "fact": {
-        "text": "In 2022, NASA-funded scientists grew small plants in real Moon soil that Apollo astronauts brought back. On the Space Station, astronauts have grown and eaten their own lettuce!",
-        "sourceIds": ["nasa-lunar-soil-plants-2022", "nasa-veggie"]
+        "text": "Space rocks still hit the Moon today. By comparing before-and-after pictures, NASA's Lunar Reconnaissance Orbiter found over 200 new craters, about 3 to 43 meters wide, that formed while it was watching.",
+        "sourceIds": [
+          "nasa-lro-new-craters"
+        ]
       }
     },
     {
-      "id": "d04-build-shield",
-      "title": "Build a Shield",
-      "description": "Mission Control says the Sun is getting busy. The Moon has no thick air to protect you from space radiation. You can make the shelter safer by piling Moon soil on top of it.",
-      "mapHighlights": ["radiation-shelter", "rover"],
-      "decisions": [
-        {
-          "id": "d04-build-shield.a",
-          "title": "Pile soil on the shelter",
-          "explanation": "Use the rover to cover the shelter with thick Moon soil.",
-          "effects": { "power": -8, "lifeSupport": -4, "radiation": 2 },
-          "setsFlags": ["shelter-shielded"],
-          "laterHint": "Protects the crew in a future storm"
-        },
-        {
-          "id": "d04-build-shield.b",
-          "title": "Collect rock samples instead",
-          "explanation": "Use today to gather interesting rocks.",
-          "effects": { "science": 15, "lifeSupport": -5, "radiation": 3 }
-        }
-      ],
-      "fact": {
-        "text": "On Earth, our air and magnetic field block most space radiation. The Moon has neither. Radiation adds up in your body over time, so NASA plans how long astronauts can spend outside. A thick layer of Moon soil (called **regolith**) on top of a base can help block it.",
-        "sourceIds": ["nasa-space-radiation"]
-      }
-    },
-    {
-      "id": "d05-crater-expedition",
-      "title": "Crater Expedition",
-      "description": "Scientists on Earth spotted a big crater 3 km away with very old rocks on its edge. The trip is long, and the rover needs a lot of power.",
-      "mapHighlights": ["rover", "sample-area"],
-      "decisions": [
-        {
-          "id": "d05-crater-expedition.a",
-          "title": "Drive to the crater",
-          "explanation": "A long rover trip to find the best rocks.",
-          "effects": { "science": 20, "power": -10, "lifeSupport": -6, "radiation": 4 }
-        },
-        {
-          "id": "d05-crater-expedition.b",
-          "title": "Search near the base",
-          "explanation": "A short walk to collect rocks close by.",
-          "effects": { "science": 8, "lifeSupport": -2, "radiation": 1 }
-        }
-      ],
-      "fact": {
-        "text": "Apollo astronauts brought 382 kg (842 lb) of Moon rocks and soil back to Earth. That's about as heavy as a grand piano! Scientists are still studying them today.",
-        "sourceIds": ["nasa-astromaterials"]
-      }
-    },
-    {
-      "id": "d06-solar-storm",
+      "id": "d07-solar-storm",
       "title": "Solar Storm Warning!",
-      "description": "Space weather alert! A big explosion on the Sun, called a **solar flare**, has just happened. Fast radiation particles might reach the Moon soon.",
-      "mapHighlights": ["radiation-shelter", "comms-antenna"],
+      "description": "Mission Control has spotted a burst of fast particles from the Sun heading your way. Two astronauts are outside collecting rock samples.",
+      "mapHighlights": [
+        "radiation-shelter",
+        "sample-area",
+        "comms-antenna"
+      ],
+      "problem": {
+        "kind": "storm",
+        "equipment": [
+          "sample-area"
+        ],
+        "fixDecisionId": "d07-solar-storm.a"
+      },
       "showsFlare": true,
       "decisions": [
         {
-          "id": "d06-solar-storm.a",
-          "title": "Everyone to the shelter",
-          "explanation": "Stay safe inside the shelter until the storm passes.",
-          "effects": { "power": -4, "radiation": 1 }
-        },
-        {
-          "id": "d06-solar-storm.b",
-          "title": "Finish the experiment outside",
-          "explanation": "Keep working. The experiment is almost done.",
-          "effects": { "science": 10, "radiation": 20 },
+          "id": "d07-solar-storm.a",
+          "title": "Go to the storm shelter",
+          "explanation": "Come inside and hide behind the water tanks. Leave the rocks.",
+          "effects": {
+            "radiation": 20
+          },
           "overrides": [
             {
-              "ifFlag": "shelter-shielded",
-              "effects": { "radiation": 10 },
-              "note": "Your soil shield from Day 4 cut the radiation in half!"
+              "ifFlag": "fast-particle-storm",
+              "effects": {
+                "radiation": 70
+              },
+              "note": "This storm had super-fast particles, but the water walls kept your crew safe."
+            }
+          ]
+        },
+        {
+          "id": "d07-solar-storm.b",
+          "title": "Finish collecting samples",
+          "explanation": "Stay out a little longer to finish the job, then come in.",
+          "effects": {
+            "radiation": 120,
+            "lifeSupport": -2,
+            "science": 10
+          },
+          "overrides": [
+            {
+              "ifFlag": "fast-particle-storm",
+              "effects": {
+                "radiation": 520
+              },
+              "note": "This storm had super-fast particles that went right through the spacesuits."
             }
           ]
         }
       ],
       "fact": {
-        "text": "In August 1972, a huge solar storm happened between the Apollo 16 and Apollo 17 missions. Luckily, no astronauts were on the Moon. Today NASA watches the Sun all the time so it can warn astronauts.",
-        "sourceIds": ["nasa-space-weather", "nasa-donki"]
+        "text": "Water has lots of hydrogen, which is good at blocking space radiation, so NASA plans storm shelters surrounded by water containers. NASA estimates that astronauts caught on the Moon without shelter during the big solar storm of August 1972 would have received a dangerous dose.",
+        "sourceIds": [
+          "nasa-radiation-protection-brief",
+          "nasa-alsj-radiation"
+        ]
       }
     },
     {
-      "id": "d07-last-sunlight",
-      "title": "Last Day of Sunlight",
-      "description": "Tomorrow the Sun sets and the long, cold lunar night begins. Your solar panels will stop working. How will you use the last sunny day?",
-      "mapHighlights": ["battery-storage", "solar-array-01", "solar-array-02", "science-lab"],
+      "id": "d09-oxygen-from-soil",
+      "title": "Oxygen from Moon Soil",
+      "description": "Your crew brought a test machine that melts Moon soil to pull out the oxygen hidden inside it. It makes fresh air, but it needs lots of electricity.",
+      "mapHighlights": [
+        "science-lab",
+        "life-support",
+        "battery-storage"
+      ],
       "decisions": [
         {
-          "id": "d07-last-sunlight.a",
-          "title": "Fill the batteries",
-          "explanation": "Go outside to tilt the panels toward the low Sun, and switch off the lab.",
-          "effects": { "power": 12, "lifeSupport": -2, "radiation": 1 }
+          "id": "d09-oxygen-from-soil.a",
+          "title": "Run the oxygen machine",
+          "explanation": "Melt one batch of Moon soil to make oxygen.",
+          "effects": {
+            "lifeSupport": 6,
+            "power": -30,
+            "science": 10
+          }
         },
         {
-          "id": "d07-last-sunlight.b",
-          "title": "Finish experiments before dark",
-          "explanation": "Use the last sunlight to complete your research.",
-          "effects": { "science": 12, "power": -6 }
+          "id": "d09-oxygen-from-soil.b",
+          "title": "Keep it switched off",
+          "explanation": "Save the electricity for the outpost.",
+          "effects": {}
         }
       ],
       "fact": {
-        "text": "A Moon night can get colder than −130 °C (−208 °F). That's colder than anywhere ever measured on Earth! Machines need heaters to survive.",
-        "sourceIds": ["nasa-moon-facts"]
+        "text": "In 2025, NASA scientists at Kennedy Space Center melted fake Moon soil made on Earth at 1,700 °C (3,100 °F), then used electricity to pull pure oxygen out of it. It was a test on Earth: no machine makes oxygen on the Moon yet.",
+        "sourceIds": [
+          "nasa-ksc-moon-soil-oxygen"
+        ]
       }
     },
     {
-      "id": "d08-night-falls",
-      "title": "Night Falls",
-      "description": "It's dark and getting very cold. Heaters keep the outpost warm, but heaters use lots of battery power.",
-      "mapHighlights": ["habitat", "science-lab", "battery-storage", "power-distribution"],
+      "id": "d11-co2-alert",
+      "title": "Carbon Dioxide Alert",
+      "description": "The machine that removes carbon dioxide, the gas we breathe out, is almost full. If it stops, the air will become unsafe to breathe.",
+      "mapHighlights": [
+        "life-support",
+        "habitat"
+      ],
+      "problem": {
+        "kind": "air",
+        "equipment": [
+          "life-support"
+        ],
+        "fixDecisionId": "d11-co2-alert.a"
+      },
       "decisions": [
         {
-          "id": "d08-night-falls.a",
-          "title": "Heat the whole outpost",
-          "explanation": "Keep the lab warm so night research can continue.",
-          "effects": { "science": 6, "power": -10 }
+          "id": "d11-co2-alert.a",
+          "title": "Use a spare filter canister",
+          "explanation": "Swap in a fresh chemical canister. It can only be used once.",
+          "effects": {
+            "lifeSupport": -4
+          }
         },
         {
-          "id": "d08-night-falls.b",
-          "title": "Heat only the habitat",
-          "explanation": "Close the lab and keep the crew warm.",
-          "effects": { "power": -4 }
+          "id": "d11-co2-alert.b",
+          "title": "Bake the filters clean",
+          "explanation": "Heat the filters so they can be reused. It uses lots of power.",
+          "effects": {
+            "power": -15
+          }
         }
       ],
       "fact": {
-        "text": "Surviving the long lunar night is one of the hardest problems for a Moon base. NASA is developing small nuclear power systems that can make electricity day and night.",
-        "sourceIds": ["nasa-fission-surface-power"]
+        "text": "The Space Station's main carbon dioxide remover traps the gas in tiny crystals, then heats them so the gas escapes into space and the crystals can be used again. Lithium hydroxide canisters, used on Apollo and the Space Shuttle, are the backup. They get used up as they work.",
+        "sourceIds": [
+          "nasa-co2-brief"
+        ]
       }
     },
     {
-      "id": "d09-air-filter",
-      "title": "Air Filter Alert",
-      "description": "Beep beep! The air filter that removes the gas we breathe out (**carbon dioxide**, CO₂) is getting clogged. The air is getting stuffy.",
-      "mapHighlights": ["life-support", "habitat"],
+      "id": "d13-final-countdown",
+      "title": "Final Countdown",
+      "description": "It's your last day before the trip home. There's time for one more experiment, or you can carefully pack the rock samples.",
+      "mapHighlights": [
+        "science-lab",
+        "sample-area",
+        "battery-storage"
+      ],
       "decisions": [
         {
-          "id": "d09-air-filter.a",
-          "title": "Install a new filter",
-          "explanation": "Put in a fresh filter. The fan needs extra power.",
-          "effects": { "lifeSupport": 6, "power": -4 }
+          "id": "d13-final-countdown.a",
+          "title": "One last experiment",
+          "explanation": "Run the lab one more time. It uses lots of power.",
+          "effects": {
+            "power": -25,
+            "science": 15
+          }
         },
         {
-          "id": "d09-air-filter.b",
-          "title": "Rest and breathe slowly",
-          "explanation": "The crew rests today so they make less CO₂.",
-          "effects": { "power": 3, "lifeSupport": -4 }
+          "id": "d13-final-countdown.b",
+          "title": "Pack up for the trip home",
+          "explanation": "Seal the rock samples so they reach Earth safely.",
+          "effects": {
+            "power": -5,
+            "science": 5
+          }
         }
       ],
       "fact": {
-        "text": "On Apollo 13, the air filters stopped working. Engineers on Earth invented a fix using tape, plastic bags and cardboard, and the astronauts built it in space!",
-        "sourceIds": ["nasa-apollo-13"]
-      }
-    },
-    {
-      "id": "d10a-harvest",
-      "title": "Harvest Time!",
-      "description": "Your space garden is growing! The little plants are green and healthy. What will you do with them?",
-      "mapHighlights": ["habitat"],
-      "decisions": [
-        {
-          "id": "d10a-harvest.a",
-          "title": "Let them keep growing",
-          "explanation": "Plants keep making fresh oxygen, but grow lights use power.",
-          "effects": { "lifeSupport": 8, "power": -4 }
-        },
-        {
-          "id": "d10a-harvest.b",
-          "title": "Harvest them for science",
-          "explanation": "Freeze the plants in the lab to study how they grew on the Moon.",
-          "effects": { "science": 12, "power": -2 }
-        }
-      ],
-      "fact": {
-        "text": "Plants take in the carbon dioxide we breathe out and give back oxygen. Future Moon and Mars bases will need gardens for both food and air.",
-        "sourceIds": ["nasa-plant-research"]
-      }
-    },
-    {
-      "id": "d10b-low-air",
-      "title": "Running Low on Air",
-      "description": "The oxygen tanks are emptying faster than planned. Without plants, the crew has to make oxygen another way.",
-      "mapHighlights": ["life-support"],
-      "decisions": [
-        {
-          "id": "d10b-low-air.a",
-          "title": "Split water to make oxygen",
-          "explanation": "A machine uses electricity to turn water into oxygen.",
-          "effects": { "lifeSupport": 10, "power": -10 }
-        },
-        {
-          "id": "d10b-low-air.b",
-          "title": "Rest in the warm habitat",
-          "explanation": "Less work means less oxygen used, but the heaters run longer.",
-          "effects": { "lifeSupport": 5, "power": -3 }
-        }
-      ],
-      "fact": {
-        "text": "The International Space Station makes oxygen by using electricity to split water (H₂O) into hydrogen and oxygen. This is called **electrolysis**.",
-        "sourceIds": ["nasa-iss-life-support"]
-      }
-    },
-    {
-      "id": "d11a-moonquake",
-      "title": "Moonquake!",
-      "description": "The ground is shaking! Your **seismometer** (a machine that feels vibrations) detected a **moonquake**.",
-      "mapHighlights": ["habitat", "science-lab"],
-      "decisions": [
-        {
-          "id": "d11a-moonquake.a",
-          "title": "Check every module outside",
-          "explanation": "Walk around the outpost to look for damage and measure the shaking.",
-          "effects": { "science": 10, "lifeSupport": -5, "radiation": 2 }
-        },
-        {
-          "id": "d11a-moonquake.b",
-          "title": "Stay inside and record data",
-          "explanation": "Let the instruments collect the data safely.",
-          "effects": { "science": 4, "power": -2 }
-        }
-      ],
-      "fact": {
-        "text": "Apollo astronauts left seismometers on the Moon. They recorded moonquakes, and some shook for up to 10 minutes!",
-        "sourceIds": ["nasa-apollo-seismometers"]
-      }
-    },
-    {
-      "id": "d11b-space-rock",
-      "title": "Tiny Space Rock Hit",
-      "description": "A tiny space rock, smaller than a pea, hit a power cable! Some electricity is leaking away.",
-      "mapHighlights": ["power-distribution", "battery-storage"],
-      "decisions": [
-        {
-          "id": "d11b-space-rock.a",
-          "title": "Repair it outside",
-          "explanation": "An astronaut goes out in the cold and dark to fix it.",
-          "effects": { "power": 4, "lifeSupport": -5, "radiation": 3 }
-        },
-        {
-          "id": "d11b-space-rock.b",
-          "title": "Use the backup cable",
-          "explanation": "Send power through a longer backup cable, but some power is lost.",
-          "effects": { "power": -6 }
-        }
-      ],
-      "fact": {
-        "text": "Without air to burn them up, tiny space rocks called **micrometeorites** hit the Moon's surface all the time.",
-        "sourceIds": ["nasa-micrometeorites"]
-      }
-    },
-    {
-      "id": "d12-call-home",
-      "title": "Call Home",
-      "description": "It's time to send your science results to Earth. The big antenna needs a lot of power to send all the data.",
-      "mapHighlights": ["comms-antenna"],
-      "decisions": [
-        {
-          "id": "d12-call-home.a",
-          "title": "Send all the data",
-          "explanation": "Scientists on Earth get all your discoveries.",
-          "effects": { "science": 10, "power": -8 }
-        },
-        {
-          "id": "d12-call-home.b",
-          "title": "Send a short message",
-          "explanation": "Send only the most important results and save power.",
-          "effects": { "science": 3, "power": -2 }
-        }
-      ],
-      "fact": {
-        "text": "A radio message takes about 1.3 seconds to travel from the Moon to Earth. From Mars it takes about 5 to 20 minutes, so astronauts on Mars can't have a normal phone call with Earth!",
-        "sourceIds": ["nasa-comms-delay"]
-      }
-    },
-    {
-      "id": "d13-ice",
-      "title": "Ice in the Shadows",
-      "description": "A spacecraft circling the Moon found signs of frozen water in a dark crater nearby. Water can be used for drinking, making oxygen and even rocket fuel!",
-      "mapHighlights": ["rover", "sample-area"],
-      "decisions": [
-        {
-          "id": "d13-ice.a",
-          "title": "Drive to the crater and drill",
-          "explanation": "A cold night trip with the rover to look for ice.",
-          "effects": { "science": 20, "power": -10, "lifeSupport": -5, "radiation": 3 }
-        },
-        {
-          "id": "d13-ice.b",
-          "title": "Study the maps from inside",
-          "explanation": "Learn about the crater from spacecraft data, safe and warm.",
-          "effects": { "science": 6, "power": -3 }
-        }
-      ],
-      "fact": {
-        "text": "In 2009, NASA's LCROSS mission crashed a rocket into a dark crater near the Moon's south pole and found water ice in the cloud it kicked up!",
-        "sourceIds": ["nasa-lcross"]
-      }
-    },
-    {
-      "id": "d14-sunrise",
-      "title": "Sunrise Is Coming",
-      "description": "This is the last day of your mission! The Sun will rise soon and your ride home is on the way. Do you have enough energy left for one more experiment?",
-      "mapHighlights": ["science-lab", "battery-storage"],
-      "decisions": [
-        {
-          "id": "d14-sunrise.a",
-          "title": "One last big experiment",
-          "explanation": "Use the remaining power for one more discovery.",
-          "effects": { "science": 12, "power": -8 }
-        },
-        {
-          "id": "d14-sunrise.b",
-          "title": "Pack up safely",
-          "explanation": "Pack the samples carefully and save power.",
-          "effects": { "science": 2, "power": -2 }
-        }
-      ],
-      "fact": {
-        "text": "NASA's Artemis program plans to send astronauts to the Moon's south pole, where they will live and work for longer missions.",
-        "sourceIds": ["nasa-artemis"]
+        "text": "On Apollo 17 in 1972, astronauts spent about 22 hours exploring outside on three moonwalks and brought home about 110 kilograms of Moon rocks and soil.",
+        "sourceIds": [
+          "nasa-apollo-17"
+        ]
       }
     }
   ],
   "flagDailyEffects": [
     {
       "ifFlag": "dusty-panels",
-      "phase": "day",
-      "effects": { "power": -2 },
-      "note": "Dusty panels made less power today."
+      "phase": "any",
+      "effects": {
+        "power": -5
+      },
+      "note": "Dusty panels made only half their power."
+    },
+    {
+      "ifFlag": "backup-cable",
+      "phase": "any",
+      "effects": {
+        "power": -5
+      },
+      "note": "The backup cable carried only half the power."
     }
   ],
   "debriefTips": {
-    "lifeSupport": "Every trip outside uses extra oxygen. Fresh air filters and plants can help!",
-    "power": "At night there's no sunlight to recharge. Try saving power before Day 8!",
-    "radiation": "Radiation adds up and never goes away. Stay in the shelter during solar storms!"
+    "lifeSupport": "Every spacewalk uses about two days of the crew's oxygen. Plan trips outside carefully!",
+    "power": "Dust and a weak backup cable drain power every day. Fixing problems early keeps the battery healthy!",
+    "radiation": "When a solar storm comes, go to the shelter right away. Water walls block the fast particles!"
   }
 }

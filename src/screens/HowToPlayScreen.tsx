@@ -1,7 +1,7 @@
 import { ChevronRight } from 'lucide-react';
 import { Fragment } from 'react';
 import { routes } from '../app/routes';
-import { Button, Panel, ScreenBackground } from '../design-system';
+import { Button, Mascot, Panel, ScreenBackground } from '../design-system';
 
 /** "How to Play" — matches image-assets/Explore, Decide, Survive_ Moon Mission Tutorial.png */
 const steps = [
@@ -42,9 +42,12 @@ export function HowToPlayScreen() {
           ))}
         </ol>
 
-        <Button to={routes.levels} variant="primary" size="lg" chevron className="mt-14">
-          Continue
-        </Button>
+        <div className="mt-12 flex items-center gap-6">
+          <Mascot pose="curious" height="7.5rem" say="Tip: tap the outpost to explore it!" bubble="right" />
+          <Button to={routes.levels} variant="primary" size="lg" chevron>
+            Continue
+          </Button>
+        </div>
       </main>
     </ScreenBackground>
   );

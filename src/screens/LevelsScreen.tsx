@@ -1,7 +1,7 @@
 import { Lock, Trophy } from 'lucide-react';
 import { routes } from '../app/routes';
 import { levels } from '../data/levels';
-import { Button, NavPill, Panel, ScreenBackground, StarRating, cn } from '../design-system';
+import { Button, NavPill, Panel, ScreenBackground, StarRating, cn, Mascot } from '../design-system';
 import type { Level } from '../game/types';
 
 /**
@@ -37,10 +37,13 @@ export function LevelsScreen() {
           ))}
         </ol>
 
-        <Panel variant="row" className="mt-4 flex items-center gap-3 px-5 py-3 backdrop-blur-sm">
-          <Trophy aria-hidden className="size-6 text-star" />
-          <p className="text-lg text-blue-100">Complete missions to earn science stars!</p>
-        </Panel>
+        <div className="mt-4 flex items-center gap-4">
+          <Mascot pose="thumbs-up" height="6rem" />
+          <Panel variant="row" className="flex items-center gap-3 px-5 py-3 backdrop-blur-sm">
+            <Trophy aria-hidden className="size-6 text-star" />
+            <p className="text-lg text-blue-100">Complete missions to earn science stars!</p>
+          </Panel>
+        </div>
       </main>
     </ScreenBackground>
   );

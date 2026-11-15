@@ -3,8 +3,10 @@
  * Every function takes a run and returns a NEW run, so state is easy to test, save and replay.
  *
  * Turn order (see docs/SCENARIOS_MISSION_01.md §2):
- *   decision effects → abort check → end-of-day tick (phase rates + flag effects) → abort check
- *   → next day, or mission complete after the last day.
+ *   decision effects → abort check → end-of-day tick (phase rates + flag effects) → abort check,
+ *   repeated for every day until the next scenario day → next scenario, or mission complete
+ *   after the last day. A scenario does not have to play every day: Mission 01 has one every
+ *   two days, so one decision covers two days of the mission.
  */
 import type {
   DayPhase,
@@ -23,21 +25,34 @@ const RESOURCE_ORDER: readonly ResourceId[] = ['lifeSupport', 'power', 'radiatio
 /** Picks a random index in [0, n). Injected so tests (and saved runs) are deterministic. */
 export type Rng = () => number;
 
-export function startMission(mission: Mission, flareIds: readonly string[] = [], rng: Rng = Math.random): MissionRun {
+/** What the engine needs to know about each archived solar flare (see src/data/solar-flares.ts). */
+export interface FlareChoice {
+  id: string;
+  /** DONKI recorded >100 MeV protons with this event: the kind that get through a spacesuit. */
+  fastParticles: boolean;
+}
+
+/** Flag set at mission start when the chosen storm carried >100 MeV protons. Scenarios read it via overrides. */
+export const FAST_PARTICLE_FLAG = 'fast-particle-storm';
+/** Flags no decision sets; the engine sets them itself. Known to the mission loader. */
+export const ENGINE_FLAGS = [FAST_PARTICLE_FLAG] as const;
+
+export function startMission(mission: Mission, flares: readonly FlareChoice[] = [], rng: Rng = Math.random): MissionRun {
   const randomPicks: Record<number, string> = {};
   for (const plan of mission.content.days) {
     if (plan.selection === 'random') {
       randomPicks[plan.day] = plan.options[Math.floor(rng() * plan.options.length)]!.scenarioId;
     }
   }
+  const flare = flares.length > 0 ? flares[Math.floor(rng() * flares.length)]! : null;
   return {
     missionId: mission.content.missionId,
-    day: 1,
+    day: mission.content.days[0]!.day,
     resources: { ...mission.balance.start },
     science: 0,
-    flags: [],
+    flags: flare?.fastParticles ? [FAST_PARTICLE_FLAG] : [],
     randomPicks,
-    flareId: flareIds.length > 0 ? flareIds[Math.floor(rng() * flareIds.length)]! : null,
+    flareId: flare?.id ?? null,
     history: [],
     status: 'playing',
     abortedBy: null,
@@ -85,7 +100,7 @@ export interface DecisionOutcome {
   applied: Effects;
   /** Friendly note when a flag changed the effects (e.g. "Your soil shield cut the radiation in half!"). */
   overrideNote?: string;
-  /** Net change from the end-of-day tick; `null` if the mission aborted before it. */
+  /** Net change from the end-of-day ticks (all days this decision covers); `null` if the mission aborted before them. */
   dailyChange: Resources | null;
   /** Notes from flag-driven daily effects (e.g. "Dusty panels made less power today."). */
   dailyNotes: string[];
@@ -116,43 +131,53 @@ export function applyDecision(mission: Mission, run: MissionRun, decisionId: str
     return { ...result, run: { ...base, status: 'aborted', abortedBy: abortedAfterDecision }, dailyChange: null, dailyNotes: [] };
   }
 
-  // End-of-day tick.
-  const phase = phaseOf(mission, run.day);
-  const rate = balance.dailyRates[phase];
+  // End-of-day ticks for every day this decision covers (up to the next scenario day).
+  const nextPlan = mission.content.days.find((d) => d.day > run.day);
+  const lastDay = nextPlan ? nextPlan.day - 1 : balance.durationDays;
   const dailyNotes: string[] = [];
-  let tick: Resources = { lifeSupport: rate.lifeSupport, power: rate.power, radiation: rate.radiation };
-  for (const fe of mission.content.flagDailyEffects) {
-    if (flags.includes(fe.ifFlag) && (fe.phase === 'any' || fe.phase === phase)) {
-      tick = {
-        lifeSupport: tick.lifeSupport + (fe.effects.lifeSupport ?? 0),
-        power: tick.power + (fe.effects.power ?? 0),
-        radiation: tick.radiation + (fe.effects.radiation ?? 0),
-      };
-      dailyNotes.push(fe.note);
+  const start = resources;
+  for (let day = run.day; day <= lastDay; day++) {
+    const phase = phaseOf(mission, day);
+    const rate = balance.dailyRates[phase];
+    let tick: Resources = { lifeSupport: rate.lifeSupport, power: rate.power, radiation: rate.radiation };
+    for (const fe of mission.content.flagDailyEffects) {
+      if (flags.includes(fe.ifFlag) && (fe.phase === 'any' || fe.phase === phase)) {
+        tick = {
+          lifeSupport: tick.lifeSupport + (fe.effects.lifeSupport ?? 0),
+          power: tick.power + (fe.effects.power ?? 0),
+          radiation: tick.radiation + (fe.effects.radiation ?? 0),
+        };
+        if (!dailyNotes.includes(fe.note)) dailyNotes.push(fe.note);
+      }
+    }
+    resources = clamp(balance, {
+      lifeSupport: resources.lifeSupport + tick.lifeSupport,
+      power: resources.power + tick.power,
+      radiation: resources.radiation + tick.radiation,
+    });
+    const aborted = breached(mission, resources);
+    if (aborted) {
+      // `day` is the day the crew didn't finish, so daysSurvived() = day - 1.
+      const dailyChange = diff(resources, start);
+      return { ...result, run: { ...base, resources, day, status: 'aborted', abortedBy: aborted }, dailyChange, dailyNotes };
     }
   }
-  const before = resources;
-  resources = clamp(balance, {
-    lifeSupport: before.lifeSupport + tick.lifeSupport,
-    power: before.power + tick.power,
-    radiation: before.radiation + tick.radiation,
-  });
-  const dailyChange: Resources = {
-    lifeSupport: resources.lifeSupport - before.lifeSupport,
-    power: resources.power - before.power,
-    radiation: resources.radiation - before.radiation,
-  };
-
-  const abortedAfterTick = breached(mission, resources);
-  if (abortedAfterTick) {
-    return { ...result, run: { ...base, resources, status: 'aborted', abortedBy: abortedAfterTick }, dailyChange, dailyNotes };
-  }
-  const finished = run.day >= balance.durationDays;
+  const dailyChange = diff(resources, start);
   return {
     ...result,
-    run: { ...base, resources, day: finished ? run.day : run.day + 1, status: finished ? 'complete' : 'playing' },
+    run: nextPlan
+      ? { ...base, resources, day: nextPlan.day }
+      : { ...base, resources, day: balance.durationDays, status: 'complete' },
     dailyChange,
     dailyNotes,
+  };
+}
+
+function diff(after: Resources, before: Resources): Resources {
+  return {
+    lifeSupport: after.lifeSupport - before.lifeSupport,
+    power: after.power - before.power,
+    radiation: after.radiation - before.radiation,
   };
 }
 

@@ -1,5 +1,5 @@
 import { routes } from '../app/routes';
-import { Button } from '../design-system';
+import { Button, Mascot } from '../design-system';
 
 /** Screen 1 — matches image-assets/uxpilot-export-11-14-26.pdf */
 export function WelcomeScreen() {
@@ -29,6 +29,12 @@ export function WelcomeScreen() {
           Start
         </Button>
       </div>
+      <Mascot
+        pose="waving"
+        height="clamp(9rem, 24vh, 14rem)"
+        say="Hi, Commander!"
+        className="absolute right-[4vw] bottom-[4vh]"
+      />
     </main>
   );
 }

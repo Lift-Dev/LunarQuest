@@ -1,5 +1,5 @@
 import { routes } from '../app/routes';
-import { Button, Panel, ProgressBar, ScreenBackground, type ResourceTone } from '../design-system';
+import { Button, Panel, ProgressBar, ScreenBackground, type ResourceTone, Mascot } from '../design-system';
 
 /**
  * Screen 3 — matches image-assets/uxpilot-export-11-14-26 (2).pdf, with the
@@ -69,9 +69,12 @@ export function LearnToSurviveScreen() {
           </ul>
         </div>
 
-        <Button to={routes.howToPlay} variant="raised" size="lg">
-          Next
-        </Button>
+        <div className="flex items-center gap-6">
+          <Mascot pose="pointing" height="7.5rem" say="Keep all three safe!" bubble="right" />
+          <Button to={routes.howToPlay} variant="raised" size="lg">
+            Next
+          </Button>
+        </div>
       </main>
     </ScreenBackground>
   );

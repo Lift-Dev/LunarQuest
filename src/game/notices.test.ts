@@ -2,16 +2,19 @@ import { describe, expect, it } from 'vitest';
 import { getMission } from '../data/missions';
 import { lowResources, startMission } from './engine';
 import { noticesBetween } from './notices';
-import type { MissionRun } from './types';
+import type { Mission, MissionRun } from './types';
 
 const mission = getMission('mission-01');
+// Mission 01 is at a South Pole site with no night, so test the night notice on a variant that has one.
+const withNight: Mission = { ...mission, balance: { ...mission.balance, daylightDays: 7 } };
 const run = (patch: Partial<MissionRun>): MissionRun => ({ ...startMission(mission), ...patch });
 
 describe('noticesBetween', () => {
-  it('announces night once, when day 7 becomes day 8', () => {
-    expect(noticesBetween(mission, run({ day: 7 }), run({ day: 8 }))).toEqual([{ id: 'night-8', kind: 'night' }]);
-    expect(noticesBetween(mission, run({ day: 3 }), run({ day: 4 }))).toEqual([]);
-    expect(noticesBetween(mission, run({ day: 8 }), run({ day: 9 }))).toEqual([]);
+  it('announces night once, when the last daylight day ends', () => {
+    expect(noticesBetween(withNight, run({ day: 7 }), run({ day: 9 }))).toEqual([{ id: 'night-9', kind: 'night' }]);
+    expect(noticesBetween(withNight, run({ day: 3 }), run({ day: 5 }))).toEqual([]);
+    expect(noticesBetween(withNight, run({ day: 9 }), run({ day: 11 }))).toEqual([]);
+    expect(noticesBetween(mission, run({ day: 7 }), run({ day: 9 }))).toEqual([]);
   });
 
   it('warns only when a resource newly crosses its warning level', () => {

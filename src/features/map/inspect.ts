@@ -60,6 +60,12 @@ export function inspect(mission: Mission, run: MissionRun, id: EquipmentId): Ins
     }
   }
 
+  if (id === 'power-distribution' && run.flags.includes('backup-cable')) {
+    status = status === 'critical' ? status : 'warning';
+    statusLabel = status === 'critical' ? LABEL.critical : 'Backup cable';
+    note = 'The backup cable carries only half the power.';
+  }
+
   if (id === 'battery-storage') reading = { label: 'Charge', percent: run.resources.power, highIsBad: false };
   if (id === 'life-support') reading = { label: 'Air', percent: run.resources.lifeSupport, highIsBad: false };
   if (id === 'radiation-shelter') reading = { label: 'Radiation dose', percent: radiationPercent(mission, run), highIsBad: true };

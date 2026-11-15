@@ -2,7 +2,7 @@ import { CalendarDays, Moon, Sun } from 'lucide-react';
 import { Navigate, useParams } from 'react-router';
 import { routes } from '../app/routes';
 import { levels } from '../data/levels';
-import { Button, NavPill, Panel, ScreenBackground } from '../design-system';
+import { Button, NavPill, Panel, ScreenBackground, Mascot } from '../design-system';
 
 /** Mission Overview — matches image-assets/Lunar Outpost Mission Briefing.png */
 export function MissionOverviewScreen() {
@@ -58,9 +58,12 @@ export function MissionOverviewScreen() {
             </Goal>
           </div>
 
-          <Button to={routes.play(missionId!)} variant="primary" size="lg" chevron className="mt-2">
-            Begin Mission
-          </Button>
+          <div className="mt-2 flex items-center gap-6">
+            <Button to={routes.play(missionId!)} variant="primary" size="lg" chevron>
+              Begin Mission
+            </Button>
+            <Mascot pose="determined" height="7rem" say="I'm ready. Are you?" bubble="right" />
+          </div>
         </div>
       </main>
     </ScreenBackground>

@@ -1,8 +1,9 @@
-import { Calendar, FlaskConical, Home, Play, RotateCcw, Radiation, TriangleAlert } from 'lucide-react';
+import { Calendar, FlaskConical, Home, Play, RotateCcw, Radiation } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { Navigate, useLocation, useParams } from 'react-router';
 import { routes } from '../app/routes';
-import { Button, Panel, ScreenBackground, StarRating } from '../design-system';
+import { Button, Mascot, Panel, ScreenBackground, StarRating } from '../design-system';
+import { completePose } from '../features/mascot/moods';
 import type { ResourceId } from '../game/types';
 
 /**
@@ -40,7 +41,7 @@ export function MissionAbortedScreen() {
 
 export function CompleteView({ missionId, result }: { missionId: string; result: CompleteResult }) {
   return (
-    <ResultFrame badge={<StarBadge />} title="Mission Complete!" subtitle="Great job, Commander!">
+    <ResultFrame badge={<Mascot pose={completePose(result.stars)} height="10rem" />} title="Mission Complete!" subtitle="Great job, Commander!">
       <StarRating earned={result.stars} className="mt-6 justify-center [&_svg]:size-10" />
       <Panel variant="solid" className="mt-8 grid grid-cols-3 divide-x divide-blue-400/30 py-5">
         <Stat icon={<Calendar className="text-blue-300" />} value={`${result.days} / ${result.totalDays}`} label="Days Survived" />
@@ -64,7 +65,7 @@ const causeText: Record<ResourceId, string> = {
 export function AbortedView({ missionId, result }: { missionId: string; result: AbortedResult }) {
   return (
     <ResultFrame
-      badge={<WarningBadge />}
+      badge={<Mascot pose="worried" height="10rem" />}
       title="Mission Aborted"
       subtitle="The outpost could not be saved. Try again next time!"
     >
@@ -93,9 +94,9 @@ export function AbortedView({ missionId, result }: { missionId: string; result: 
 function ResultFrame({ badge, title, subtitle, children }: { badge: ReactNode; title: string; subtitle: string; children: ReactNode }) {
   return (
     <ScreenBackground scene="outpost">
-      <main className="grid min-h-dvh place-items-center px-4 py-24">
-        <section className="relative w-full max-w-[560px] rounded-3xl border-2 border-blue-400/60 bg-slate-900/85 px-8 pt-20 pb-8 text-center shadow-glow-panel backdrop-blur-sm">
-          <div className="absolute -top-12 left-1/2 -translate-x-1/2">{badge}</div>
+      <main className="grid min-h-dvh place-items-center px-4 pt-36 pb-16">
+        <section className="relative w-full max-w-[560px] rounded-3xl border-2 border-blue-400/60 bg-slate-900/85 px-8 pt-16 pb-8 text-center shadow-glow-panel backdrop-blur-sm">
+          <div className="absolute -top-28 left-1/2 -translate-x-1/2">{badge}</div>
           <h1 className="text-5xl leading-tight font-bold text-white">{title}</h1>
           <p className="mx-auto mt-3 max-w-sm text-xl leading-7 text-blue-100">{subtitle}</p>
           {children}
@@ -103,23 +104,6 @@ function ResultFrame({ badge, title, subtitle, children }: { badge: ReactNode; t
       </main>
     </ScreenBackground>
   );
-}
-
-function StarBadge() {
-  return (
-    <svg viewBox="0 0 24 24" className="size-28 drop-shadow-[0_0_28px_rgb(250_204_21/0.7)]" aria-hidden>
-      <path
-        d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5z"
-        className="fill-star stroke-yellow-200"
-        strokeWidth="1.2"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function WarningBadge() {
-  return <TriangleAlert aria-hidden className="size-24 fill-red-500 text-red-200 drop-shadow-[0_0_28px_rgb(239_68_68/0.6)]" strokeWidth={1.5} />;
 }
 
 function Stat({ icon, value, label }: { icon: ReactNode; value: string; label: string }) {

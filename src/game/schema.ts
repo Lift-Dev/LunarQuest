@@ -53,6 +53,19 @@ export const decisionSchema = z.object({
   laterHint: z.string().optional(),
 });
 
+/** How a problem looks on the map (each kind has its own animation). */
+export const PROBLEM_KINDS = ['shadow', 'dust', 'damage', 'storm', 'air'] as const;
+
+/**
+ * The thing that is going wrong on the map. It glows red with an animation, and the decision that
+ * fixes it appears right next to it, so the player "goes there" to fix it.
+ */
+export const problemSchema = z.object({
+  kind: z.enum(PROBLEM_KINDS),
+  equipment: z.array(id).min(1),
+  fixDecisionId: z.string().min(1),
+});
+
 export const scenarioSchema = z.object({
   id,
   title: z.string().min(1),
@@ -62,6 +75,7 @@ export const scenarioSchema = z.object({
   mapHighlights: z.array(id).default([]),
   /** Shows the real solar-flare card (Day 6). */
   showsFlare: z.boolean().default(false),
+  problem: problemSchema.optional(),
   decisions: z.tuple([decisionSchema, decisionSchema]),
   fact: factSchema,
 });
@@ -115,7 +129,8 @@ const dailyRateSchema = z.object({
 
 /**
  * All numbers that drive the simulation for one mission.
- * ⚠️ These are game-balancing values, NOT scientific measurements.
+ * Each value is derived from a NASA source where one exists; the derivation of every number is in
+ * docs/SCENARIOS_MISSION_01.md §2 and in the mission's balance.ts.
  */
 export const missionBalanceSchema = z.object({
   durationDays: z.number().int().min(1),
@@ -168,6 +183,10 @@ export const solarFlareSchema = z.object({
   note: z.string().optional(),
   /** DONKI flrID once confirmed against the database. */
   donkiId: z.string().nullable(),
+  /** DONKI sepIDs of the solar energetic particle events linked to this flare. */
+  sepIds: z.array(z.string()).default([]),
+  /** True when one of those SEP events was recorded at >100 MeV (GOES), the protons that get through spacesuits. */
+  fastParticles: z.boolean(),
   verified: z.boolean(),
 });
 

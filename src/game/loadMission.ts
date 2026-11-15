@@ -9,6 +9,7 @@
  * All problems are collected and thrown together so a content author sees
  * every issue at once.
  */
+import { ENGINE_FLAGS } from './engine';
 import { missionBalanceSchema, missionContentSchema } from './schema';
 import type { Mission, MissionBalance, MissionContent, Scenario } from './types';
 
@@ -58,7 +59,7 @@ function findReferenceProblems(content: MissionContent, balance: MissionBalance,
   const problems: string[] = [];
   const scenarioIds = new Set<string>();
   const decisionIds = new Set<string>();
-  const flagsSet = new Set<string>();
+  const flagsSet = new Set<string>(ENGINE_FLAGS);
 
   for (const s of content.scenarios) {
     if (scenarioIds.has(s.id)) problems.push(`duplicate scenario id "${s.id}"`);
@@ -72,11 +73,12 @@ function findReferenceProblems(content: MissionContent, balance: MissionBalance,
 
   const flagsRead: Array<[flag: string, where: string]> = [];
 
-  // Days: exactly 1..durationDays, in order, each resolving to real scenarios.
+  // Scenario days: start on day 1, strictly ascending, within the mission. Days in between have
+  // no scenario; the decision before them covers them (see engine.applyDecision).
   const days = content.days.map((d) => d.day);
-  const expected = Array.from({ length: balance.durationDays }, (_, i) => i + 1);
-  if (days.join() !== expected.join()) {
-    problems.push(`days must be exactly ${expected[0]}..${balance.durationDays} in order, got [${days.join(', ')}]`);
+  const ascending = days.every((d, i) => i === 0 || d > days[i - 1]!);
+  if (days[0] !== 1 || !ascending || days.some((d) => d > balance.durationDays)) {
+    problems.push(`days must start at 1, go up, and stay within 1..${balance.durationDays}, got [${days.join(', ')}]`);
   }
   const usedScenarios = new Set<string>();
   for (const plan of content.days) {
@@ -104,6 +106,14 @@ function findReferenceProblems(content: MissionContent, balance: MissionBalance,
     for (const eq of s.mapHighlights) {
       if (!equipment.has(eq)) problems.push(`scenario "${s.id}": unknown map object "${eq}"`);
     }
+    if (s.problem) {
+      for (const eq of s.problem.equipment) {
+        if (!equipment.has(eq)) problems.push(`scenario "${s.id}": problem on unknown map object "${eq}"`);
+      }
+      if (!s.decisions.some((d) => d.id === s.problem!.fixDecisionId)) {
+        problems.push(`scenario "${s.id}": fixDecisionId "${s.problem.fixDecisionId}" is not one of its decisions`);
+      }
+    }
     for (const src of s.fact.sourceIds) {
       if (!sources.has(src)) problems.push(`scenario "${s.id}": unknown source "${src}"`);
     }
@@ -124,8 +134,12 @@ function findReferenceProblems(content: MissionContent, balance: MissionBalance,
   return problems;
 }
 
-/** Design rule: no free choice. A decision must cost a resource or carry a ⏳ later-consequence hint. */
-export function decisionHasCost(decision: Scenario['decisions'][number]): boolean {
+/**
+ * Design rule: no free choice. A decision must cost a resource, carry a ⏳ later-consequence hint,
+ * or give up science that the other option earns (the cost of playing safe).
+ */
+export function decisionHasCost(decision: Scenario['decisions'][number], other?: Scenario['decisions'][number]): boolean {
   const e = decision.effects;
-  return (e.lifeSupport ?? 0) < 0 || (e.power ?? 0) < 0 || (e.radiation ?? 0) > 0 || decision.laterHint !== undefined;
+  const givesUpScience = other !== undefined && (e.science ?? 0) < (other.effects.science ?? 0);
+  return (e.lifeSupport ?? 0) < 0 || (e.power ?? 0) < 0 || (e.radiation ?? 0) > 0 || decision.laterHint !== undefined || givesUpScience;
 }

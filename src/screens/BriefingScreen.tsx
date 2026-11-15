@@ -1,5 +1,5 @@
 import { routes } from '../app/routes';
-import { Button, Chip, Panel, ScreenBackground } from '../design-system';
+import { Button, Chip, Mascot, Panel, ScreenBackground } from '../design-system';
 
 /** Screen 2 "Your Mission" — matches image-assets/uxpilot-export-11-14-26 (1).pdf */
 export function BriefingScreen() {
@@ -35,9 +35,12 @@ export function BriefingScreen() {
             </p>
           </Panel>
 
-          <Button to={routes.learnToSurvive} variant="primary" size="lg" chevron className="mt-12">
-            Continue
-          </Button>
+          <div className="mt-10 flex items-center gap-6">
+            <Button to={routes.learnToSurvive} variant="primary" size="lg" chevron>
+              Continue
+            </Button>
+            <Mascot pose="excited" height="7.5rem" say="Let's go!" bubble="right" />
+          </div>
         </div>
       </main>
     </ScreenBackground>

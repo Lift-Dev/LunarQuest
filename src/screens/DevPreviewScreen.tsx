@@ -19,7 +19,7 @@ export function DevPreviewScreen() {
     // Jump to day N by always taking option A (or B with ?pick=b); ?feedback shows the card after day N's choice.
     const mission = getMission('mission-01');
     const pick = search.get('pick') === 'b' ? 1 : 0;
-    let run = startMission(mission, solarFlares.map((f) => f.id), () => 0);
+    let run = startMission(mission, solarFlares, () => 0);
     while (run.day < Number(day)) run = applyDecision(mission, run, currentScenario(mission, run).decisions[pick].id).run;
     const outcome = search.has('feedback') ? applyDecision(mission, run, currentScenario(mission, run).decisions[pick].id) : null;
     const notices = (search.get('notices') ?? '')

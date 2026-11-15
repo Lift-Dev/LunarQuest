@@ -1,4 +1,4 @@
-import { Moon, Sun } from 'lucide-react';
+import { Moon, RotateCw, Sun, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router';
 import { routes } from '../app/routes';
@@ -18,6 +18,7 @@ import { InspectionPanel } from '../features/map/InspectionPanel';
 import { OutpostMap } from '../features/map/OutpostMap';
 import { inspect } from '../features/map/inspect';
 import type { EquipmentId } from '../data/maps/outpost-01';
+import { scenarioPose } from '../features/mascot/moods';
 import { useGameStore } from '../store/gameStore';
 import type { AbortedResult, CompleteResult } from './MissionResultScreens';
 
@@ -73,10 +74,14 @@ export function GameplayScreen() {
   };
 
   // While feedback is showing the engine has already moved on, so the HUD shows the new values.
-  const shownDay = outcome ? outcome.run.day - (outcome.run.status === 'playing' ? 1 : 0) : run.day;
+  // A decision can cover several days, so show the day it was made on.
+  const shownDay = outcome ? outcome.run.history.at(-1)!.day : run.day;
   const scenario: Scenario = outcome ? outcome.scenario : currentScenario(mission, run);
 
   const highlights = outcome ? [] : scenario.mapHighlights;
+  const problem = outcome ? undefined : scenario.problem;
+  const fixDecision = problem && scenario.decisions.find((d) => d.id === problem.fixDecisionId);
+  const fix = fixDecision ? { decision: fixDecision, onChoose: () => choose(fixDecision.id) } : undefined;
   const panel = selected && !outcome && (
     <InspectionPanel id={selected} info={inspect(mission, run, selected)} onSelect={setSelected} onClose={() => setSelected(null)} />
   );
@@ -90,10 +95,12 @@ export function GameplayScreen() {
           focusX={0.7}
           selected={outcome ? null : selected}
           highlights={highlights}
+          problem={problem}
+          fix={fix}
           onSelect={setSelected}
           className="absolute inset-0 hidden landscape:block"
         />
-        <main className="pointer-events-none relative flex min-h-dvh flex-col gap-4 p-4 md:p-6 [&>*]:pointer-events-auto">
+        <main className="pointer-events-none relative flex min-h-dvh flex-col gap-4 p-4 md:p-6 short:gap-1.5 short:safe-x short:py-2 [&>*]:pointer-events-auto">
           <ResourceHud
             lifeSupport={run.resources.lifeSupport}
             power={run.resources.power}
@@ -103,30 +110,34 @@ export function GameplayScreen() {
             onPause={() => setPaused(true)}
           />
 
+          <RotateHint />
+
           {!outcome && <NoticeStack notices={notices} onDismiss={dismissNotice} />}
 
           {outcome ? (
             <>
               {/* Dims the scene so the fact is the only thing to read. */}
               <div aria-hidden className="pointer-events-none fixed inset-0 bg-space/55" />
-              <div className="relative flex flex-1 items-center py-10">
+              <div className="relative flex flex-1 items-center py-10 short:py-1">
                 <FeedbackCard outcome={outcome} bigAt={mission.balance.bigEffectThreshold} onContinue={onContinue} />
               </div>
             </>
           ) : (
             // Wide screens: day bar top-left, inspection panel top-right, story card along the bottom foreground.
             // Portrait: day bar, map, panel, then the story card, stacked.
-            <div className="pointer-events-none! flex flex-1 flex-col gap-4">
+            <div className="pointer-events-none! flex flex-1 flex-col gap-4 short:gap-1.5">
               <div className="pointer-events-none! flex items-start justify-between gap-4 portrait:contents">
                 <div className="pointer-events-auto">
                   <DayChip mission={mission} day={shownDay} />
                 </div>
-                {panel && <div className="pointer-events-auto portrait:order-3 landscape:w-[22rem]">{panel}</div>}
+                {panel && <div className="pointer-events-auto portrait:order-3 landscape:w-[22rem] short:w-64">{panel}</div>}
               </div>
               <OutpostMap
                 fit="contain"
                 selected={selected}
                 highlights={highlights}
+                problem={problem}
+                fix={fix}
                 onSelect={setSelected}
                 className="pointer-events-auto relative aspect-video w-full rounded-2xl border border-blue-500/30 portrait:order-2 landscape:hidden"
               />
@@ -135,7 +146,8 @@ export function GameplayScreen() {
                 scenario={scenario}
                 note={<FlareNote run={run} scenario={scenario} />}
                 onChoose={choose}
-                className="pointer-events-auto portrait:order-4 landscape:mt-auto"
+                mascot={scenarioPose(shownDay, phaseOf(mission, shownDay), scenario, lowResources(mission, run))}
+                className="portrait:order-4 landscape:mt-auto"
               />
             </div>
           )}
@@ -166,9 +178,9 @@ export function GameplayScreen() {
 function DayChip({ mission, day }: { mission: Mission; day: number }) {
   const phase = phaseOf(mission, day);
   return (
-    <div className="flex w-fit flex-wrap items-center gap-x-5 gap-y-2 rounded-2xl border-2 border-blue-400/40 bg-slate-950/75 px-4 py-2.5 backdrop-blur-sm">
-      <p className="flex items-center gap-2.5 text-lg font-bold text-white">
-        {phase === 'day' ? <Sun aria-hidden className="size-6 text-yellow-300" /> : <Moon aria-hidden className="size-6 text-blue-200" />}
+    <div className="flex w-fit flex-wrap items-center gap-x-5 gap-y-2 rounded-2xl border-2 border-blue-400/40 bg-slate-950/75 px-4 py-2.5 backdrop-blur-sm max-sm:gap-x-3 max-sm:gap-y-1 max-sm:px-3 max-sm:py-1.5 short:rounded-xl short:px-3 short:py-1">
+      <p className="flex items-center gap-2.5 text-lg font-bold text-white max-sm:text-base short:gap-2 short:text-sm">
+        {phase === 'day' ? <Sun aria-hidden className="size-6 text-yellow-300 short:size-4" /> : <Moon aria-hidden className="size-6 text-blue-200 short:size-4" />}
         Day {day} / {mission.balance.durationDays} · {phase === 'day' ? 'Lunar Daylight' : 'Lunar Night'}
       </p>
       <DayTrack day={day} total={mission.balance.durationDays} daylightDays={mission.balance.daylightDays} />
@@ -176,11 +188,26 @@ function DayChip({ mission, day }: { mission: Mission; day: number }) {
   );
 }
 
+/** Portrait phones: the game is a widescreen picture, so invite the player to turn the phone. */
+function RotateHint() {
+  const [open, setOpen] = useState(true);
+  if (!open) return null;
+  return (
+    <p className="hidden items-center gap-2 rounded-xl border border-blue-400/40 bg-slate-950/80 py-1.5 pr-2 pl-3 text-sm text-blue-100 portrait:max-sm:flex">
+      <RotateCw aria-hidden className="size-4 shrink-0 text-blue-300" />
+      <span className="flex-1">Turn your phone sideways for the full view.</span>
+      <button type="button" onClick={() => setOpen(false)} aria-label="Dismiss" className="grid size-8 place-items-center rounded-full hover:bg-white/10">
+        <X aria-hidden className="size-4" />
+      </button>
+    </p>
+  );
+}
+
 function FlareNote({ run, scenario }: { run: MissionRun; scenario: Scenario }) {
   const flare = scenario.showsFlare ? solarFlares.find((f) => f.id === run.flareId) : undefined;
   if (!flare) return null;
   return (
-    <p className="rounded-xl border border-amber-500/50 bg-amber-100 px-3 py-2 text-base leading-5 text-amber-950 landscape:py-1.5 landscape:text-sm">
+    <p className="rounded-xl border border-amber-500/50 bg-amber-100 px-3 py-2 text-base leading-5 text-amber-950 landscape:py-1.5 landscape:text-sm short:py-1 short:text-xs short:leading-4">
       This storm is based on a real solar flare: <strong>{formatDate(flare.date)}</strong>, strength <strong>{flare.classType}</strong>. Archived NASA data.
     </p>
   );

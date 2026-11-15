@@ -10,11 +10,14 @@ export function Modal({
   title,
   icon: Icon,
   onClose,
+  mascot,
   children,
 }: {
   title: string;
   icon: LucideIcon;
   onClose?: () => void;
+  /** Optional robot peeking over the bottom-right corner. */
+  mascot?: ReactNode;
   children: ReactNode;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -27,20 +30,21 @@ export function Modal({
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-space/70 px-4 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 grid place-items-center bg-space/70 px-4 backdrop-blur-sm short:py-2">
       <div
         ref={ref}
         role="dialog"
         aria-modal="true"
         aria-label={title}
         tabIndex={-1}
-        className="relative w-full max-w-[540px] rounded-3xl border-2 border-blue-400/60 bg-slate-900/90 px-10 pt-16 pb-10 shadow-glow-panel outline-none"
+        className="relative w-full max-w-[540px] rounded-3xl border-2 border-blue-400/60 bg-slate-900/90 px-10 pt-16 pb-10 shadow-glow-panel outline-none max-sm:px-5 max-sm:pb-6 short:px-6 short:pt-9 short:pb-4"
       >
-        <span className="absolute -top-10 left-1/2 grid size-20 -translate-x-1/2 place-items-center rounded-full border-4 border-blue-400/70 bg-slate-900 text-white shadow-glow-blue">
-          <Icon aria-hidden className="size-9" strokeWidth={2.5} />
+        <span className="absolute -top-10 left-1/2 short:-top-6 short:size-12 grid size-20 -translate-x-1/2 place-items-center rounded-full border-4 border-blue-400/70 bg-slate-900 text-white shadow-glow-blue">
+          <Icon aria-hidden className="size-9 short:size-6" strokeWidth={2.5} />
         </span>
-        <h2 className="text-center text-4xl font-bold text-white">{title}</h2>
-        <div className="mt-6 border-t border-blue-400/30 pt-6">{children}</div>
+        <h2 className="text-center text-4xl font-bold text-white max-sm:text-3xl short:text-2xl">{title}</h2>
+        <div className="mt-6 border-t border-blue-400/30 pt-6 short:mt-2 short:pt-3">{children}</div>
+        {mascot && <div className="absolute -right-6 -bottom-8 hidden sm:block">{mascot}</div>}
       </div>
     </div>
   );

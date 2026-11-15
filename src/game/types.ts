@@ -20,6 +20,7 @@ export type ResourceId = z.infer<typeof resourceIdSchema>;
 export type Effects = z.infer<typeof effectsSchema>;
 export type Decision = z.infer<typeof decisionSchema>;
 export type Scenario = z.infer<typeof scenarioSchema>;
+export type Problem = NonNullable<Scenario['problem']>;
 export type DayPlan = z.infer<typeof dayPlanSchema>;
 export type MissionContent = z.infer<typeof missionContentSchema>;
 export type MissionBalance = z.infer<typeof missionBalanceSchema>;

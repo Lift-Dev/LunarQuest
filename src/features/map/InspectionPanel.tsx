@@ -61,31 +61,31 @@ export function InspectionPanel({
   return (
     <section
       aria-label={`${eq.name} details`}
-      className="w-full rounded-3xl border-2 border-cyan-400/70 bg-slate-950/90 px-5 py-4 text-white shadow-glow-panel backdrop-blur-md"
+      className="w-full rounded-3xl border-2 border-cyan-400/70 bg-slate-950/90 px-5 py-4 text-white shadow-glow-panel backdrop-blur-md short:max-h-[calc(100dvh-6.5rem)] short:overflow-y-auto short:rounded-2xl short:px-3 short:py-2"
     >
-      <div className="flex items-center gap-3 border-b border-blue-400/40 pb-3">
-        <Icon className="size-10 shrink-0 text-blue-200" />
-        <h2 className="flex-1 text-xl leading-tight font-bold">{eq.name}</h2>
+      <div className="flex items-center gap-3 border-b border-blue-400/40 pb-3 short:gap-2 short:pb-2">
+        <Icon className="size-10 shrink-0 text-blue-200 short:size-6" />
+        <h2 className="flex-1 text-xl leading-tight font-bold short:text-base">{eq.name}</h2>
         <button
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="grid size-10 shrink-0 place-items-center rounded-full border-2 border-white/70 bg-blue-600 transition hover:bg-blue-500"
+          className="grid size-10 shrink-0 place-items-center rounded-full short:size-8 border-2 border-white/70 bg-blue-600 transition hover:bg-blue-500"
         >
           <X aria-hidden className="size-5" />
         </button>
       </div>
 
-      <div className="space-y-2 border-b border-blue-400/40 py-3">
-        <p className="flex items-center gap-3 text-lg">
-          <StatusIcon aria-hidden className={cn('size-8 shrink-0', tone.text)} />
+      <div className="space-y-2 border-b border-blue-400/40 py-3 short:space-y-1 short:py-2 short:text-sm">
+        <p className="flex items-center gap-3 text-lg short:gap-2 short:text-sm">
+          <StatusIcon aria-hidden className={cn('size-8 shrink-0 short:size-5', tone.text)} />
           <span>
             Status: <strong className={cn('font-semibold', tone.text)}>{info.statusLabel}</strong>
           </span>
         </p>
         {r && (
           <div>
-            <p className="text-lg">
+            <p className="text-lg short:text-sm">
               {r.label}: <strong className="font-semibold">{r.percent}%</strong>
             </p>
             <div
@@ -94,27 +94,27 @@ export function InspectionPanel({
               aria-valuemin={0}
               aria-valuemax={100}
               aria-valuenow={r.percent}
-              className="mt-1.5 h-3.5 overflow-hidden rounded-full border border-white/30 bg-slate-800"
+              className="mt-1.5 h-3.5 overflow-hidden short:h-2.5 rounded-full border border-white/30 bg-slate-800"
             >
               <div className={cn('h-full rounded-full', barColor)} style={{ width: `${r.percent}%` }} />
             </div>
           </div>
         )}
-        {info.note && <p className="text-lg leading-6 text-blue-100/90">{info.note}</p>}
+        {info.note && <p className="text-lg leading-6 text-blue-100/90 short:text-sm short:leading-5">{info.note}</p>}
       </div>
 
-      <div className="pt-3">
-        <p className="flex items-center gap-3 text-lg">
+      <div className="pt-3 short:pt-2">
+        <p className="flex items-center gap-3 text-lg short:text-sm">
           <Network aria-hidden className="size-7 shrink-0 text-blue-300" />
           Connected to:
         </p>
-        <ul className="mt-2 space-y-1">
+        <ul className="mt-2 space-y-1 short:mt-1 short:flex short:flex-wrap short:gap-x-4 short:space-y-0">
           {connectionsOf(id).map((c) => (
             <li key={c}>
               <button
                 type="button"
                 onClick={() => onSelect(c)}
-                className="flex w-full items-center gap-3 rounded-lg py-0.5 pl-10 text-left text-lg text-blue-100 transition hover:text-white"
+                className="flex w-full items-center gap-3 rounded-lg py-0.5 pl-10 text-left text-lg text-blue-100 transition hover:text-white short:pl-0 short:text-sm"
               >
                 <span aria-hidden className="size-3 rounded-full bg-blue-500" />
                 {getEquipment(c).name}

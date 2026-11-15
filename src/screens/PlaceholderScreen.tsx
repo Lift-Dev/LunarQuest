@@ -1,4 +1,5 @@
 import { Link } from 'react-router';
+import { Mascot } from '../design-system';
 
 interface Props {
   title: string;
@@ -9,6 +10,7 @@ interface Props {
 export function PlaceholderScreen({ title, next }: Props) {
   return (
     <main className="flex min-h-full flex-col items-center justify-center gap-6 p-8 text-center">
+      <Mascot pose="confused" height="9rem" say="Hmm, this part isn't built yet!" bubble="top" />
       <p className="text-xs tracking-[0.2em] text-blue-300/70 uppercase">Placeholder · Phase 4</p>
       <h1 className="text-3xl font-bold tracking-wide uppercase">{title}</h1>
       {next && (

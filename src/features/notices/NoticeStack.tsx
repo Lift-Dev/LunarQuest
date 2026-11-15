@@ -1,4 +1,4 @@
-import { Moon, TriangleAlert, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { AnimatePresence, MotionConfig, motion } from 'motion/react';
 import { useEffect } from 'react';
 import type { Notice } from '../../game/notices';
@@ -21,7 +21,7 @@ const SHOW_MS = 6000;
 export function NoticeStack({ notices, onDismiss }: { notices: Notice[]; onDismiss: (id: string) => void }) {
   return (
     <MotionConfig reducedMotion="user">
-      <div className="relative z-20 flex flex-col items-start gap-3 empty:hidden">
+      <div className="relative z-20 flex flex-col items-start gap-3 empty:hidden short:absolute short:top-12 short:left-1/2 short:w-[min(26rem,60vw)] short:-translate-x-1/2 short:gap-1.5">
         <AnimatePresence>
           {notices.map((n) => (
             <NoticeCard key={n.id} notice={n} onDismiss={() => onDismiss(n.id)} />
@@ -40,7 +40,6 @@ function NoticeCard({ notice, onDismiss }: { notice: Notice; onDismiss: () => vo
 
   const night = notice.kind === 'night';
   const { title, text } = copy[night ? 'night' : notice.resource];
-  const Icon = night ? Moon : TriangleAlert;
 
   return (
     <motion.div
@@ -51,21 +50,20 @@ function NoticeCard({ notice, onDismiss }: { notice: Notice; onDismiss: () => vo
       exit={{ opacity: 0, y: -12 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
       className={cn(
-        'flex w-full max-w-md items-center gap-4 rounded-2xl border-2 bg-slate-950/90 py-3 pr-3 pl-4 backdrop-blur-md',
+        'flex w-full max-w-md items-center gap-4 rounded-2xl border-2 bg-slate-950/90 py-3 pr-3 pl-4 backdrop-blur-md max-sm:gap-3 short:gap-2 short:py-1.5 short:pl-3',
         night ? 'border-blue-400/60' : 'border-red-400/70',
       )}
     >
-      <span
-        className={cn(
-          'grid size-12 shrink-0 place-items-center rounded-full',
-          night ? 'bg-blue-600 text-white' : 'bg-red-400 text-slate-950',
-        )}
-      >
-        <Icon aria-hidden className="size-6" strokeWidth={2.5} />
-      </span>
+      {/* The robot: thoughtful at nightfall, holding a warning sign when something runs low. */}
+      <img
+        src={`/assets/mascot/${night ? 'pondering' : 'caution'}.webp`}
+        alt=""
+        aria-hidden
+        className="-my-1 h-16 w-auto shrink-0 max-sm:h-12 short:h-10"
+      />
       <div className="min-w-0 flex-1">
-        <p className="text-xl leading-6 font-bold text-white">{title}</p>
-        <p className="text-base leading-5 text-blue-100/85">{text}</p>
+        <p className="text-xl leading-6 font-bold text-white short:text-base short:leading-5">{title}</p>
+        <p className="text-base leading-5 text-blue-100/85 short:text-sm">{text}</p>
       </div>
       <button
         type="button"
