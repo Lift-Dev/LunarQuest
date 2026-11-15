@@ -137,6 +137,15 @@ export const missionBalanceSchema = z.object({
     power: z.number(),
     radiation: z.number(),
   }),
+  /**
+   * UI only: a resource is shown as "low" (red bar + warning notice) at or past these values.
+   * Same direction as abortAt. Does not change any game rule.
+   */
+  warnAt: z.object({
+    lifeSupport: z.number(),
+    power: z.number(),
+    radiation: z.number(),
+  }),
   /** Science points needed for 1…5 stars, ascending. */
   starThresholds: z.tuple([z.number(), z.number(), z.number(), z.number(), z.number()]),
   /** |effect| at or above this shows a double arrow on decision cards. */

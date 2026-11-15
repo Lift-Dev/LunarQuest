@@ -5,9 +5,11 @@ import { routes } from '../app/routes';
 import { getMission } from '../data/missions';
 import { solarFlares } from '../data/solar-flares';
 import { Button, Panel, ScreenBackground } from '../design-system';
-import { currentScenario, daysSurvived, phaseOf, radiationPercent } from '../game/engine';
+import { currentScenario, daysSurvived, lowResources, phaseOf, radiationPercent } from '../game/engine';
 import { starsFromScience } from '../game/scoring';
 import type { Decision, Mission, MissionRun, Scenario } from '../game/types';
+import { DayTrack } from '../features/hud/DayTrack';
+import { NoticeStack } from '../features/notices/NoticeStack';
 import { ResourceHud } from '../features/hud/ResourceHud';
 import { PauseMenu } from '../features/pause/PauseMenu';
 import { FeedbackCard } from '../features/scenario/FeedbackCard';
@@ -23,7 +25,7 @@ import type { AbortedResult, CompleteResult } from './MissionResultScreens';
 export function GameplayScreen() {
   const { missionId = '' } = useParams();
   const navigate = useNavigate();
-  const { run, outcome, start, choose, next, clear } = useGameStore();
+  const { run, outcome, notices, start, choose, next, clear, dismissNotice } = useGameStore();
   const [paused, setPaused] = useState(false);
 
   const known = missionId === 'mission-01';
@@ -70,8 +72,11 @@ export function GameplayScreen() {
           power={run.resources.power}
           radiation={radiationPercent(mission, run)}
           stars={stars}
+          low={lowResources(mission, run)}
           onPause={() => setPaused(true)}
         />
+
+        {!outcome && <NoticeStack notices={notices} onDismiss={dismissNotice} />}
 
         {outcome ? (
           <>
@@ -120,10 +125,13 @@ function ScenarioCard({ mission, run, day, scenario }: { mission: Mission; run: 
   const flare = scenario.showsFlare ? solarFlares.find((f) => f.id === run.flareId) : undefined;
   return (
     <Panel variant="solid" className="max-w-xl p-5 md:p-6">
-      <p className="flex items-center gap-3 border-b border-blue-400/30 pb-3 text-lg font-bold text-white">
-        {phase === 'day' ? <Sun aria-hidden className="size-7 text-yellow-300" /> : <Moon aria-hidden className="size-7 text-blue-200" />}
-        Day {day} · {phase === 'day' ? 'Lunar Daylight' : 'Lunar Night'}
-      </p>
+      <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-blue-400/30 pb-3">
+        <p className="flex items-center gap-3 text-lg font-bold text-white">
+          {phase === 'day' ? <Sun aria-hidden className="size-7 text-yellow-300" /> : <Moon aria-hidden className="size-7 text-blue-200" />}
+          Day {day} · {phase === 'day' ? 'Lunar Daylight' : 'Lunar Night'}
+        </p>
+        <DayTrack day={day} total={mission.balance.durationDays} daylightDays={mission.balance.daylightDays} />
+      </div>
       <h1 className="mt-3 text-3xl leading-tight font-bold text-white">{scenario.title}</h1>
       <p className="mt-2 text-xl leading-7 text-blue-100">
         <RichText text={scenario.description} />

@@ -184,3 +184,9 @@ export function daysSurvived(mission: Mission, run: MissionRun): number {
 export function radiationPercent(mission: Mission, run: MissionRun): number {
   return Math.min(100, Math.round((run.resources.radiation / mission.balance.abortAt.radiation) * 100));
 }
+
+/** Resources close to their abort level, for the red "low" state and warning notices. UI only. */
+export function lowResources(mission: Mission, run: MissionRun): ResourceId[] {
+  const w = mission.balance.warnAt;
+  return RESOURCE_ORDER.filter((id) => (id === 'radiation' ? run.resources.radiation >= w.radiation : run.resources[id] <= w[id]));
+}

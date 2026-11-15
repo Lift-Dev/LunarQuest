@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import { getMission } from '../data/missions';
 import { solarFlares } from '../data/solar-flares';
 import { applyDecision, startMission } from '../game/engine';
+import { noticesBetween } from '../game/notices';
+import type { Notice } from '../game/notices';
 import type { DecisionOutcome } from '../game/engine';
 import type { MissionRun } from '../game/types';
 
@@ -13,6 +15,11 @@ interface GameState {
   run: MissionRun | null;
   /** Result of the last decision, shown on the feedback card until the player continues. */
   outcome: DecisionOutcome | null;
+  /** Notices for the day that follows the decision; moved to `notices` when the player continues. */
+  pendingNotices: Notice[];
+  /** Notices currently on screen. */
+  notices: Notice[];
+  dismissNotice: (id: string) => void;
   start: (missionId: string) => void;
   choose: (decisionId: string) => void;
   /** Dismiss the feedback card. */
@@ -23,14 +30,18 @@ interface GameState {
 export const useGameStore = create<GameState>((set, get) => ({
   run: null,
   outcome: null,
+  pendingNotices: [],
+  notices: [],
+  dismissNotice: (id) => set((s) => ({ notices: s.notices.filter((n) => n.id !== id) })),
   start: (missionId) =>
-    set({ run: startMission(getMission(missionId), solarFlares.map((f) => f.id)), outcome: null }),
+    set({ run: startMission(getMission(missionId), solarFlares.map((f) => f.id)), outcome: null, pendingNotices: [], notices: [] }),
   choose: (decisionId) => {
     const { run, outcome } = get();
     if (!run || outcome) return; // ignore double taps while feedback is showing
-    const result = applyDecision(getMission(run.missionId), run, decisionId);
-    set({ run: result.run, outcome: result });
+    const mission = getMission(run.missionId);
+    const result = applyDecision(mission, run, decisionId);
+    set({ run: result.run, outcome: result, pendingNotices: noticesBetween(mission, run, result.run) });
   },
-  next: () => set({ outcome: null }),
-  clear: () => set({ run: null, outcome: null }),
+  next: () => set((s) => ({ outcome: null, notices: s.pendingNotices, pendingNotices: [] })),
+  clear: () => set({ run: null, outcome: null, pendingNotices: [], notices: [] }),
 }));

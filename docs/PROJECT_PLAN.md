@@ -250,7 +250,7 @@ Each phase ends with: a summary of what was done, what remains, checks run (`tsc
 - [x] Pure engine `src/game/engine.ts` (`startMission`, `applyDecision` incl. daily tick + abort/complete, `currentScenario`, `daysSurvived`) + 17 unit tests, incl. a walk of every decision path
 - [x] Resource HUD (Life Support, Power, Radiation, ★, Pause) + day/night chip
 - [x] Scenario panel + 2 decision cards with arrow chips (no confirm modal, per your decision)
-- [x] Flag-based branching, history log. Day/night transition banner: waiting for your reference
+- [x] Flag-based branching, history log. Day/night: day track + sun/moon label on the scenario card, and a "Night has fallen" notice on Day 8. Low-resource warnings: red HUD bar + notice (UI only, `warnAt` in balance)
 - [x] Abort → Mission Aborted. Day 14 → Mission Complete
 - [ ] Unlocking Mission 02 on completion (shows "Coming soon" since it has no content)
 - **Done when:** Mission 01 can be played start to finish, with both a win path and an abort path

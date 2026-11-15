@@ -22,7 +22,11 @@ export function DevPreviewScreen() {
     let run = startMission(mission, solarFlares.map((f) => f.id), () => 0);
     while (run.day < Number(day)) run = applyDecision(mission, run, currentScenario(mission, run).decisions[pick].id).run;
     const outcome = search.has('feedback') ? applyDecision(mission, run, currentScenario(mission, run).decisions[pick].id) : null;
-    useGameStore.setState({ run: outcome ? outcome.run : run, outcome });
+    const notices = (search.get('notices') ?? '')
+      .split(',')
+      .filter(Boolean)
+      .map((k) => (k === 'night' ? { id: 'dev-night', kind: 'night' as const } : { id: `dev-${k}`, kind: 'low' as const, resource: k as 'power' }));
+    useGameStore.setState({ run: outcome ? outcome.run : run, outcome, notices, pendingNotices: [] });
     navigate(routes.play('mission-01'), { replace: true });
   }, [name, day, search, navigate]);
   if (name === 'complete')

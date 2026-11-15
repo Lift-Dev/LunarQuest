@@ -16,6 +16,8 @@ export const balance: MissionBalance = {
     night: { lifeSupport: -4, power: -8, radiation: 2 },
   },
   abortAt: { lifeSupport: 15, power: 10, radiation: 60 },
+  // UI warning levels only (low-air / low-power / high-dose notices); ~25 points before abort.
+  warnAt: { lifeSupport: 35, power: 30, radiation: 40 },
   starThresholds: [20, 45, 70, 95, 120],
   bigEffectThreshold: 10,
 };
