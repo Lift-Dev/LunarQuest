@@ -12,7 +12,9 @@ Command a lunar outpost for 14 days, keep your crew alive, and learn real NASA s
 
 No download. No account. Works on a phone, tablet or laptop.
 
-*Built for the 2026 NASA Space Apps Challenge: "Build a Junior Astronaut Mission Trainer" (ages 7–12).*
+*Built by **Team Milky Way** for the 2026 NASA Space Apps Challenge: "Build a Junior Astronaut Mission Trainer" (ages 7–12).*
+
+<img src="docs/screenshots/06-gameplay.jpg" alt="LunarQuest gameplay: the outpost map with the day's situation and two choices" width="900" />
 
 </div>
 
@@ -62,6 +64,19 @@ Kids usually meet space as something to watch. In LunarQuest they **make the dec
 | Oxygen from Moon Soil | Run the oxygen machine | Keep it switched off |
 | Carbon Dioxide Alert | Use a spare filter canister | Bake the filters clean |
 | Final Countdown | One last experiment | Pack up for the trip home |
+
+## See it in action
+
+| | |
+|---|---|
+| <img src="docs/screenshots/01-welcome.jpg" alt="Welcome screen" /> | <img src="docs/screenshots/05-mission-briefing.jpg" alt="Mission briefing" /> |
+| **Welcome.** One tap to start, with no sign-up. | **Briefing.** You are the Mission Commander. |
+| <img src="docs/screenshots/03-how-to-play.jpg" alt="How to play" /> | <img src="docs/screenshots/02-resources.jpg" alt="Learn to survive: the three resources" /> |
+| **How to play.** Observe, investigate, decide. | **Learn to survive.** Three resources to protect. |
+| <img src="docs/screenshots/07-real-space-fact.jpg" alt="Real Space Fact after a decision" /> | <img src="docs/screenshots/08-mission-aborted.jpg" alt="Mission aborted screen" /> |
+| **Real Space Fact.** The science behind every choice, with its NASA source. | **Mission aborted.** The game explains what went wrong, so the next run goes better. |
+
+<p align="center"><img src="docs/screenshots/04-journey.jpg" alt="Journey screen with future missions" width="600" /><br/><b>The journey.</b> Mission 01 is playable now, and the rest are already laid out.</p>
 
 ## Real NASA data
 
@@ -144,6 +159,10 @@ public/assets/   Images used by the game
 | ✅ **Done** | Mission 01 playable from start to finish · interactive outpost map with equipment inspection · seven decisions with NASA facts · real solar-storm replay · scoring and Science Stars · mission complete and aborted screens · responsive phone and desktop layouts · deployed on Vercel |
 | 🔜 **Next** | Save and resume progress · balance testing with real 7–12 year olds · an in-app Science Sources screen |
 | 🌙 **Later** | Missions 02–15 (already laid out on the Journey screen) · new scenarios built on more NASA data |
+
+## Team
+
+**Milky Way**, NASA Space Apps Challenge 2026.
 
 ## Credits
 
