@@ -8,6 +8,15 @@
 
 Command a lunar outpost for 14 days, keep your crew alive, and learn real NASA science along the way.
 
+</div>
+
+> [!TIP]
+> **Page not loading?** 🌙 Some internet providers block `vercel.app` links from time to time, especially on mobile data. Turning on a **VPN** usually fixes it right away. The game itself is fine, the network just needs a little detour!
+>
+> **Sayfa açılmıyor mu?** 🌙 Bazı internet sağlayıcıları `vercel.app` bağlantılarını zaman zaman engelleyebiliyor, özellikle mobil veride. Bir **VPN** açmak genellikle sorunu hemen çözer. Oyun sorunsuz çalışıyor, bağlantının sadece farklı bir yoldan gitmesi gerekiyor!
+
+<div align="center">
+
 ### [▶ Play it now: lunarquest.vercel.app](https://lunarquest.vercel.app)
 
 No download. No account. Works on a phone, tablet or laptop.
