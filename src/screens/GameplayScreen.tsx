@@ -4,17 +4,16 @@ import { Navigate, useNavigate, useParams } from 'react-router';
 import { routes } from '../app/routes';
 import { getMission } from '../data/missions';
 import { solarFlares } from '../data/solar-flares';
-import { Button, Panel, ScreenBackground } from '../design-system';
+import { ScreenBackground } from '../design-system';
 import { currentScenario, daysSurvived, lowResources, phaseOf, radiationPercent } from '../game/engine';
 import { starsFromScience } from '../game/scoring';
-import type { Decision, Mission, MissionRun, Scenario } from '../game/types';
+import type { Mission, MissionRun, Scenario } from '../game/types';
 import { DayTrack } from '../features/hud/DayTrack';
 import { NoticeStack } from '../features/notices/NoticeStack';
 import { ResourceHud } from '../features/hud/ResourceHud';
 import { PauseMenu } from '../features/pause/PauseMenu';
 import { FeedbackCard } from '../features/scenario/FeedbackCard';
-import { EffectChips } from '../features/scenario/EffectChips';
-import { RichText } from '../features/scenario/RichText';
+import { DecisionSidebar } from '../features/scenario/DecisionSidebar';
 import { InspectionPanel } from '../features/map/InspectionPanel';
 import { OutpostMap } from '../features/map/OutpostMap';
 import { inspect } from '../features/map/inspect';
@@ -79,7 +78,7 @@ export function GameplayScreen() {
 
   const highlights = outcome ? [] : scenario.mapHighlights;
   const panel = selected && !outcome && (
-    <div className="landscape:absolute landscape:top-24 landscape:right-6 landscape:w-[22rem]">
+    <div>
       <InspectionPanel id={selected} info={inspect(mission, run, selected)} onSelect={setSelected} onClose={() => setSelected(null)} />
     </div>
   );
@@ -87,12 +86,18 @@ export function GameplayScreen() {
   return (
     <ScreenBackground glow="none" stars={false}>
       <div className="relative min-h-dvh">
-        {/* Wide screens: the outpost fills the screen behind everything (as in the design). */}
+        {/* Wide screens: a soft, darkened copy of the scene fills the screen, with the sharp outpost on top. */}
+        <img
+          src="/assets/backdrop/outpost.jpg"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute inset-0 hidden size-full scale-110 object-cover blur-2xl brightness-50 landscape:block"
+        />
         <OutpostMap
-                    selected={outcome ? null : selected}
+          selected={outcome ? null : selected}
           highlights={highlights}
           onSelect={setSelected}
-          className="absolute inset-0 hidden landscape:block"
+          className="absolute inset-y-0 left-0 right-[24rem] hidden landscape:block"
         />
         <main className="pointer-events-none relative mx-auto flex min-h-dvh max-w-[1440px] flex-col gap-4 p-4 md:p-6 [&>*]:pointer-events-auto">
           <ResourceHud
@@ -115,23 +120,27 @@ export function GameplayScreen() {
               </div>
             </>
           ) : (
-            <>
-              <ScenarioCard mission={mission} run={run} day={shownDay} scenario={scenario} />
-              {/* Portrait tablets: the whole outpost, uncropped, between the story and the choices. */}
+            <div className="pointer-events-none! flex flex-1 flex-col gap-4 landscape:flex-row landscape:justify-between">
+              <div className="pointer-events-none! flex flex-col gap-4 landscape:w-[22rem] [&>*]:pointer-events-auto">
+                <DayChip mission={mission} day={shownDay} />
+                {panel}
+              </div>
+              {/* Portrait tablets: the whole outpost between the day bar and the story. */}
               <OutpostMap
-                                selected={selected}
+                selected={selected}
                 highlights={highlights}
                 onSelect={setSelected}
-                className="relative aspect-video w-full rounded-2xl border border-blue-500/30 landscape:hidden"
+                className="pointer-events-auto relative aspect-video w-full rounded-2xl border border-blue-500/30 landscape:hidden"
               />
-              {panel}
-              <div className="pointer-events-none! flex-1" />
-              <section aria-label="Choose what to do" className="pointer-events-none! grid gap-4 md:grid-cols-2 [&>*]:pointer-events-auto">
-                {scenario.decisions.map((d) => (
-                  <DecisionCard key={d.id} decision={d} bigAt={mission.balance.bigEffectThreshold} onChoose={() => choose(d.id)} />
-                ))}
-              </section>
-            </>
+              <DecisionSidebar
+                day={shownDay}
+                scenario={scenario}
+                bigAt={mission.balance.bigEffectThreshold}
+                note={<FlareNote run={run} scenario={scenario} />}
+                onChoose={choose}
+                className="pointer-events-auto landscape:w-[22rem] landscape:self-start"
+              />
+            </div>
           )}
         </main>
       </div>
@@ -157,42 +166,26 @@ export function GameplayScreen() {
   );
 }
 
-function ScenarioCard({ mission, run, day, scenario }: { mission: Mission; run: MissionRun; day: number; scenario: Scenario }) {
+function DayChip({ mission, day }: { mission: Mission; day: number }) {
   const phase = phaseOf(mission, day);
-  const flare = scenario.showsFlare ? solarFlares.find((f) => f.id === run.flareId) : undefined;
   return (
-    <Panel variant="solid" className="max-w-xl p-5 md:p-6">
-      <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-blue-400/30 pb-3">
-        <p className="flex items-center gap-3 text-lg font-bold text-white">
-          {phase === 'day' ? <Sun aria-hidden className="size-7 text-yellow-300" /> : <Moon aria-hidden className="size-7 text-blue-200" />}
-          Day {day} · {phase === 'day' ? 'Lunar Daylight' : 'Lunar Night'}
-        </p>
-        <DayTrack day={day} total={mission.balance.durationDays} daylightDays={mission.balance.daylightDays} />
-      </div>
-      <h1 className="mt-3 text-3xl leading-tight font-bold text-white">{scenario.title}</h1>
-      <p className="mt-2 text-xl leading-7 text-blue-100">
-        <RichText text={scenario.description} />
+    <div className="flex w-fit flex-wrap items-center gap-x-5 gap-y-2 rounded-2xl border-2 border-blue-400/40 bg-slate-950/75 px-4 py-2.5 backdrop-blur-sm">
+      <p className="flex items-center gap-2.5 text-lg font-bold text-white">
+        {phase === 'day' ? <Sun aria-hidden className="size-6 text-yellow-300" /> : <Moon aria-hidden className="size-6 text-blue-200" />}
+        Day {day} / {mission.balance.durationDays} · {phase === 'day' ? 'Lunar Daylight' : 'Lunar Night'}
       </p>
-      {flare && (
-        <p className="mt-4 rounded-xl border border-yellow-400/30 bg-yellow-400/10 px-4 py-2 text-base leading-6 text-yellow-100">
-          This storm is based on a real solar flare: <strong>{formatDate(flare.date)}</strong>, strength{' '}
-          <strong>{flare.classType}</strong>. Archived NASA data.
-        </p>
-      )}
-    </Panel>
+      <DayTrack day={day} total={mission.balance.durationDays} daylightDays={mission.balance.daylightDays} />
+    </div>
   );
 }
 
-function DecisionCard({ decision, bigAt, onChoose }: { decision: Decision; bigAt: number; onChoose: () => void }) {
+function FlareNote({ run, scenario }: { run: MissionRun; scenario: Scenario }) {
+  const flare = scenario.showsFlare ? solarFlares.find((f) => f.id === run.flareId) : undefined;
+  if (!flare) return null;
   return (
-    <Panel variant="solid" className="flex flex-col gap-3 p-5">
-      <h2 className="text-2xl font-bold text-white">{decision.title}</h2>
-      <p className="text-lg leading-6 text-blue-100/90">{decision.explanation}</p>
-      <EffectChips effects={decision.effects} bigAt={bigAt} laterHint={decision.laterHint} />
-      <Button variant="pill" size="md" onClick={onChoose} className="mt-auto self-end !rounded-full !px-10 !py-2 !text-xl">
-        Choose
-      </Button>
-    </Panel>
+    <p className="rounded-xl border border-amber-500/50 bg-amber-100 px-3 py-2 text-base leading-5 text-amber-950">
+      This storm is based on a real solar flare: <strong>{formatDate(flare.date)}</strong>, strength <strong>{flare.classType}</strong>. Archived NASA data.
+    </p>
   );
 }
 

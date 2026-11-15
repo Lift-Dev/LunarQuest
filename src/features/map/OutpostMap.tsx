@@ -26,7 +26,7 @@ export function OutpostMap({ selected, highlights, onSelect, className }: Props)
         src="/assets/backdrop/outpost.jpg"
         alt=""
         aria-hidden
-        className="pointer-events-none absolute inset-0 size-full object-contain [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]"
+        className="pointer-events-none absolute inset-0 size-full object-contain [mask-composite:intersect] [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent),linear-gradient(to_right,transparent,black_6%,black_94%,transparent)] [-webkit-mask-composite:source-in]"
       />
       <svg
         viewBox={`0 0 ${MAP_SIZE.width} ${MAP_SIZE.height}`}
