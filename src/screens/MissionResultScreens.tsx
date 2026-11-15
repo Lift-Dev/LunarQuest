@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { Navigate, useLocation, useParams } from 'react-router';
 import { routes } from '../app/routes';
 import { Button, Mascot, Panel, ScreenBackground, StarRating } from '../design-system';
+import { enterImmersive } from '../lib/immersive';
 import { completePose } from '../features/mascot/moods';
 import type { ResourceId } from '../game/types';
 
@@ -83,7 +84,7 @@ export function AbortedView({ missionId, result }: { missionId: string; result: 
         <Button to={routes.levels} variant="primary" size="lg" icon={<Home aria-hidden className="size-[1em]" />} className="!rounded-full !px-4 !text-xl">
           Return to Menu
         </Button>
-        <Button to={routes.play(missionId)} variant="primary" size="lg" icon={<RotateCcw aria-hidden className="size-[1em]" />} className="!rounded-full !px-4 !text-xl">
+        <Button to={routes.play(missionId)} onClick={() => void enterImmersive()} variant="primary" size="lg" icon={<RotateCcw aria-hidden className="size-[1em]" />} className="!rounded-full !px-4 !text-xl">
           Try Again
         </Button>
       </div>

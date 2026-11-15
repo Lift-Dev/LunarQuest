@@ -1,10 +1,11 @@
-import { Moon, RotateCw, Sun, X } from 'lucide-react';
+import { Moon, RotateCw, Sun } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router';
 import { routes } from '../app/routes';
 import { getMission } from '../data/missions';
 import { solarFlares } from '../data/solar-flares';
-import { ScreenBackground } from '../design-system';
+import { Button, Mascot, ScreenBackground } from '../design-system';
+import { enterImmersive, exitImmersive } from '../lib/immersive';
 import { currentScenario, daysSurvived, lowResources, phaseOf, radiationPercent } from '../game/engine';
 import { starsFromScience } from '../game/scoring';
 import type { Mission, MissionRun, Scenario } from '../game/types';
@@ -38,6 +39,13 @@ export function GameplayScreen() {
   useEffect(() => {
     if (known && (!run || run.missionId !== missionId)) start(missionId);
   }, [known, run, missionId, start]);
+
+  // Phones: full screen and sideways while playing (the tap on "Begin Mission" already asked for it;
+  // this covers a reload or a direct link), and back to normal when leaving the game.
+  useEffect(() => {
+    void enterImmersive();
+    return exitImmersive;
+  }, []);
 
   // Esc closes the inspection panel.
   useEffect(() => {
@@ -88,6 +96,7 @@ export function GameplayScreen() {
 
   return (
     <ScreenBackground glow="none" stars={false}>
+      <RotatePrompt />
       <div className="relative min-h-dvh">
         {/* Wide screens: the outpost fills the whole screen behind everything (as in the design). */}
         <OutpostMap
@@ -109,8 +118,6 @@ export function GameplayScreen() {
             low={lowResources(mission, run)}
             onPause={() => setPaused(true)}
           />
-
-          <RotateHint />
 
           {!outcome && <NoticeStack notices={notices} onDismiss={dismissNotice} />}
 
@@ -188,18 +195,28 @@ function DayChip({ mission, day }: { mission: Mission; day: number }) {
   );
 }
 
-/** Portrait phones: the game is a widescreen picture, so invite the player to turn the phone. */
-function RotateHint() {
-  const [open, setOpen] = useState(true);
-  if (!open) return null;
+/**
+ * Portrait phones: the game is a widescreen picture, so it asks the player to turn the phone.
+ * It disappears by itself once the phone is sideways (or the orientation lock did it already).
+ * "Play anyway" keeps the stacked portrait layout for anyone whose phone is locked upright.
+ */
+function RotatePrompt() {
+  const [skipped, setSkipped] = useState(false);
+  if (skipped) return null;
   return (
-    <p className="hidden items-center gap-2 rounded-full border border-blue-400/30 bg-slate-950/70 py-0.5 pr-1 pl-3 text-xs text-blue-100/90 portrait:max-sm:flex">
-      <RotateCw aria-hidden className="size-3.5 shrink-0 text-blue-300" />
-      <span className="flex-1">Turn sideways for the full view</span>
-      <button type="button" onClick={() => setOpen(false)} aria-label="Dismiss" className="grid size-7 place-items-center rounded-full hover:bg-white/10">
-        <X aria-hidden className="size-3.5" />
-      </button>
-    </p>
+    <div
+      role="dialog"
+      aria-label="Turn your phone sideways"
+      className="fixed inset-0 z-50 hidden flex-col items-center justify-center gap-4 bg-space px-8 text-center portrait:max-sm:flex"
+    >
+      <Mascot pose="curious" height="8rem" />
+      <RotateCw aria-hidden className="size-10 animate-spin text-blue-300 [animation-duration:3s]" />
+      <h2 className="text-3xl font-bold text-white">Turn your phone sideways</h2>
+      <p className="text-lg text-blue-100/80">LunarQuest plays like a movie, in landscape.</p>
+      <Button variant="ghost" size="md" onClick={() => setSkipped(true)} className="mt-2">
+        Play anyway
+      </Button>
+    </div>
   );
 }
 

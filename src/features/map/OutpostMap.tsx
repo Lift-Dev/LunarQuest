@@ -182,7 +182,7 @@ function FixButton({ problem, decision, onChoose }: { problem: Problem; decision
             e.stopPropagation();
             onChoose();
           }}
-          className="group relative flex w-56 animate-float max-sm:w-44 short:w-44 items-center gap-2.5 rounded-2xl border-2 border-green-200 bg-gradient-to-b from-green-400 to-green-500 px-3 py-2 text-left text-white shadow-[0_4px_0_0_rgb(21_128_61)] transition hover:brightness-110 active:translate-y-0.5 active:shadow-none"
+          className="group relative flex w-56 animate-float max-sm:w-44 short:w-40 items-center gap-2.5 rounded-2xl border-2 border-green-200 bg-gradient-to-b from-green-400 to-green-500 px-3 py-2 text-left text-white shadow-[0_4px_0_0_rgb(21_128_61)] transition hover:brightness-110 active:translate-y-0.5 active:shadow-none"
         >
           <span aria-hidden className="grid size-9 shrink-0 place-items-center rounded-xl bg-white/90 text-green-700">
             <Wrench className="size-5" />

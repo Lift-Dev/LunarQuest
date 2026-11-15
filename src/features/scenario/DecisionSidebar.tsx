@@ -28,7 +28,7 @@ export function DecisionSidebar({ day, scenario, note, onChoose, mascot, classNa
   const here = scenario.decisions.map((d, i) => ({ d, i })).filter(({ d }) => d.id !== fixId);
   return (
     // Top padding leaves room for the robot standing on the card's top-left corner.
-    <div className={cn('pointer-events-none relative flex flex-col gap-2 pt-14 landscape:w-[26rem] landscape:max-w-[36vw] short:grid short:w-full short:max-w-none short:grid-cols-[1.15fr_1fr] short:items-end short:gap-2 short:pt-0', className)}>
+    <div className={cn('pointer-events-none relative flex flex-col gap-2 pt-14 landscape:w-[26rem] landscape:max-w-[36vw] short:grid short:w-full short:max-w-none short:grid-cols-[0.8fr_1fr] short:items-end short:gap-2 short:pt-0', className)}>
       <Mascot pose={mascot} height="6.5rem" className="absolute top-0 left-3 z-10 short:hidden" />
       <section aria-label="Today's mission" className="pointer-events-auto overflow-hidden rounded-2xl border-[3px] border-amber-400 bg-amber-50 shadow-xl">
         <header className="flex items-center gap-3 bg-gradient-to-b from-amber-300 to-amber-400 py-2 pr-4 pl-28 short:py-1 short:pl-3">

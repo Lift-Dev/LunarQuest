@@ -2,6 +2,7 @@ import { CalendarDays, Moon, Sun } from 'lucide-react';
 import { Navigate, useParams } from 'react-router';
 import { routes } from '../app/routes';
 import { levels } from '../data/levels';
+import { enterImmersive } from '../lib/immersive';
 import { Button, NavPill, Panel, ScreenBackground, Mascot } from '../design-system';
 
 /** Mission Overview — matches image-assets/Lunar Outpost Mission Briefing.png */
@@ -59,7 +60,8 @@ export function MissionOverviewScreen() {
           </div>
 
           <div className="mt-2 flex flex-wrap items-center justify-center gap-6 max-sm:gap-3 short:mt-0">
-            <Button to={routes.play(missionId!)} variant="primary" size="lg" chevron>
+            {/* The tap is what lets the browser go full screen and turn sideways on phones. */}
+            <Button to={routes.play(missionId!)} variant="primary" size="lg" chevron onClick={() => void enterImmersive()}>
               Begin Mission
             </Button>
             <Mascot pose="determined" height="7rem" say="I'm ready. Are you?" bubble="right" />

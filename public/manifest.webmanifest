@@ -1,0 +1,11 @@
+{
+  "name": "LunarQuest",
+  "short_name": "LunarQuest",
+  "description": "Command a lunar outpost and survive the lunar cycle.",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#050b1a",
+  "theme_color": "#050b1a",
+  "icons": [{ "src": "/assets/welcome/logo.png", "sizes": "840x840", "type": "image/png", "purpose": "any" }]
+}
