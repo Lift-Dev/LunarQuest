@@ -1,32 +1,44 @@
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import { MAP_SIZE, centerOf, connectionsOf, equipment, type Equipment, type EquipmentId } from '../../data/maps/outpost-01';
 import { cn } from '../../design-system';
 
 /**
  * The outpost picture with clickable equipment on top (inspect only).
- * The picture and the SVG share one coordinate system and the same fit,
- * so hotspots stay on their objects at any screen size. The picture is never cropped (`meet`),
- * so every piece of equipment is always visible; its top and bottom edges fade into the space background.
+ * The picture and the SVG sit in one "stage" box with the picture's exact proportions,
+ * so hotspots stay on their objects at any screen size.
+ * - `cover`   the stage fills the whole container (full-bleed background), cropped around `focusX`
+ * - `contain` the whole picture is shown, with soft faded edges (portrait tablets)
  */
 interface Props {
   selected: EquipmentId | null;
   /** Equipment the current scenario is about: shown with a soft pulsing outline. */
   highlights: readonly string[];
   onSelect: (id: EquipmentId | null) => void;
+  fit: 'cover' | 'contain';
+  /** Cover only: which part of the picture stays in view when it is cropped sideways (0 = left, 1 = right). */
+  focusX?: number;
   className?: string;
 }
 
-export function OutpostMap({ selected, highlights, onSelect, className }: Props) {
+export function OutpostMap({ selected, highlights, onSelect, fit, focusX = 0.5, className }: Props) {
   const [hover, setHover] = useState<EquipmentId | null>(null);
   const linked = selected ? connectionsOf(selected) : [];
+  const ref = useRef<HTMLDivElement>(null);
+  const stage = useCoverStage(ref, fit === 'cover', focusX);
 
   return (
-    <div className={cn('overflow-hidden', className)}>
+    <div ref={ref} className={cn('overflow-hidden', className)}>
+      <div className="absolute" style={fit === 'cover' ? stage : { inset: 0 }}>
       <img
         src="/assets/backdrop/outpost.jpg"
         alt=""
         aria-hidden
-        className="pointer-events-none absolute inset-0 size-full object-contain [mask-composite:intersect] [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent),linear-gradient(to_right,transparent,black_6%,black_94%,transparent)] [-webkit-mask-composite:source-in]"
+        className={cn(
+          'pointer-events-none absolute inset-0 size-full',
+          fit === 'cover'
+            ? 'object-fill'
+            : 'object-contain [mask-composite:intersect] [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent),linear-gradient(to_right,transparent,black_6%,black_94%,transparent)] [-webkit-mask-composite:source-in]',
+        )}
       />
       <svg
         viewBox={`0 0 ${MAP_SIZE.width} ${MAP_SIZE.height}`}
@@ -100,6 +112,7 @@ export function OutpostMap({ selected, highlights, onSelect, className }: Props)
 
         {selected && <Pin equipment={equipment.find((e) => e.id === selected)!} />}
       </svg>
+      </div>
     </div>
   );
 }
@@ -124,4 +137,20 @@ function cablePath(a: EquipmentId, b: EquipmentId): string {
   const mx = (ax + bx) / 2;
   const my = (ay + by) / 2 + Math.min(80, Math.abs(ax - bx) * 0.12);
   return `M${ax} ${ay} Q${mx} ${my} ${bx} ${by}`;
+}
+
+/** Size and position of a picture-shaped box that covers the container, cropped around `focusX`. */
+function useCoverStage(ref: React.RefObject<HTMLDivElement | null>, enabled: boolean, focusX: number): CSSProperties {
+  const [box, setBox] = useState({ w: 0, h: 0 });
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!enabled || !el) return;
+    const ro = new ResizeObserver(([entry]) => setBox({ w: entry!.contentRect.width, h: entry!.contentRect.height }));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [ref, enabled]);
+  const scale = Math.max(box.w / MAP_SIZE.width, box.h / MAP_SIZE.height);
+  const width = MAP_SIZE.width * scale;
+  const height = MAP_SIZE.height * scale;
+  return { width, height, left: (box.w - width) * focusX, top: (box.h - height) / 2 };
 }

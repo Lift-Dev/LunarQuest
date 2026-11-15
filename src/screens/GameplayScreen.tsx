@@ -78,28 +78,22 @@ export function GameplayScreen() {
 
   const highlights = outcome ? [] : scenario.mapHighlights;
   const panel = selected && !outcome && (
-    <div>
-      <InspectionPanel id={selected} info={inspect(mission, run, selected)} onSelect={setSelected} onClose={() => setSelected(null)} />
-    </div>
+    <InspectionPanel id={selected} info={inspect(mission, run, selected)} onSelect={setSelected} onClose={() => setSelected(null)} />
   );
 
   return (
     <ScreenBackground glow="none" stars={false}>
       <div className="relative min-h-dvh">
-        {/* Wide screens: a soft, darkened copy of the scene fills the screen, with the sharp outpost on top. */}
-        <img
-          src="/assets/backdrop/outpost.jpg"
-          alt=""
-          aria-hidden
-          className="pointer-events-none absolute inset-0 hidden size-full scale-110 object-cover blur-2xl brightness-50 landscape:block"
-        />
+        {/* Wide screens: the outpost fills the whole screen behind everything (as in the design). */}
         <OutpostMap
+          fit="cover"
+          focusX={0.7}
           selected={outcome ? null : selected}
           highlights={highlights}
           onSelect={setSelected}
-          className="absolute inset-y-0 left-0 right-[24rem] hidden landscape:block"
+          className="absolute inset-0 hidden landscape:block"
         />
-        <main className="pointer-events-none relative mx-auto flex min-h-dvh max-w-[1440px] flex-col gap-4 p-4 md:p-6 [&>*]:pointer-events-auto">
+        <main className="pointer-events-none relative flex min-h-dvh flex-col gap-4 p-4 md:p-6 [&>*]:pointer-events-auto">
           <ResourceHud
             lifeSupport={run.resources.lifeSupport}
             power={run.resources.power}
@@ -120,25 +114,27 @@ export function GameplayScreen() {
               </div>
             </>
           ) : (
-            <div className="pointer-events-none! flex flex-1 flex-col gap-4 landscape:flex-row landscape:justify-between">
-              <div className="pointer-events-none! flex flex-col gap-4 landscape:w-[22rem] [&>*]:pointer-events-auto">
+            // Wide screens: story card on the left (over the quiet sky and rover), inspection panel on the right.
+            // Portrait: day bar, map, panel, then the story card, stacked.
+            <div className="pointer-events-none! flex flex-1 flex-col gap-4 landscape:flex-row landscape:items-start landscape:justify-between">
+              <div className="pointer-events-none! flex flex-col gap-4 portrait:contents landscape:w-[22rem] [&>*]:pointer-events-auto">
                 <DayChip mission={mission} day={shownDay} />
-                {panel}
+                <DecisionSidebar
+                  day={shownDay}
+                  scenario={scenario}
+                  note={<FlareNote run={run} scenario={scenario} />}
+                  onChoose={choose}
+                  className="portrait:order-4"
+                />
               </div>
-              {/* Portrait tablets: the whole outpost between the day bar and the story. */}
               <OutpostMap
+                fit="contain"
                 selected={selected}
                 highlights={highlights}
                 onSelect={setSelected}
-                className="pointer-events-auto relative aspect-video w-full rounded-2xl border border-blue-500/30 landscape:hidden"
+                className="pointer-events-auto relative aspect-video w-full rounded-2xl border border-blue-500/30 portrait:order-2 landscape:hidden"
               />
-              <DecisionSidebar
-                day={shownDay}
-                scenario={scenario}
-                note={<FlareNote run={run} scenario={scenario} />}
-                onChoose={choose}
-                className="pointer-events-auto landscape:w-[22rem] landscape:self-start"
-              />
+              {panel && <div className="pointer-events-auto portrait:order-3 landscape:w-[22rem]">{panel}</div>}
             </div>
           )}
         </main>
