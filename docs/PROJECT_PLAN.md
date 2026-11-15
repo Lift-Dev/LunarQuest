@@ -247,11 +247,11 @@ Each phase ends with: a summary of what was done, what remains, checks run (`tsc
 - **Done when:** every object can be inspected, its connections light up correctly, and you approve how it looks
 
 ### Phase 6: Gameplay (~2–3 days)
-- [ ] Pure engine: `startMission`, `applyDecision`, `advanceDay`, `checkOutcome` + unit tests
-- [ ] Resource HUD (O₂, Power, Radiation, ★, Day X/14, ☀/☾, Pause)
-- [ ] Scenario panel + 2 decision cards + confirm modal
-- [ ] Branching via `decision.next`, history log, day/night transition banner
-- [ ] Abort → Mission Aborted (cause + stats + Retry). Day 14 → Mission Complete (resources, ★, decisions, Next)
+- [x] Pure engine `src/game/engine.ts` (`startMission`, `applyDecision` incl. daily tick + abort/complete, `currentScenario`, `daysSurvived`) + 17 unit tests, incl. a walk of every decision path
+- [x] Resource HUD (Life Support, Power, Radiation, ★, Pause) + day/night chip
+- [x] Scenario panel + 2 decision cards with arrow chips (no confirm modal, per your decision)
+- [x] Flag-based branching, history log. Day/night transition banner: waiting for your reference
+- [x] Abort → Mission Aborted. Day 14 → Mission Complete
 - [ ] Unlocking Mission 02 on completion (shows "Coming soon" since it has no content)
 - **Done when:** Mission 01 can be played start to finish, with both a win path and an abort path
 

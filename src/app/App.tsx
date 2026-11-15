@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import { BriefingScreen } from '../screens/BriefingScreen';
 import { LearnToSurviveScreen } from '../screens/LearnToSurviveScreen';
 import { LevelsScreen } from '../screens/LevelsScreen';
+import { GameplayScreen } from '../screens/GameplayScreen';
 import { HowToPlayScreen } from '../screens/HowToPlayScreen';
 import { DevPreviewScreen } from '../screens/DevPreviewScreen';
 import { MissionOverviewScreen } from '../screens/MissionOverviewScreen';
@@ -20,10 +21,10 @@ export function App() {
         <Route path={routes.howToPlay} element={<HowToPlayScreen />} />
         <Route path={routes.levels} element={<LevelsScreen />} />
         <Route path="/mission/:missionId" element={<MissionOverviewScreen />} />
-        <Route path="/mission/:missionId/play" element={<PlaceholderScreen title="Gameplay" />} />
+        <Route path="/mission/:missionId/play" element={<GameplayScreen />} />
         <Route path="/mission/:missionId/aborted" element={<MissionAbortedScreen />} />
         <Route path="/mission/:missionId/complete" element={<MissionCompleteScreen />} />
-        {import.meta.env.DEV && <Route path="/dev/:name" element={<DevPreviewScreen />} />}
+        {import.meta.env.DEV && <Route path="/dev/:name/:day?" element={<DevPreviewScreen />} />}
         <Route path={routes.sources} element={<PlaceholderScreen title="Science Sources" />} />
         <Route path="*" element={<Navigate to={routes.welcome} replace />} />
       </Routes>
