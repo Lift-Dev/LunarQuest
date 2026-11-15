@@ -30,7 +30,7 @@ export function DevPreviewScreen() {
   if (name === 'aborted') return <AbortedView missionId="mission-01" result={{ days: 8, totalDays: 14, cause: 'power' }} />;
   if (name === 'pause')
     return (
-      <ScreenBackground scene>
+      <ScreenBackground scene="outpost">
         <PauseMenu onResume={noop} onExit={noop} onRestart={noop} onResetProgress={noop} />
       </ScreenBackground>
     );

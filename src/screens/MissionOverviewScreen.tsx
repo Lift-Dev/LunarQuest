@@ -12,7 +12,7 @@ export function MissionOverviewScreen() {
   if (!level || level.number > 1) return <Navigate to={routes.levels} replace />;
 
   return (
-    <ScreenBackground scene>
+    <ScreenBackground scene="outpost">
       <NavPill to={routes.levels}>Back</NavPill>
       <main className="mx-auto flex min-h-dvh max-w-6xl flex-col items-center justify-center gap-6 px-6 py-24 lg:items-end">
         <div className="flex w-full max-w-[1000px] flex-col items-center gap-6">

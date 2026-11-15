@@ -20,9 +20,19 @@ const items: Array<{
   { key: 'science', label: 'Science', Icon: FlaskConical, upIsGood: true },
 ];
 
-export function EffectChips({ effects, bigAt, laterHint }: { effects: Effects; bigAt: number; laterHint?: string }) {
+export function EffectChips({
+  effects,
+  bigAt,
+  laterHint,
+  className,
+}: {
+  effects: Effects;
+  bigAt: number;
+  laterHint?: string;
+  className?: string;
+}) {
   return (
-    <ul className="flex flex-wrap gap-2">
+    <ul className={cn('flex flex-wrap gap-2', className)}>
       {items.map(({ key, label, Icon, upIsGood }) => {
         const v = effects[key];
         if (!v) return null;

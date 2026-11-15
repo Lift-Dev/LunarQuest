@@ -35,8 +35,8 @@ export function ScreenBackground({
 }: {
   glow?: GlowPreset;
   stars?: boolean;
-  /** Lunar-outpost photo behind the screen, darkened so panels stay readable. */
-  scene?: boolean;
+  /** Photo behind the screen, darkened so panels stay readable: empty lunar `surface`, or the `outpost`. */
+  scene?: boolean | 'surface' | 'outpost';
   className?: string;
   children: ReactNode;
 }) {
@@ -45,12 +45,18 @@ export function ScreenBackground({
       {scene && (
         <>
           <img
-            src="/assets/backdrop/moon.jpg"
+            src={`/assets/backdrop/${scene === 'outpost' ? 'outpost' : 'surface'}.jpg`}
             alt=""
             aria-hidden
-            className="pointer-events-none absolute inset-0 size-full object-cover object-[40%_center]"
+            className="pointer-events-none absolute inset-0 size-full object-cover object-[50%_35%]"
           />
-          <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-space/70 via-space/50 to-space/85" />
+          <div
+            aria-hidden
+            className={cn(
+              'absolute inset-0 bg-gradient-to-b',
+              scene === 'outpost' ? 'from-space/50 via-space/10 to-space/70' : 'from-space/60 via-space/45 to-space/80',
+            )}
+          />
         </>
       )}
       {stars && !scene && (

@@ -4,14 +4,13 @@ import { Navigate, useNavigate, useParams } from 'react-router';
 import { routes } from '../app/routes';
 import { getMission } from '../data/missions';
 import { solarFlares } from '../data/solar-flares';
-import { sources } from '../data/sources';
 import { Button, Panel, ScreenBackground } from '../design-system';
 import { currentScenario, daysSurvived, phaseOf, radiationPercent } from '../game/engine';
-import type { DecisionOutcome } from '../game/engine';
 import { starsFromScience } from '../game/scoring';
 import type { Decision, Mission, MissionRun, Scenario } from '../game/types';
 import { ResourceHud } from '../features/hud/ResourceHud';
 import { PauseMenu } from '../features/pause/PauseMenu';
+import { FeedbackCard } from '../features/scenario/FeedbackCard';
 import { EffectChips } from '../features/scenario/EffectChips';
 import { RichText } from '../features/scenario/RichText';
 import { useGameStore } from '../store/gameStore';
@@ -64,7 +63,7 @@ export function GameplayScreen() {
   const scenario: Scenario = outcome ? outcome.scenario : currentScenario(mission, run);
 
   return (
-    <ScreenBackground scene>
+    <ScreenBackground scene="outpost">
       <main className="mx-auto flex min-h-dvh max-w-[1440px] flex-col gap-4 p-4 md:p-6">
         <ResourceHud
           lifeSupport={run.resources.lifeSupport}
@@ -74,18 +73,24 @@ export function GameplayScreen() {
           onPause={() => setPaused(true)}
         />
 
-        <ScenarioCard mission={mission} run={run} day={shownDay} scenario={scenario} />
-
-        <div className="flex-1" />
-
         {outcome ? (
-          <FeedbackCard mission={mission} outcome={outcome} onContinue={onContinue} />
+          <>
+            {/* Dims the scene so the fact is the only thing to read. */}
+            <div aria-hidden className="pointer-events-none fixed inset-0 bg-space/55" />
+            <div className="relative flex flex-1 items-center py-10">
+              <FeedbackCard outcome={outcome} bigAt={mission.balance.bigEffectThreshold} onContinue={onContinue} />
+            </div>
+          </>
         ) : (
-          <section aria-label="Choose what to do" className="grid gap-4 md:grid-cols-2">
+          <>
+            <ScenarioCard mission={mission} run={run} day={shownDay} scenario={scenario} />
+            <div className="flex-1" />
+            <section aria-label="Choose what to do" className="grid gap-4 md:grid-cols-2">
             {scenario.decisions.map((d) => (
               <DecisionCard key={d.id} decision={d} bigAt={mission.balance.bigEffectThreshold} onChoose={() => choose(d.id)} />
             ))}
-          </section>
+            </section>
+          </>
         )}
       </main>
 
@@ -141,35 +146,6 @@ function DecisionCard({ decision, bigAt, onChoose }: { decision: Decision; bigAt
       <EffectChips effects={decision.effects} bigAt={bigAt} laterHint={decision.laterHint} />
       <Button variant="pill" size="md" onClick={onChoose} className="mt-auto self-end !rounded-full !px-10 !py-2 !text-xl">
         Choose
-      </Button>
-    </Panel>
-  );
-}
-
-function FeedbackCard({ mission, outcome, onContinue }: { mission: Mission; outcome: DecisionOutcome; onContinue: () => void }) {
-  const { fact } = outcome.scenario;
-  const names = fact.sourceIds.map((id) => sources.find((s) => s.id === id)?.name).filter(Boolean);
-  const over = outcome.run.status !== 'playing';
-  return (
-    <Panel variant="solid" className="mx-auto w-full max-w-4xl p-5 md:p-6" role="status">
-      <p className="text-sm font-bold tracking-wider text-blue-300 uppercase">You chose</p>
-      <h2 className="text-2xl font-bold text-white">{outcome.decision.title}</h2>
-      <div className="mt-3">
-        <EffectChips effects={outcome.applied} bigAt={mission.balance.bigEffectThreshold} />
-      </div>
-      {outcome.overrideNote && <p className="mt-3 text-lg font-bold text-emerald-300">{outcome.overrideNote}</p>}
-      {outcome.dailyNotes.map((n) => (
-        <p key={n} className="mt-2 text-base text-blue-100/80">{n}</p>
-      ))}
-      <div className="mt-4 border-t border-blue-400/30 pt-4">
-        <p className="text-sm font-bold tracking-wider text-yellow-300 uppercase">Real Space Fact</p>
-        <p className="mt-1 text-lg leading-6 text-blue-100">
-          <RichText text={fact.text} />
-        </p>
-        {names.length > 0 && <p className="mt-2 text-sm text-blue-200/60">Source: {names.join(', ')}</p>}
-      </div>
-      <Button variant="primary" size="md" chevron onClick={onContinue} className="mt-5 ml-auto !rounded-full">
-        {over ? 'See result' : 'Next day'}
       </Button>
     </Panel>
   );

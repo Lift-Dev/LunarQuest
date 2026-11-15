@@ -92,7 +92,7 @@ export function AbortedView({ missionId, result }: { missionId: string; result: 
 
 function ResultFrame({ badge, title, subtitle, children }: { badge: ReactNode; title: string; subtitle: string; children: ReactNode }) {
   return (
-    <ScreenBackground scene>
+    <ScreenBackground scene="outpost">
       <main className="grid min-h-dvh place-items-center px-4 py-24">
         <section className="relative w-full max-w-[560px] rounded-3xl border-2 border-blue-400/60 bg-slate-900/85 px-8 pt-20 pb-8 text-center shadow-glow-panel backdrop-blur-sm">
           <div className="absolute -top-12 left-1/2 -translate-x-1/2">{badge}</div>
