@@ -14,7 +14,7 @@ interface Props {
 
 export function ResourceHud({ lifeSupport, power, radiation, stars, onPause }: Props) {
   return (
-    <header className="flex items-center gap-3">
+    <header className="relative z-10 flex items-center gap-3">
       <div className="grid flex-1 grid-cols-2 gap-x-6 gap-y-3 rounded-2xl border-2 border-blue-400/40 bg-slate-950/75 px-5 py-3 backdrop-blur-sm lg:grid-cols-4">
         <Meter Icon={Wind} label="Life Support" value={lifeSupport} icon="text-cyan-300" bar="bg-cyan-400" />
         <Meter Icon={Zap} label="Power" value={power} icon="text-yellow-300" bar="bg-yellow-400" />
