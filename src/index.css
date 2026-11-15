@@ -178,8 +178,8 @@
 
 /* Keeps content clear of a notch or rounded corner when the phone is on its side. */
 @utility safe-x {
-  padding-left: max(0.5rem, env(safe-area-inset-left));
-  padding-right: max(0.5rem, env(safe-area-inset-right));
+  padding-left: max(var(--safe-min, 0.5rem), env(safe-area-inset-left));
+  padding-right: max(var(--safe-min, 0.5rem), env(safe-area-inset-right));
 }
 
 @layer base {

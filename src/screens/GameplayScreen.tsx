@@ -100,7 +100,7 @@ export function GameplayScreen() {
           onSelect={setSelected}
           className="absolute inset-0 hidden landscape:block"
         />
-        <main className="pointer-events-none relative flex min-h-dvh flex-col gap-4 p-4 md:p-6 short:gap-1.5 short:safe-x short:py-2 [&>*]:pointer-events-auto">
+        <main className="pointer-events-none relative flex min-h-dvh flex-col gap-4 p-4 max-sm:gap-2 max-sm:p-3 md:p-6 short:gap-1.5 short:safe-x short:py-2 [&>*]:pointer-events-auto">
           <ResourceHud
             lifeSupport={run.resources.lifeSupport}
             power={run.resources.power}
@@ -118,14 +118,14 @@ export function GameplayScreen() {
             <>
               {/* Dims the scene so the fact is the only thing to read. */}
               <div aria-hidden className="pointer-events-none fixed inset-0 bg-space/55" />
-              <div className="relative flex flex-1 items-center py-10 short:py-1">
+              <div className="relative flex flex-1 items-center pt-32 pb-8 max-sm:pt-28 max-sm:pb-4 short:py-1">
                 <FeedbackCard outcome={outcome} bigAt={mission.balance.bigEffectThreshold} onContinue={onContinue} />
               </div>
             </>
           ) : (
             // Wide screens: day bar top-left, inspection panel top-right, story card along the bottom foreground.
             // Portrait: day bar, map, panel, then the story card, stacked.
-            <div className="pointer-events-none! flex flex-1 flex-col gap-4 short:gap-1.5">
+            <div className="pointer-events-none! flex flex-1 flex-col gap-4 max-sm:gap-2 short:gap-1.5">
               <div className="pointer-events-none! flex items-start justify-between gap-4 portrait:contents">
                 <div className="pointer-events-auto">
                   <DayChip mission={mission} day={shownDay} />
@@ -178,10 +178,10 @@ export function GameplayScreen() {
 function DayChip({ mission, day }: { mission: Mission; day: number }) {
   const phase = phaseOf(mission, day);
   return (
-    <div className="flex w-fit flex-wrap items-center gap-x-5 gap-y-2 rounded-2xl border-2 border-blue-400/40 bg-slate-950/75 px-4 py-2.5 backdrop-blur-sm max-sm:gap-x-3 max-sm:gap-y-1 max-sm:px-3 max-sm:py-1.5 short:rounded-xl short:px-3 short:py-1">
-      <p className="flex items-center gap-2.5 text-lg font-bold text-white max-sm:text-base short:gap-2 short:text-sm">
-        {phase === 'day' ? <Sun aria-hidden className="size-6 text-yellow-300 short:size-4" /> : <Moon aria-hidden className="size-6 text-blue-200 short:size-4" />}
-        Day {day} / {mission.balance.durationDays} · {phase === 'day' ? 'Lunar Daylight' : 'Lunar Night'}
+    <div className="flex w-fit flex-wrap items-center gap-x-5 gap-y-2 rounded-2xl border-2 border-blue-400/40 bg-slate-950/75 px-4 py-2.5 backdrop-blur-sm max-sm:w-full max-sm:flex-nowrap max-sm:gap-x-3 max-sm:rounded-xl max-sm:border max-sm:px-3 max-sm:py-1.5 short:rounded-xl short:px-3 short:py-1">
+      <p className="flex items-center gap-2.5 text-lg font-bold text-white max-sm:shrink-0 max-sm:text-sm short:gap-2 short:text-sm">
+        {phase === 'day' ? <Sun aria-hidden className="size-6 text-yellow-300 max-sm:size-5 short:size-4" /> : <Moon aria-hidden className="size-6 text-blue-200 max-sm:size-5 short:size-4" />}
+        Day {day} / {mission.balance.durationDays}<span className="max-sm:hidden"> · {phase === 'day' ? 'Lunar Daylight' : 'Lunar Night'}</span>
       </p>
       <DayTrack day={day} total={mission.balance.durationDays} daylightDays={mission.balance.daylightDays} />
     </div>
@@ -193,11 +193,11 @@ function RotateHint() {
   const [open, setOpen] = useState(true);
   if (!open) return null;
   return (
-    <p className="hidden items-center gap-2 rounded-xl border border-blue-400/40 bg-slate-950/80 py-1.5 pr-2 pl-3 text-sm text-blue-100 portrait:max-sm:flex">
-      <RotateCw aria-hidden className="size-4 shrink-0 text-blue-300" />
-      <span className="flex-1">Turn your phone sideways for the full view.</span>
-      <button type="button" onClick={() => setOpen(false)} aria-label="Dismiss" className="grid size-8 place-items-center rounded-full hover:bg-white/10">
-        <X aria-hidden className="size-4" />
+    <p className="hidden items-center gap-2 rounded-full border border-blue-400/30 bg-slate-950/70 py-0.5 pr-1 pl-3 text-xs text-blue-100/90 portrait:max-sm:flex">
+      <RotateCw aria-hidden className="size-3.5 shrink-0 text-blue-300" />
+      <span className="flex-1">Turn sideways for the full view</span>
+      <button type="button" onClick={() => setOpen(false)} aria-label="Dismiss" className="grid size-7 place-items-center rounded-full hover:bg-white/10">
+        <X aria-hidden className="size-3.5" />
       </button>
     </p>
   );

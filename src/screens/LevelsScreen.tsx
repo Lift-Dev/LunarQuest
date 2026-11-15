@@ -20,14 +20,14 @@ export function LevelsScreen() {
       <NavPill to={routes.welcome} icon="home">
         Home
       </NavPill>
-      <main className="flex min-h-dvh flex-col items-center justify-center py-20">
-        <h1 className="text-center text-[clamp(2.25rem,4vw,3.5rem)] leading-none font-bold text-white uppercase text-glow">
+      <main className="flex min-h-dvh flex-col items-center justify-center py-20 short:py-2">
+        <h1 className="text-center text-[clamp(2.25rem,4vw,3.5rem)] leading-none font-bold text-white uppercase text-glow max-sm:text-3xl short:text-3xl">
           Your <span className="text-blue-400">Journey</span>
         </h1>
-        <p className="mt-3 text-xl text-blue-100/90">Complete missions to explore, survive and discover!</p>
+        <p className="mt-3 px-4 text-center text-xl text-blue-100/90 max-sm:text-base short:hidden">Complete missions to explore, survive and discover!</p>
 
         <ol
-          className="mt-14 flex w-full snap-x snap-mandatory items-center gap-6 overflow-x-auto px-[max(1.5rem,calc((100vw-1240px)/2))] py-10"
+          className="mt-14 max-sm:mt-8 short:mt-3 flex w-full snap-x snap-mandatory items-center gap-6 overflow-x-auto px-[max(1.5rem,calc((100vw-1240px)/2))] py-10 max-sm:px-6 max-sm:py-8 short:py-6"
           aria-label="Missions"
         >
           {levels.map((level) => (
@@ -37,11 +37,11 @@ export function LevelsScreen() {
           ))}
         </ol>
 
-        <div className="mt-4 flex items-center gap-4">
+        <div className="mt-4 flex items-center gap-4 max-sm:px-4 short:hidden">
           <Mascot pose="thumbs-up" height="6rem" />
           <Panel variant="row" className="flex items-center gap-3 px-5 py-3 backdrop-blur-sm">
             <Trophy aria-hidden className="size-6 text-star" />
-            <p className="text-lg text-blue-100">Complete missions to earn science stars!</p>
+            <p className="text-lg text-blue-100 max-sm:text-base">Complete missions to earn science stars!</p>
           </Panel>
         </div>
       </main>
@@ -58,6 +58,7 @@ function LevelCard({ level, unlocked, stars }: { level: Level; unlocked: boolean
       className={cn(
         'relative flex w-[200px] flex-col items-center px-3 pt-8 pb-4 text-center',
         unlocked ? 'w-[240px]' : 'bg-slate-900/60 opacity-90',
+        'short:w-[170px]',
       )}
     >
       <span
@@ -81,7 +82,7 @@ function LevelCard({ level, unlocked, stars }: { level: Level; unlocked: boolean
           </div>
         )}
       </div>
-      <h2 className={cn('mt-3 flex min-h-12 items-center text-lg leading-5 font-bold uppercase', unlocked ? 'text-white' : 'text-slate-300')}>
+      <h2 className={cn('mt-3 flex min-h-12 items-center text-lg leading-5 font-bold uppercase short:mt-2 short:min-h-9 short:text-sm short:leading-4', unlocked ? 'text-white' : 'text-slate-300')}>
         {level.title}
       </h2>
       <StarRating earned={stars} size="sm" dim={!unlocked} className="mt-2" />
@@ -91,7 +92,7 @@ function LevelCard({ level, unlocked, stars }: { level: Level; unlocked: boolean
           variant="pill"
           size="md"
           chevron
-          className="mt-4 w-full !px-4 !py-2 !text-xl"
+          className="mt-4 w-full !px-4 !py-2 !text-xl short:mt-2 short:!py-1.5 short:!text-lg"
         >
           Start
         </Button>

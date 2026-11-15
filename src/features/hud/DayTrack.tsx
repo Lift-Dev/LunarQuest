@@ -18,7 +18,7 @@ export function DayTrack({ day, total, daylightDays }: { day: number; total: num
           <span
             key={n}
             className={cn(
-              'h-2 w-3 rounded-full md:w-4',
+              'h-2 w-3 rounded-full max-sm:w-2 md:w-4',
               n < day && (isDay ? 'bg-yellow-400' : 'bg-blue-400'),
               n === day && cn('ring-2 ring-white', isDay ? 'bg-yellow-400' : 'bg-blue-400'),
               n > day && (isDay ? 'bg-yellow-400/25' : 'bg-blue-400/25'),

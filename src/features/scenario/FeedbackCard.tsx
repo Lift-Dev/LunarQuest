@@ -4,7 +4,6 @@ import { sources } from '../../data/sources';
 import { Button, Mascot } from '../../design-system';
 import { outcomePose } from '../mascot/moods';
 import type { DecisionOutcome } from '../../game/engine';
-import { EffectChips } from './EffectChips';
 import { RichText } from './RichText';
 
 /**
@@ -52,7 +51,6 @@ export function FeedbackCard({
           <p className="text-lg text-blue-100 short:text-sm">
             You chose <strong className="font-bold text-white">{outcome.decision.title}</strong>
           </p>
-          <EffectChips effects={outcome.applied} bigAt={bigAt} className="justify-center short:justify-start" />
           {outcome.overrideNote && <p className="text-lg font-bold text-emerald-300">{outcome.overrideNote}</p>}
           {outcome.dailyNotes.map((n) => (
             <p key={n} className="text-base text-blue-100/70">
