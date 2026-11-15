@@ -2,7 +2,6 @@ import { Atom, BatteryCharging, ChevronRight, FlaskConical, TriangleAlert, Wind 
 import type { ComponentType } from 'react';
 import type { Decision, Effects, Scenario } from '../../game/types';
 import { cn } from '../../design-system';
-import { EffectChips } from './EffectChips';
 import { RichText } from './RichText';
 
 /**
@@ -13,7 +12,6 @@ import { RichText } from './RichText';
 interface Props {
   day: number;
   scenario: Scenario;
-  bigAt: number;
   /** Extra note under the story, e.g. the real solar flare on Day 6. */
   note?: React.ReactNode;
   onChoose: (decisionId: string) => void;
@@ -25,7 +23,7 @@ const STYLES = [
   { letter: 'B', button: 'from-green-400 to-green-500 border-green-200', ring: 'shadow-[0_4px_0_0_rgb(21_128_61)]' },
 ] as const;
 
-export function DecisionSidebar({ day, scenario, bigAt, note, onChoose, className }: Props) {
+export function DecisionSidebar({ day, scenario, note, onChoose, className }: Props) {
   return (
     <section aria-label="Today's mission" className={cn('overflow-hidden rounded-2xl border-[3px] border-amber-400 bg-amber-50 shadow-xl', className)}>
       <header className="flex items-center gap-3 bg-gradient-to-b from-amber-300 to-amber-400 px-4 py-2.5">
@@ -45,7 +43,7 @@ export function DecisionSidebar({ day, scenario, bigAt, note, onChoose, classNam
 
         <div className="space-y-3 pt-1">
           {scenario.decisions.map((d, i) => (
-            <OptionButton key={d.id} decision={d} style={STYLES[i]!} bigAt={bigAt} onChoose={() => onChoose(d.id)} />
+            <OptionButton key={d.id} decision={d} style={STYLES[i]!} onChoose={() => onChoose(d.id)} />
           ))}
         </div>
       </div>
@@ -53,31 +51,28 @@ export function DecisionSidebar({ day, scenario, bigAt, note, onChoose, classNam
   );
 }
 
-function OptionButton({ decision, style, bigAt, onChoose }: { decision: Decision; style: (typeof STYLES)[number]; bigAt: number; onChoose: () => void }) {
+function OptionButton({ decision, style, onChoose }: { decision: Decision; style: (typeof STYLES)[number]; onChoose: () => void }) {
   const Icon = iconFor(decision.effects);
   return (
     <button
       type="button"
       onClick={onChoose}
       className={cn(
-        'group flex w-full items-center gap-3 rounded-2xl border-2 bg-gradient-to-b p-3 text-left text-white transition',
+        'group flex w-full items-center gap-3 rounded-2xl border-2 bg-gradient-to-b px-3 py-2.5 text-left text-white transition',
         'hover:brightness-110 active:translate-y-0.5 active:shadow-none',
         style.button,
         style.ring,
       )}
     >
-      <span aria-hidden className="grid size-12 shrink-0 place-items-center rounded-xl bg-white/90 text-slate-800">
-        <Icon className="size-7" />
+      <span aria-hidden className="grid size-11 shrink-0 place-items-center rounded-xl bg-white/90 text-slate-800">
+        <Icon className="size-6" />
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block text-lg leading-tight font-bold">
-          <span className="sr-only">Option {style.letter}: </span>
-          <span aria-hidden>Option {style.letter}:</span> {decision.title}
-        </span>
-        <span className="mt-0.5 block text-[0.95rem] leading-5 text-white/95">{decision.explanation}</span>
-        <EffectChips effects={decision.effects} bigAt={bigAt} laterHint={decision.laterHint} onColor className="mt-2 gap-1.5 [&_li]:py-0.5 [&_li]:text-sm" />
+        <span className="block text-base leading-tight font-bold">Option {style.letter}:</span>
+        <span className="block text-lg leading-tight font-bold">{decision.title}</span>
+        <span className="mt-0.5 block text-sm leading-[1.15rem] text-white/95">{decision.explanation}</span>
       </span>
-      <ChevronRight aria-hidden className="size-7 shrink-0 transition group-hover:translate-x-0.5" />
+      <ChevronRight aria-hidden className="size-6 shrink-0 transition group-hover:translate-x-0.5" />
     </button>
   );
 }

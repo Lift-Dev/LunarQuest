@@ -135,7 +135,6 @@ export function GameplayScreen() {
               <DecisionSidebar
                 day={shownDay}
                 scenario={scenario}
-                bigAt={mission.balance.bigEffectThreshold}
                 note={<FlareNote run={run} scenario={scenario} />}
                 onChoose={choose}
                 className="pointer-events-auto landscape:w-[22rem] landscape:self-start"

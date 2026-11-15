@@ -24,14 +24,11 @@ export function EffectChips({
   effects,
   bigAt,
   laterHint,
-  onColor = false,
   className,
 }: {
   effects: Effects;
   bigAt: number;
   laterHint?: string;
-  /** White chips for use on a coloured button (the decision sidebar). */
-  onColor?: boolean;
   className?: string;
 }) {
   return (
@@ -48,13 +45,11 @@ export function EffectChips({
             aria-label={`${label} ${up ? 'goes up' : 'goes down'}${Math.abs(v) >= bigAt ? ' a lot' : ''}`}
             className={cn(
               'inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-base font-bold',
-              onColor
-                ? cn('border-white bg-white', key === 'science' ? 'text-amber-600' : good ? 'text-emerald-700' : 'text-red-600')
-                : key === 'science'
-                  ? 'border-yellow-400/40 bg-yellow-400/10 text-yellow-300'
-                  : good
-                    ? 'border-emerald-400/40 bg-emerald-400/10 text-emerald-300'
-                    : 'border-red-400/40 bg-red-400/10 text-red-300',
+              key === 'science'
+                ? 'border-yellow-400/40 bg-yellow-400/10 text-yellow-300'
+                : good
+                  ? 'border-emerald-400/40 bg-emerald-400/10 text-emerald-300'
+                  : 'border-red-400/40 bg-red-400/10 text-red-300',
             )}
           >
             <Icon aria-hidden className="size-4" />
@@ -63,12 +58,7 @@ export function EffectChips({
         );
       })}
       {laterHint && (
-        <li
-          className={cn(
-            'inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-base font-bold',
-            onColor ? 'border-white bg-white text-blue-700' : 'border-blue-400/40 bg-blue-400/10 text-blue-300',
-          )}
-        >
+        <li className="inline-flex items-center gap-1.5 rounded-full border border-blue-400/40 bg-blue-400/10 px-3 py-1 text-base font-bold text-blue-300">
           <Hourglass aria-hidden className="size-4" />
           <span>{laterHint}</span>
         </li>
