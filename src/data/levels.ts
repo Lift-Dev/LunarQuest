@@ -6,7 +6,7 @@
 import type { Level } from '../game/types';
 
 const titles = [
-  'Survive the Lunar Cycle',
+  'Lunar Outpost',
   'The Red Planet',
   'Growing Beyond Earth',
   'Lost Connection',

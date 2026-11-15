@@ -8,3 +8,5 @@ export type { ResourceTone } from './ProgressBar';
 export { StarRating } from './StarRating';
 export { ScreenBackground } from './ScreenBackground';
 export { cn } from './cn';
+export { NavPill } from './NavPill';
+export { Modal } from './Modal';

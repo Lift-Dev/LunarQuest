@@ -36,6 +36,8 @@ interface CommonProps {
   size?: ButtonSize;
   /** Shows the › chevron after the label (Briefing CONTINUE). */
   chevron?: boolean;
+  /** Optional icon before the label. */
+  icon?: ReactNode;
   className?: string;
   children: ReactNode;
 }
@@ -44,10 +46,11 @@ type AsLink = CommonProps & { to: string } & Omit<ComponentPropsWithoutRef<typeo
 type AsButton = CommonProps & { to?: undefined } & Omit<ComponentPropsWithoutRef<'button'>, 'className' | 'children'>;
 
 export function Button(props: AsLink | AsButton) {
-  const { variant = 'primary', size = 'lg', chevron = false, className, children, ...rest } = props;
+  const { variant = 'primary', size = 'lg', chevron = false, icon, className, children, ...rest } = props;
   const classes = cn(base, variants[variant], sizes[variant][size], className);
   const content = (
     <>
+      {icon}
       {children}
       {chevron && <ChevronRight aria-hidden className="size-[1em]" strokeWidth={3} />}
     </>

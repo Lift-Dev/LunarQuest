@@ -1,84 +1,98 @@
-import { Fragment } from 'react';
-import { Lock } from 'lucide-react';
+import { Lock, Trophy } from 'lucide-react';
 import { routes } from '../app/routes';
 import { levels } from '../data/levels';
-import { Button, Chip, Panel, ScreenBackground, StarRating, cn } from '../design-system';
+import { Button, NavPill, Panel, ScreenBackground, StarRating, cn } from '../design-system';
 import type { Level } from '../game/types';
 
 /**
- * Screen 5 "Your Journey" — matches image-assets/uxpilot-export-11-14-26 (5).pdf.
- * Progress (unlocks, stars) comes from the save system in Phase 7; until then
- * only Level 01 is unlocked.
+ * "Your Journey" — matches image-assets/Your Journey_ Lunar Mission Map.png.
+ * The row scrolls sideways (all 15 levels) and snaps card by card.
+ * Progress (unlocks, stars) comes from the save system in Phase 7; until then only Level 01 is unlocked.
  */
 const unlockedThrough = 1;
 const starsByLevel: Record<string, number> = {};
 
+const pad = (n: number) => String(n).padStart(2, '0');
+
 export function LevelsScreen() {
   return (
-    <ScreenBackground glow="top" stars={false}>
-      <main className="mx-auto flex min-h-dvh max-w-3xl flex-col items-stretch px-4 pt-11 pb-16">
-        <h1 className="text-center text-[clamp(2.25rem,4vw,3rem)] leading-none font-bold text-white uppercase">
-          Your journey
+    <ScreenBackground scene>
+      <NavPill to={routes.welcome} icon="home">
+        Home
+      </NavPill>
+      <main className="flex min-h-dvh flex-col items-center justify-center py-20">
+        <h1 className="text-center text-[clamp(2.25rem,4vw,3.5rem)] leading-none font-bold text-white uppercase text-glow">
+          Your <span className="text-blue-400">Journey</span>
         </h1>
-        <ol className="mt-12">
-          {levels.map((level, i) => (
-            <Fragment key={level.id}>
-              {i > 0 && <Connector />}
-              <li>
-                {level.number <= unlockedThrough ? (
-                  <NextLevelCard level={level} stars={starsByLevel[level.id] ?? 0} />
-                ) : (
-                  <LockedLevelRow level={level} />
-                )}
-              </li>
-            </Fragment>
+        <p className="mt-3 text-xl text-blue-100/90">Complete missions to explore, survive and discover!</p>
+
+        <ol
+          className="mt-14 flex w-full snap-x snap-mandatory items-center gap-6 overflow-x-auto px-[max(1.5rem,calc((100vw-1240px)/2))] py-10"
+          aria-label="Missions"
+        >
+          {levels.map((level) => (
+            <li key={level.id} className="shrink-0 snap-center first:snap-start">
+              <LevelCard level={level} unlocked={level.number <= unlockedThrough} stars={starsByLevel[level.id] ?? 0} />
+            </li>
           ))}
         </ol>
+
+        <Panel variant="row" className="mt-4 flex items-center gap-3 px-5 py-3 backdrop-blur-sm">
+          <Trophy aria-hidden className="size-6 text-star" />
+          <p className="text-lg text-blue-100">Complete missions to earn science stars!</p>
+        </Panel>
       </main>
     </ScreenBackground>
   );
 }
 
-const pad = (n: number) => String(n).padStart(2, '0');
-
-function NextLevelCard({ level, stars }: { level: Level; stars: number }) {
+function LevelCard({ level, unlocked, stars }: { level: Level; unlocked: boolean; stars: number }) {
+  const playable = unlocked && level.contentId !== null;
   return (
-    <Panel variant="active" className="flex items-center gap-6 p-6">
-      <img src={level.thumbnail} alt="" aria-hidden className="h-36 w-48 shrink-0 rounded-lg object-cover" />
-      <div className="flex min-w-0 flex-col items-start">
-        <Chip tone="yellow">Level {pad(level.number)} · Next mission</Chip>
-        <h2 className="mt-2 text-3xl leading-9 font-bold text-white uppercase">{level.title}</h2>
-        <StarRating earned={stars} className="mt-4" />
-        <Button to={routes.missionOverview(level.contentId ?? level.id)} variant="pill" size="md" className="mt-6">
+    <Panel
+      variant={unlocked ? 'active' : 'row'}
+      aria-label={`Mission ${level.number}, ${level.title}${unlocked ? '' : ', locked'}`}
+      className={cn(
+        'relative flex w-[200px] flex-col items-center px-3 pt-8 pb-4 text-center',
+        unlocked ? 'w-[240px]' : 'bg-slate-900/60 opacity-90',
+      )}
+    >
+      <span
+        className={cn(
+          'absolute -top-4 rounded-full border-2 px-4 py-0.5 text-sm font-bold tracking-wider whitespace-nowrap text-white uppercase',
+          unlocked ? 'border-blue-300 bg-blue-600 shadow-glow-blue' : 'border-blue-400/40 bg-slate-900',
+        )}
+      >
+        Mission {pad(level.number)}
+      </span>
+      <div className="relative w-full overflow-hidden rounded-lg">
+        <img
+          src={level.thumbnail}
+          alt=""
+          aria-hidden
+          className={cn('aspect-[4/3] w-full object-cover', !unlocked && 'brightness-75')}
+        />
+        {!unlocked && (
+          <div className="absolute inset-0 grid place-items-center">
+            <Lock aria-hidden className="size-9 text-slate-100 drop-shadow-lg" strokeWidth={2.5} />
+          </div>
+        )}
+      </div>
+      <h2 className={cn('mt-3 flex min-h-12 items-center text-lg leading-5 font-bold uppercase', unlocked ? 'text-white' : 'text-slate-300')}>
+        {level.title}
+      </h2>
+      <StarRating earned={stars} size="sm" dim={!unlocked} className="mt-2" />
+      {unlocked && (
+        <Button
+          to={playable ? routes.missionOverview(level.contentId!) : routes.levels}
+          variant="pill"
+          size="md"
+          chevron
+          className="mt-4 w-full !px-4 !py-2 !text-xl"
+        >
           Start
         </Button>
-      </div>
+      )}
     </Panel>
-  );
-}
-
-function LockedLevelRow({ level }: { level: Level }) {
-  return (
-    <Panel variant="row" className="flex items-center gap-4 p-4 opacity-80" aria-label={`Level ${level.number}, ${level.title}, locked`}>
-      <div className="relative h-27 w-36 shrink-0 overflow-hidden rounded-lg">
-        <img src={level.thumbnail} alt="" aria-hidden className="size-full object-cover" />
-        <div className="absolute inset-0 grid place-items-center bg-slate-950/50">
-          <Lock aria-hidden className="size-5 text-slate-200" strokeWidth={2.5} />
-        </div>
-      </div>
-      <div className="min-w-0">
-        <p className="text-xs font-bold tracking-wider text-slate-400 uppercase">Level {pad(level.number)} · Locked</p>
-        <h2 className={cn('mt-0.5 text-2xl font-bold text-slate-300 uppercase')}>{level.title}</h2>
-        <StarRating earned={0} size="sm" dim className="mt-2" />
-      </div>
-    </Panel>
-  );
-}
-
-function Connector() {
-  return (
-    <li aria-hidden className="flex h-14 justify-center py-2">
-      <span className="border-l-2 border-dashed border-slate-600" />
-    </li>
   );
 }

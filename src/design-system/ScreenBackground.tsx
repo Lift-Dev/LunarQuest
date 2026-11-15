@@ -29,17 +29,31 @@ const STARS: Array<[x: number, y: number, size: number, color: string]> = [
 export function ScreenBackground({
   glow = 'top',
   stars = true,
+  scene = false,
   className,
   children,
 }: {
   glow?: GlowPreset;
   stars?: boolean;
+  /** Lunar-outpost photo behind the screen, darkened so panels stay readable. */
+  scene?: boolean;
   className?: string;
   children: ReactNode;
 }) {
   return (
     <div className={cn('relative min-h-dvh overflow-hidden bg-space', glows[glow], className)}>
-      {stars && (
+      {scene && (
+        <>
+          <img
+            src="/assets/backdrop/moon.jpg"
+            alt=""
+            aria-hidden
+            className="pointer-events-none absolute inset-0 size-full object-cover object-[40%_center]"
+          />
+          <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-space/70 via-space/50 to-space/85" />
+        </>
+      )}
+      {stars && !scene && (
         <div aria-hidden className="pointer-events-none absolute inset-0">
           {STARS.map(([x, y, s, c], i) => (
             <span

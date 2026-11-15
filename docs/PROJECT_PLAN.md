@@ -231,8 +231,8 @@ Each phase ends with: a summary of what was done, what remains, checks run (`tsc
 
 ### Phase 4: Screens and navigation (~1.5 days)
 - [x] Welcome, Your Mission, Learn to Survive, Mission Levels: pixel-matched to your PDFs (done early, in Phase 3)
-- [ ] How to Play, Mission Overview, Aborted, Complete: built from the references you send
-- [ ] Router + guards (locked mission → redirect to Levels)
+- [x] How to Play, Mission Overview, Levels (horizontal Journey Map), Mission Complete, Mission Aborted, Pause + Settings overlay: built 2026-11-15 from the PNG references (results screens take real run data via navigation state; `/dev/complete|aborted|pause` preview routes in dev only)
+- [x] Router + guards (locked/unknown mission → redirect to Levels)
 - [ ] Desktop 16:9 + tablet landscape/portrait layouts
 - **Done when:** you can click from Welcome to Mission Overview and every screen matches its reference
 
