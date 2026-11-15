@@ -30,7 +30,8 @@ export const levels: Level[] = titles.map((title, i) => {
     number,
     id: `level-${nn}`,
     title,
-    thumbnail: `/assets/levels/thumb-${nn}.png`,
+    // Only Level 01 has a colour thumbnail so far; 02–15 use the greyscale locked art.
+    thumbnail: number === 1 ? '/assets/levels/thumb-01.jpg' : `/assets/levels/thumb-${nn}-locked.png`,
     contentId: number === 1 ? 'mission-01' : null,
   };
 });

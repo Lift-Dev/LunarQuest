@@ -35,22 +35,20 @@ Naming pattern: `<screen-number>-<screen-name>__<element>.png`. All lowercase, h
 
 ---
 
-## B. Individual assets from the existing screens (clean versions)
+## B. Individual assets from the existing screens ✅ extracted from your PDFs
 
-I can extract these from your PDFs, but originals are better because they keep transparency and full resolution.
+These were pulled from the PDFs at full quality and with transparency, so **you don't need to send them**. Originals are in `image-assets/extracted/`.
 
-| ✔ | File name | Description |
+| ✔ | Asset | Status |
 |---|---|---|
-| ☐ | `01-welcome__logo.png` | LunarQuest logo only, transparent background |
-| ☐ | `01-welcome__background.png` | Welcome background **without** the logo, text and button (astronaut, dome, Earth, terrain), 1920 × 1080 or larger |
-| ☐ | `02-mission__illustration.png` | Outpost illustration from the briefing screen (square) |
-| ☐ | `03-resources__icon-life-support.png` | Oxygen canister icon, transparent |
-| ☐ | `03-resources__icon-power.png` | Energy cell icon, transparent |
-| ☐ | `03-resources__icon-radiation.png` | Shield dome icon, transparent |
-| ☐ | `05-levels__thumb-01.png` … `05-levels__thumb-15.png` | The 15 level thumbnails, **unlocked versions** (I'll apply the dim and padlock in code) |
-| ☐ | `common__star-filled.png` / `common__star-empty.png` | Science star, gold filled and outline. *(Optional: I can draw these in SVG to match)* |
-
----
+| ☑ | Logo | Extracted (1440 px, transparent) |
+| ☑ | Welcome background without text | Extracted (1920 × 1088) |
+| ☑ | Briefing illustration | Extracted (1440 px) |
+| ☑ | 3 resource icons | Extracted (1440 px, transparent) |
+| ☑ | Level 01 thumbnail (colour) | Extracted |
+| ☐ | `05-levels__thumb-02.png` … `05-levels__thumb-15.png` | **Still needed later:** colour versions of levels 2–15. Only greyscale "locked" versions are in the PDF. Not needed until those missions exist |
+| ☑ | Stars | Drawn in code to match the design |
+| ☑ | Fonts | Identified: **Fredoka** (from the PDF) |
 
 ## C. Outpost map assets (needed for Phase 5)
 
@@ -91,6 +89,5 @@ Until those arrive, the game uses a neutral placeholder that is easy to replace.
 1. `07-gameplay.png` + `07c-inspection-panel.png` + `07-map__reference-full.png`: these shape the most complex part of the game
 2. `06-mission-overview.png`, `04-how-to-play.png`
 3. `08-mission-aborted.png`, `09-mission-complete.png`, `07b-decision-confirm.png`, `07d-pause-menu.png`
-4. Section B clean assets
 5. Section C map parts
 6. The rest

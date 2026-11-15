@@ -1,0 +1,2080 @@
+
+❯ # PROJECT: LUNAR OUTPOST — BUILD A FUNCTIONAL GAME MVP
+
+  You are a senior game developer, software architect, and UI/UX implementation
+  engineer.
+
+  Your task is to turn my existing UI designs, images, and project assets into
+  a fully functional MVP of a lunar exploration and survival game.
+
+  Do not just create static screens or a visual prototype. Build an actual
+  working application with functional navigation, interactive elements, game
+  mechanics, state management, and mission progression.
+
+  I will provide UI screenshots, illustrations, backgrounds, icons, and other
+  visual assets. You must inspect and reuse these assets wherever appropriate.
+
+  The finished MVP should look as close as reasonably possible to my supplied
+  designs while having working gameplay.
+
+  ---
+
+  # 1. FIRST: INSPECT THE PROJECT
+
+  Before writing code:
+
+  1. Inspect the entire existing project structure.
+  2. Identify the programming language, framework, dependencies, and current
+  architecture.
+  3. Locate and inspect all supplied images and UI assets.
+  4. Identify the purpose of each asset and where it belongs in the
+  application.
+  5. Inspect any existing scenario descriptions, decision trees, or game data.
+  6. Identify missing assets and missing information.
+  7. Report your findings and propose an implementation plan.
+
+  Do not immediately start replacing files or creating a new project.
+
+  If a project already exists, work within its existing structure unless there
+  is a compelling technical reason to change it.
+
+  Do not delete or overwrite existing work without explaining why.
+
+  If an important technical decision cannot be determined from the repository,
+  ask me before proceeding.
+
+  # 2. GAME OVERVIEW
+
+  The game is a lunar exploration and survival game designed for children aged
+  7–12.
+
+  The player takes the role of mission commander at a lunar research outpost.
+
+  The player must:
+  - Keep the crew alive.
+  - Manage limited resources.
+  - Investigate situations around the outpost.
+  - Make decisions based on different scenarios.
+  - Complete scientific research.
+  - Survive the entire mission.
+
+  The game is level-based. Missions are completed sequentially, and later
+  missions unlock after completing previous ones.
+
+  The first playable mission is Mission 01 — Lunar Outpost.
+
+  # 3. MISSION ONE: LUNAR OUTPOST
+
+  Mission duration: 14 Earth days.
+
+  The mission consists of:
+  - Days 1–7: Lunar daylight.
+  - Days 8–14: Lunar night.
+
+  Scientific objectives:
+  - Collect lunar samples.
+  - Gather scientific data.
+  - Study the surrounding environment.
+  - Conduc
+  ──── (486 lines hidden) ─────────────────────────────────────────────────────
+  ement scenarios, decisions, branching logic, resources, and scientific
+  progress.
+
+  **PHASE 7 — Persistence**
+  Implement saving, resuming, and restarting missions.
+
+  **PHASE 8 — Testing**
+  Test the complete Mission One gameplay loop and fix errors.
+
+  After each phase:
+  - Explain what was completed.
+  - Identify what remains.
+  - Run relevant checks.
+  - Show me the result before making major design changes.
+
+  Do not attempt to implement everything in one enormous code change.
+
+  Prioritize a working and visually accurate MVP over unnecessary complexity.
+
+  ---
+
+  # FINAL INSTRUCTION
+
+  Your ultimate goal is to transform my existing UI designs and project assets
+  into a working lunar survival game.
+
+  Do not merely reproduce screenshots.
+
+  Build the actual application behind those screenshots.
+
+  The player must be able to navigate the game, inspect the lunar outpost,
+  understand equipment connections, read scenarios, make decisions, manage
+  resources, and complete or fail the 14-day mission.
+
+  Preserve my existing designs, scenarios, and gameplay decisions.
+
+  Start with Phase 1: inspect the project and report your findings. Do not
+  begin large-scale implementation until I approve the plan.
+  there tech stack is as follows:
+  | Frontend | vite- React + TypeScript + Tailwind |
+  | 3D / visualization | Three.js |
+  | Backend | Python + FastAPI |
+  | Database | Supabase / PostgreSQL |
+  | AI | LLM API with structured tool calls |
+  | Data processing | Python + NumPy |
+  | Deployment | Vercel +  |
+  I want to clarify something very important: pls if you have any other better
+  stack or tool recommendation that u think allign with our app. don't hasitet
+  to recommend me. out dream here is to get something better and well
+  organized.
+
+
+  the assets of the ui are provided in the folder LunarQuest/image-assets.
+  please try to replicate exacly the same one as perfectly same ui as possible!
+  i want them to look exactly like the ui i provided.
+  i want you to request me another ui assets that we need in our app. i will
+  help u here by providing u the ui just like this one. don't try to create
+  another ui while i am here to provide you refernce image. just tell me what
+  kind of ui you need. i will help you by providing that! i will name according
+  to ur request so that when i add the new asset of the ui you just requested
+  me, it will be easier to identify it just by its name
+
+
+
+  Most importantly, i would like you to create me a complete plan for this
+  project so that i will go step by step and finish in a well orgnaized and
+  better way
+
+⏺ I'll start with Phase 1 and look through the project before proposing
+  anything.
+
+  Listed 1 directory (ctrl+o to expand)
+
+⏺ The project holds only four PDFs: no code and no scenario files. I'll read
+  each PDF.
+
+  Read 4 files, ran 1 shell command (ctrl+o to expand)
+
+⏺ I've reviewed all four designs. I'm checking next whether the PDF
+  illustrations can be extracted as separate images, which decides if we can
+  reuse your art directly. · summary
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ I have what I need for the Phase 1 report. I'll write the plan and the asset
+  request list as files in the project so you can work through them step by
+  step.
+
+⏺ Write(docs/PROJECT_PLAN.md)
+  ⎿  Wrote 304 lines to docs/PROJECT_PLAN.md
+       1 # LunarQuest — Project Plan
+       2
+       3 Status: **Phase 1 complete — waiting for approval and answers to
+          the open questions (§7).**
+       4 Last updated: 2026-11-14
+       5
+       6 ---
+       7
+       8 ## 1. Phase 1 findings: what's in the project
+       9
+     … +295 lines (ctrl+o to expand)
+
+⏺ Write(docs/ASSET_REQUESTS.md)
+  ⎿  Wrote 92 lines to docs/ASSET_REQUESTS.md
+      1 # LunarQuest — UI Asset Requests
+      2
+      3 Please create these in UX Pilot (or any tool) in the **same visua
+        l style as the 4 existing screens**. Save each file with **exactl
+        y the name shown**. Each item has a status checkbox so we can tra
+        ck progress.
+      4
+      5 ## How to deliver
+      6 - **Screen references** → `LunarQuest/image-assets/screens/`. A f
+        ull-screen mockup (PNG or PDF), **1920 × 1080 (16:9)** if possibl
+     … +87 lines (~7 KB) (ctrl+o to expand)
+
+  Wrote 2 memories (ctrl+o to expand)
+
+⏺ I've finished Phase 1 (inspecting the project) and written two planning files.
+  I can't start building yet because your scenario and decision files aren't in
+  the project folder.
+
+  - docs/PROJECT_PLAN.md has the full plan: findings, the stack I recommend, the
+    folder layout, the data model, placeholder balance numbers, an 8-phase
+    roadmap with checkboxes, and a test checklist.
+  - docs/ASSET_REQUESTS.md lists every design and image I need from you, each
+    with the exact file name to save it under, in priority order.
+
+  What's in the project
+
+  - No code and no git repository, so this is a fresh start. Nothing gets
+    overwritten.
+  - There are 4 designs in image-assets/: Welcome, Your Mission, Learn to
+    Survive and Mission Levels. Each PDF still contains the original images at
+    full resolution (up to 2764 px wide), so I can pull out the logo,
+    backgrounds, icons and 15 level thumbnails without losing quality.
+  - 8 screens have no design yet: How to Play, Mission Overview, the main game
+    screen, the equipment info panel, Pause, Mission Aborted, Mission Complete,
+    and the Levels screen after a mission is completed.
+
+  Recommended tools
+
+  Keep: Vite, React, TypeScript, Tailwind and Vercel are a good fit
+  Change or postpone: Outpost map: use layered 2D images with clickable shapes
+    drawn on top, not Three.js. Your art is 2D painting, and Three.js would need
+
+    3D models that don't exist yet. The 2D approach is sharper, simpler to click
+
+    and highlight, and runs well on classroom tablets. Three.js stays an option
+    later.
+  ────────────────────────────────────────
+  Keep: I'd add: Zustand to hold game state and save it in the browser, Zod to
+    catch mistakes in the scenario files, React Router, Motion for animation,
+    Vitest and Playwright for automated tests, and offline/tablet install
+  support
+  Change or postpone: Python, Supabase and the AI model: after the first
+  version.
+    Your brief asks for a version that works locally without a server. Accounts
+    for children under 13 also bring legal rules about parental consent, so they
+
+    need planning first. An AI model would fit best as a tool that drafts
+    scenarios for you to review, not something talking to children.
+  ────────────────────────────────────────
+  Keep:
+  Change or postpone: Balancing: use a TypeScript script instead of Python and
+    NumPy. It reuses the game's own rules to play every possible path, so the
+    rules don't have to be written twice.
+
+  Questions I need answered first
+
+  1. Where are the scenarios and decisions? Your brief says they exist, but they
+     aren't in the folder. Put them in LunarQuest/scenarios/ in any format
+     (doc, PDF, spreadsheet). I'll copy the text word for word.
+  2. What is Mission 01 called? Your brief says "Lunar Outpost" but the Levels
+     design says "Survive the Lunar Cycle".
+  3. How should radiation be shown? Your brief says radiation builds up and must
+     stay low, but the design shows "Shield Integrity 94%", where high is good.
+     I recommend showing shield integrity, so all three bars mean "full is
+     good", which is easier for young children. The game would still track
+     radiation exposure behind the scenes.
+  4. Which fonts did UX Pilot use? If you don't know, I'll match them as closely
+     as I can.
+  5. How many scenarios happen per day: one every day, or does it vary?
+  6. Can I start with the placeholder numbers in section 3.2 of the plan?
+     They're clearly marked as temporary and get tuned during testing.
+
+  What to send first
+
+  1. 07-gameplay.png: the main game screen
+  2. 07c-inspection-panel.png: the panel that opens when you click equipment
+  3. 07-map__reference-full.png: one image of the whole outpost seen from above
+
+  These three shape the hardest part of the game. Once your scenarios arrive and
+  you approve the plan, I'll start Phase 2: setting up the project and
+  converting your scenarios into game data.
+
+❯ <ide_opened_file>The user opened the file
+  /Users/admin/Desktop/LunarQuest/docs/ASSET_REQUESTS.md in the IDE. This may
+  or may not be related to the current task.</ide_opened_file>
+
+❯ there following is the project we are targetting :
+  we want a minimalist and clean app like in the ui i have provided without
+  overcomplicating anything to make it fit the audience the project is intended
+  for with a clean ui ux.
+  can you create the scenarious for us based on what u understood so far?
+  Build a Junior Astronaut Mission Trainer
+  Join the Challenge
+  DetailsResourcesTeams
+  Event
+  2026 NASA Space Apps Challenge
+  Difficulty
+  Intermediate
+  Beginner/Youth
+  Subjects
+  Games
+  Planets & Moons
+  Software
+  Space Exploration
+  Sun
+  Space-themed STEM content often oversimplifies the engineering trade-offs
+  that define a real mission or presents them at a level too complex to hold a
+  young learner's attention. Few tools make those trade-offs both tangible and
+  fun. Your challenge is to design and build an interactive game or app that
+  lets students run a lunar or Martian outpost, balancing competing demands
+  like life support, radiation shielding, power, and food production, so they
+  experience firsthand the decisions that determine whether a mission fails or
+  succeeds.
+
+
+  Background
+  As NASA works to establish a sustained presence on the Moon and extend human
+  exploration toward Mars, one of the most persistent challenges isn't just
+  engineering hardware — it's building public understanding of what survival
+  actually requires in these environments. Astronauts on a lunar or Martian
+  outpost must balance competing demands: limited power has to be split between
+  life support, communications, and science; radiation exposure has to be
+  weighed against mission objectives; and every decision carries a resource
+  cost that compounds over time. These are the same kinds of trade-offs NASA's
+  own mission planners navigate daily, informed by real data — solar activity
+  and radiation risk from the Space Weather Database (DONKI), astronaut
+  radiation dosimetry and biological research from the Open Science Data
+  Repository (OSDR), and environmental data from Artemis and Mars surface
+  missions.
+
+  The gap is in translation. Space education content for kids often stays too
+  abstract (e.g., posters and general facts) to convey real trade-offs or
+  assumes a technical background too advanced for a young audience to engage
+  with meaningfully. As a result, many students never encounter the actual
+  decision-making logic behind a mission—only its outcomes. Content that leans
+  purely educational often struggles to hold attention; content that leans
+  purely toward entertainment can lose accuracy.
+
+  Participants might prioritize designing mechanics—not just visuals—that
+  mirror real constraints: a choice that saves power today might cost oxygen
+  tomorrow. Grounding gameplay in real NASA open data, rather than invented
+  statistics, is encouraged. Possible approaches include survival-style
+  resource management, narrative decision trees, or dashboard-style mission
+  control simulators—but participants are encouraged to explore whatever format
+  best teaches the underlying trade-off rather than conforming to any single
+  template.
+
+  Objectives
+  Your challenge is to design and build an interactive game or app that lets
+  kids ages 7–12 manage a lunar or Martian outpost, making real decisions about
+  life support, radiation shielding, power budgeting, food production, and
+  communication delay, and experiencing how those choices play out over the
+  course of a simulated mission.
+
+  Think about how your tool can turn genuine mission constraints into gameplay:
+  what does it feel like to trade oxygen reserves for an extra research
+  opportunity, or to reinforce shielding against a radiation event at the cost
+  of tonight's power supply? How will you represent competing resources so that
+  no choice is free, and every decision teaches something true about what
+  astronauts and mission planners actually navigate?
+
+  You're encouraged to ground your simulation in real NASA open data wherever
+  possible — for example, using DONKI to reflect actual solar activity and
+  radiation risk, the OSDR for real astronaut health and biological research
+  findings, or Artemis and Mars surface mission data to inform environmental
+  conditions at your chosen site. Incorporating live or archived NASA datasets,
+  rather than fabricated numbers, will make the experience more authentic and
+  give players a genuine window into how mission-critical decisions are made.
+
+  Format is open: you could build a resource-management survival game, a
+  narrative-driven decision simulator, a mission-control-style dashboard
+  experience, or something else entirely — browser-based, mobile, or desktop.
+  The goal is a working prototype that demonstrates the trade-off mechanic
+  clearly enough that a young player walks away understanding a real constraint
+  of deep space survival, not just having played a fun game. Creative
+  interpretations of "outpost," "site," or "mission" beyond the Moon and Mars
+  are welcome, provided the underlying educational goal — teaching real
+  engineering trade-offs through play — stays central.
+
+  Potential Considerations
+  You may (but are not required to) consider the following:
+
+  Audience and Accessibility
+
+  Your target audience is kids ages 7–12, but consider whether your tool can
+  flex to engage older siblings, parents, or classroom settings too.
+  Favor plain language over jargon; where a scientific term is unavoidable —
+  radiation dose, microgravity, sol — briefly explain it in-context rather than
+  assuming prior knowledge.
+  Low barrier to entry matters — a browser-playable experience with no download
+  or account required will reach more participants during judging and more
+  students afterward.
+  Grounding in Real Data
+
+  Wherever possible, pull from NASA's public APIs and open datasets rather than
+  inventing plausible-sounding numbers—even a small amount of real data—a real
+  radiation reading, a real Mars photo, a real astronaut health finding—makes
+  the experience meaningfully more credible than an entirely simulated one.
+  Clearly attribute your data sources within the tool itself, so players
+  understand they're engaging with real NASA science, not just a themed game.
+  If live API calls aren't feasible during your build window, a curated real
+  dataset embedded directly into your tool is a reasonable and honest
+  alternative—just don't present static data as live.
+  Gameplay and Design Pitfalls to Avoid
+
+  Avoid designing a "safe" choice that has no cost—the educational value comes
+  from every decision involving a genuine trade-off, mirroring real mission
+  planning.
+  Don't let visual polish substitute for mechanical accuracy—a simple game that
+  teaches a real constraint beats a beautiful one that doesn't.
+  Avoid overwhelming young players with too many simultaneous systems to track;
+  two or three core resources—life support, power, shielding—are usually more
+  effective than five or six.
+  What Would Make a Solution Stand Out
+
+  Tools that let players see the real-world consequences of their in-game
+  choice—linking a radiation-shielding decision to actual current space weather
+  data.
+  Replayability—mechanics or events that vary between playthroughs encourage
+  kids to try different strategies and learn from failure without it feeling
+  punitive.
+  Accompanying a working prototype with a short explanation of which NASA
+  datasets were used and why, making the science traceable and verifiable by
+  judges.
+  For data and resources related to this challenge, refer to the Resources tab
+  at the top of the page. More resources may be added before the hackathon
+  begins.
+
+⏺ Write(docs/SCENARIOS_MISSION_01.md)
+  ⎿  Wrote 309 lines to docs/SCENARIOS_MISSION_01.md
+       1 # Mission 01 — Scenario Script (DRAFT v1)
+       2
+       3 Status: **Draft for your review.** Once you approve it, this fil
+         e is copied word for word into `src/data/scenarios/mission-01.js
+         on`.
+       4 Target: NASA Space Apps 2026 — *Build a Junior Astronaut Mission
+          Trainer* (ages 7–12)
+       5
+       6 ---
+       7
+     … +302 lines (ctrl+o to expand)
+
+⏺ Update(docs/PROJECT_PLAN.md)
+  ⎿  Added 3 lines, removed 1 line
+      292  
+      293  ## 7. Open questions: I need these answered before Phase 2
+      294  
+      295 +> **Update:** The project targets NASA Space Apps 2026, *Build
+          + a Junior Astronaut Mission Trainer*. Q1 and Q5 are now answer
+          +ed by the draft in [SCENARIOS_MISSION_01.md](SCENARIOS_MISSION
+          +_01.md): one scenario per day, 14 days, 3 memory flags, 2 rand
+          +om events. Waiting for your review.                           
+      296 +                                                              
+      297  **Blocking**
+      296 -- **Q1: Scenario and decision data.** Your brief says they alr
+          -eady exist, but they aren't in the project. Please add them (a
+          -ny format: doc, PDF, spreadsheet, text) to `LunarQuest/scenari
+          -os/`. I need, per scenario: day, title, description, the 2 dec
+          -isions (title + explanation), and if you have them, each decis
+          -ion's resource and science effects and which scenario comes ne
+          -xt. Missing effects get labelled placeholders that you approve
+          -.                                                             
+      298 +- **Q1 (drafted, awaiting review): Scenario and decision data.
+          +** Your brief says they already exist, but they aren't in the 
+          +project. Please add them (any format: doc, PDF, spreadsheet, t
+          +ext) to `LunarQuest/scenarios/`. I need, per scenario: day, ti
+          +tle, description, the 2 decisions (title + explanation), and i
+          +f you have them, each decision's resource and science effects 
+          +and which scenario comes next. Missing effects get labelled pl
+          +aceholders that you approve.                                  
+      299  - **Q2: Mission 01 name.** "Lunar Outpost" (brief) or "Survive
+            the Lunar Cycle" (Levels design)?
+      300  - **Q3: Radiation display.** Should players see **Radiation ex
+           posure** (rises; abort when too *high*) or **Shield integrity*
+           * (falls; abort when too *low*), as in your design? I recommen
+           d shield integrity in the UI: all three bars then mean "full i
+           s good", which is easier for 7-year-olds. The engine still tra
+           cks exposure internally.
+      301  
+
+  Ran 1 shell command, wrote 1 memory (ctrl+o to expand)
+
+⏺ I've written the Mission 01 scenarios: docs/SCENARIOS_MISSION_01.md. Please
+  read it and mark anything you want changed. Once you approve it, that file
+  becomes the game's scenario data.
+
+  How it's built around the challenge brief
+
+  - There is one situation per day for 14 days. Each has two choices, so a whole
+    game is 14 decisions, which is short enough for a 7-year-old.
+  - Every choice costs something. Each option either uses oxygen, power or
+    radiation safety, or gives up science points. This is the brief's "no safe
+    choice" rule.
+  - Some choices come back later. Leaving dust on the solar panels (Day 2) means
+    slower charging. Planting a garden (Day 3) changes what happens on Day 10.
+    Covering the shelter with Moon soil (Day 4) protects the crew in the Day 6
+    solar storm.
+  - It's a bit different each time. Day 6 uses a real solar flare picked at
+    random from NASA's space weather database (DONKI), and Day 11 picks one of
+    two events.
+  - Players learn a real fact after each choice. A short "Real Space Fact" card
+    follows every decision, citing Apollo, Apollo 13, LCROSS, the Space Station
+    and Artemis.
+  - Food production is covered by the garden story, so there's still only three
+    bars to watch, as the brief advises.
+  - The brief's other topics are covered too: communication delay (Day 12) and
+    the lunar night (Days 8–14).
+
+  Here's what the 14 days look like:
+
+  ☀ Daylight: 1 Wake Up the Outpost · 2 Dusty Panels · 3 Seeds from Earth · 4
+    Build a Shield · 5 Crater Expedition · 6 Solar Storm Warning! · 7 Last Day
+  of
+     Sunlight
+  ☾ Night: 8 Night Falls · 9 Air Filter Alert · 10 Harvest Time! / Running Low
+  on
+    Air · 11 Moonquake! / Tiny Space Rock Hit · 12 Call Home · 13 Ice in the
+    Shadows · 14 Sunrise Is Coming
+
+  To keep things simple, the choice cards show arrows (for example O₂ ▼ ⚡ ▲)
+  instead of numbers. Kids then think about the trade-off instead of doing
+  maths.
+
+  Things to know before you approve
+
+  - All the numbers are placeholders. I worked through two play styles by hand:
+    always picking the science option runs out of power around Day 12, and
+    taking every risk outside fails on radiation. A balanced player should
+    survive with about 3–4 stars, but that's an estimate. A testing script in
+    Phase 8 will check every path properly.
+  - I wrote the space facts from what I know about NASA, and none has been
+    checked against a source yet. The exact figures (−130 °C, 382 kg of Moon
+    rock, 10-minute moonquakes, 1.3-second radio delay, the August 1972 storm)
+    each need checking and a link before launch.
+  - A real lunar day lasts about two Earth weeks, not seven days. The game says
+    so in a fact card, so it isn't misleading.
+
+  Still to decide
+
+  - What is Mission 01 called? Your brief says "Lunar Outpost" but the Levels
+    design says "Survive the Lunar Cycle".
+  - Radiation display: should players see Shield integrity, which goes down and
+    fails when low, or Radiation exposure, which goes up and fails when high? I
+    recommend Shield, so all three bars mean "full is good".
+
+  Once you've reviewed the scenarios, the next steps are Phase 2 (setting up the
+  project) and the screen designs listed in docs/ASSET_REQUESTS.md. I've marked
+  the scenario question as drafted in the plan.
+
+❯ <ide_selection>The user selected the lines 8 to 310 from
+  /Users/admin/Desktop/LunarQuest/docs/SCENARIOS_MISSION_01.md:
+  ## 1. Design rules
+
+  1. **Every choice costs something.** Each option either loses a resource or
+  misses science. The challenge brief specifically warns against "safe"
+  choices.
+  2. **Today's choice can cost tomorrow.** Three choices set a *memory flag*
+  that changes a later day. This is the challenge's "save power today, cost
+  oxygen tomorrow" idea.
+  3. **One situation per day, 14 decisions in total.** This keeps it simple for
+  7-year-olds.
+  4. **Plain language.** Each situation is at most ~40 words and each option at
+  most ~15. Every science word is explained the moment it appears.
+  5. **Every choice ends with a real fact.** After choosing, the player sees a
+  short **"Real Space Fact"** card with a NASA source. This is how the game
+  *teaches*.
+  6. **Replayability.** Day 6 uses a randomly picked **real solar flare from
+  NASA DONKI**, and Day 11 picks 1 of 2 random events. Each playthrough is a
+  little different.
+  7. **No new resources.** "Food production" from the brief is covered by the
+  greenhouse story (plants make oxygen), so there is no 4th bar.
+
+  ### How choices are shown to the player
+  Decision cards show **arrows, not numbers**: `O₂ ▼  ⚡ ▲  ★ ▲`. Kids then
+  reason about trade-offs ("this saves power but costs air") instead of doing
+  maths. The exact numbers below stay in the game's data files.
+
+  ### Key
+  | Symbol | Meaning |
+  |---|---|
+  | **O₂** | Life Support (oxygen) |
+  | **⚡** | Power (battery) |
+  | **☢** | Radiation exposure. It goes *up* when bad. Shown as Shield in the
+  UI if you choose that option (open question Q3) |
+  | **★** | Science points |
+  | 🏳 | Sets a memory flag used on a later day |
+  | 🗺 | Map objects to highlight |
+
+  > ⚠️ **All numbers are placeholder game-balancing values, not scientific
+  measurements.** They get tuned in Phase 8 with the balancing script.
+
+  ---
+
+  ## 2. Daily rules (applied automatically at the end of each day)
+
+  | | Days 1–7 (☀ Lunar day) | Days 8–14 (☾ Lunar night) |
+  |---|---|---|
+  | O₂ (crew breathing) | −4 | −4 |
+  | ⚡ (solar charging minus use) | +4 | −8 (no sunlight) |
+  | ☢ (background space radiation) | +2 | +2 |
+
+  **Start:** O₂ 100 · ⚡ 80 (max 100) · ☢ 0 · ★ 0
+  **Mission aborted if:** O₂ ≤ 15 · ⚡ ≤ 10 · ☢ ≥ 60
+  **Stars:** ★1 = 20 pts · ★2 = 45 · ★3 = 70 · ★4 = 95 · ★5 = 120
+
+  ---
+
+  ## 3. The 14 days
+
+  ### ☀ DAY 1 — Wake Up the Outpost
+  🗺 `solar-array-01`, `solar-array-02`, `battery-storage`, `science-lab`
+
+  **Situation:** Welcome, C
+  ──── (209 lines hidden) ─────────────────────────────────────────────────────
+   one more experiment?
+
+  | | Option A — **One last big experiment** | Option B — **Pack up safely** |
+  |---|---|---|
+  | Explanation | Use the remaining power for one more discovery. | Pack the
+  samples carefully and save power. |
+  | Effect | ★ +12 · ⚡ −8 | ★ +2 · ⚡ −2 |
+
+  **Real Space Fact:** NASA's Artemis program plans to send astronauts to the
+  Moon's south pole and build a base where crews can live and work for longer
+  missions. *(Source: NASA Artemis)*
+
+  ---
+
+  ## 4. Memory flags (how branching works)
+
+  | Flag | Set on | Effect later |
+  |---|---|---|
+  | `dusty-panels` | Day 2, B | Daytime charging +4 → +2 per day (days 3–7) |
+  | `garden-planted` | Day 3, A | Day 10 shows **Harvest Time!** instead of
+  **Running Low on Air** |
+  | `shelter-shielded` | Day 4, A | Day 6 Option B radiation +20 → +10 |
+
+  Random picks (decided when the mission starts and saved, so reloading the
+  page doesn't re-roll them):
+  - Day 6: one real flare from the curated DONKI list
+  - Day 11: 11-A or 11-B
+
+  ---
+
+  ## 5. Quick balance check (placeholder numbers)
+
+  | Play style | Result |
+  |---|---|
+  | **Science-greedy** (always the ★ option) | Power hits the abort level
+  around **Day 12** → *Mission Aborted: Power*. Teaches that you can't do
+  everything. |
+  | **Reckless outdoors** (Day 2A, 4B, 5A, 6B unshielded, 11A, 13A) | ☢ ≈ 63 →
+  *Mission Aborted: Radiation* |
+  | **Balanced** | Survives with ~3–4 ★ |
+  | **Ultra-cautious** (never the ★ option) | Survives with ~1–2 ★. Shows that
+  survival alone doesn't make a great mission |
+
+  The balancing script (Phase 8) will check every possible path and tune these
+  numbers properly.
+
+  ---
+
+  ## 6. Real NASA data used
+
+  | Where | Data | Source | Plan |
+  |---|---|---|---|
+  | Day 6 flare card | Real solar flare dates and classes | **NASA DONKI**
+  (Space Weather Database) | Curated list of ~10 real events embedded in the
+  game, clearly labelled *"archived real data"*, not live |
+  | Day 6 fact | Radiation risk on the Moon | NASA / **OSDR** (astronaut
+  radiation research) | One kid-friendly fact on the Mission Complete screen |
+  | All facts | Moon temperatures, Apollo, LCROSS, ISS electrolysis, comms
+  delay | NASA public pages | A **"Science Sources"** screen listing every
+  source with a link |
+
+  **Every fact above must be checked against its NASA source before launch.** I
+  wrote them from known NASA information, but the exact wording and numbers
+  (−130 °C, 382 kg, 10 minutes, 1.3 s, August 1972) need a verification pass
+  with links.
+
+
+  This may or may not be related to the current task.</ide_selection>
+
+❯ choose the one you think will allign well with out challenge app. the one
+  that will be considered good by the challenge writers. and make fixes as well
+  accordingly.
+
+⏺ I'll settle the two open questions, fix the scenarios so they fit the
+  challenge criteria, and swap the Day 6 flare placeholders for real NASA DONKI
+  records. First, I'll pull real solar flares from DONKI.
+
+  Ran 5 shell commands (ctrl+o to expand)
+
+⏺ The NASA DONKI service is unreachable from here (404 and timeout), so I'll
+  bundle a curated list of well-documented flares and mark each one to confirm
+  against DONKI. Rewriting the scenario file next. · summary
+
+⏺ Write(docs/SCENARIOS_MISSION_01.md)
+  ⎿  Added 169 lines, removed 74 lines
+       1 -# Mission 01 — Scenario Script (DRAFT v1)                      
+       1 +# Mission 01 — Survive the Lunar Cycle · Scenario Script (DRAFT
+         + v2)                                                           
+       2  
+       3 -Status: **Draft for your review.** Once you approve it, this fi
+         -le is copied word for word into `src/data/scenarios/mission-01.
+         -json`.                                                         
+       3 +Status: **Draft v2 for your review.** Once approved, this file 
+         +is copied word for word into `src/data/scenarios/mission-01.jso
+         +n`.                                                            
+       4  Target: NASA Space Apps 2026 — *Build a Junior Astronaut Missio
+          n Trainer* (ages 7–12)
+       5  
+       6  ---
+       7  
+       8 +## 0. Decisions made in v2 (chosen to match the challenge's jud
+         +ging criteria)                                                 
+       9 +                                                               
+      10 +| Question | Decision | Why the challenge writers will like it 
+         +|                                                              
+      11 +|---|---|---|                                                  
+      12 +| **Mission name** | **Mission 01 — Survive the Lunar Cycle**. 
+         +"Lunar Outpost" is the *place* name (shown as `📍 LUNAR OUTPOST
+         +`) | The title names the core trade-off: sunlight power by day,
+         + battery survival by night. It also matches your Levels design,
+         + so that screen needs no change |                              
+      13 +| **Radiation display** | **Radiation Dose**: a meter that *fil
+         +ls up*, never goes down, and aborts the mission when full | **A
+         +ccuracy over polish.** In real life a radiation dose adds up ov
+         +er the whole mission and can't be undone. "Shield integrity" wo
+         +uld teach something false. The lesson becomes: *"Every trip out
+         +side adds radiation, and you can't take it back."* This is the 
+         +real reason NASA limits astronaut time in space |              
+      14 +| **Every choice costs something** | Every decision card now sh
+         +ows **at least one red ▼ cost** or a **⏳ "matters later"** bad
+         +ge | The brief says: *"Avoid designing a 'safe' choice that has
+         + no cost."* v1 had 4 options with no visible cost. All are fixe
+         +d |                                                            
+      15 +| **Failure feels like learning** | New **Mission Debrief** on 
+         +the Aborted screen (§5) | The brief asks players to *"learn fro
+         +m failure without it feeling punitive"* |                      
+      16 +| **Real data** | Day 6 uses a **curated list of 7 real solar f
+         +lares** (§6), labelled *"archived NASA data"* | The brief says 
+         +*"a curated real dataset embedded directly… is a reasonable and
+         + honest alternative — just don't present static data as live"* 
+         +|                                                              
+      17 +                                                               
+      18 +**Changes needed in your designs:**                            
+      19 +- Screen 3, Radiation card: "SHIELD INTEGRITY 94%" becomes **"R
+         +ADIATION DOSE 6%"**, a low bar in violet, with the text *"Prote
+         +ct your crew. Radiation adds up and never goes away."*         
+      20 +- Mission Overview title: **MISSION 01 — SURVIVE THE LUNAR CYCL
+         +E**, with `📍 LUNAR OUTPOST` under it.                         
+      21 +                                                               
+      22 +---                                                            
+      23 +                                                               
+      24  ## 1. Design rules
+      25  
+      10 -1. **Every choice costs something.** Each option either loses a
+         - resource or misses science. The challenge brief specifically w
+         -arns against "safe" choices.                                   
+      11 -2. **Today's choice can cost tomorrow.** Three choices set a *m
+         -emory flag* that changes a later day. This is the challenge's "
+         -save power today, cost oxygen tomorrow" idea.                  
+      12 -3. **One situation per day, 14 decisions in total.** This keeps
+         - it simple for 7-year-olds.                                    
+      13 -4. **Plain language.** Each situation is at most ~40 words and 
+         -each option at most ~15. Every science word is explained the mo
+         -ment it appears.                                               
+      14 -5. **Every choice ends with a real fact.** After choosing, the 
+         -player sees a short **"Real Space Fact"** card with a NASA sour
+         -ce. This is how the game *teaches*.                            
+      15 -6. **Replayability.** Day 6 uses a randomly picked **real solar
+         - flare from NASA DONKI**, and Day 11 picks 1 of 2 random events
+         -. Each playthrough is a little different.                      
+      16 -7. **No new resources.** "Food production" from the brief is co
+         -vered by the greenhouse story (plants make oxygen), so there is
+         - no 4th bar.                                                   
+      26 +1. **No free choice.** Every option shows at least one red ▼ (a
+         + resource goes the wrong way) or a ⏳ badge (*"This choice matt
+         +ers later"*).                                                  
+      27 +2. **Today's choice can cost tomorrow.** Three choices set a *m
+         +emory flag* that changes a later day (§4).                     
+      28 +3. **One situation per day, 14 decisions.** Simple enough for 7
+         +-year-olds.                                                    
+      29 +4. **Plain language.** Situations are at most ~40 words, option
+         +s at most ~15. Each science word is explained the first time it
+         + appears and added to the glossary (§7).                       
+      30 +5. **Every choice teaches.** After each choice, a **Real Space 
+         +Fact** card shows one true fact and its source.                
+      31 +6. **Replayable.** Day 6 picks 1 of 7 real solar flares at rand
+         +om, and Day 11 picks 1 of 2 events.                            
+      32 +7. **Only three bars.** Food production is taught through the s
+         +pace garden story (plants also make oxygen).                   
+      33  
+      18 -### How choices are shown to the player                        
+      19 -Decision cards show **arrows, not numbers**: `O₂ ▼  ⚡ ▲  ★ ▲`.
+         - Kids then reason about trade-offs ("this saves power but costs
+         - air") instead of doing maths. The exact numbers below stay in 
+         -the game's data files.                                         
+      34 +### How decision cards show effects                            
+      35 +Arrows, not numbers. Kids reason about trade-offs instead of do
+         +ing maths.                                                     
+      36  
+      21 -### Key                                                        
+      22 -| Symbol | Meaning |                                           
+      23 -|---|---|                                                      
+      24 -| **O₂** | Life Support (oxygen) |                             
+      25 -| **⚡** | Power (battery) |                                   
+      26 -| **☢** | Radiation exposure. It goes *up* when bad. Shown as S
+         -hield in the UI if you choose that option (open question Q3) | 
+      27 -| **★** | Science points |                                     
+      28 -| 🏳 | Sets a memory flag used on a later day |                 
+      29 -| 🗺 | Map objects to highlight |                               
+      37 +| Shown on card | Meaning | Colour |                           
+      38 +|---|---|---|                                                  
+      39 +| `O₂ ▲` / `⚡ ▲` | Goes up (good) | green |                   
+      40 +| `O₂ ▼` / `⚡ ▼` | Goes down (bad) | red |                    
+      41 +| `☢ ▲` | Radiation dose goes up (bad) | red |                 
+      42 +| `★ ▲` | Science points | gold |                              
+      43 +| `⏳` | "This choice matters later" | blue |                  
+      44  
+      45 +Big changes (≥ 10) show a double arrow `▼▼`.                   
+      46 +                                                               
+      47 +### Symbols used in this document                              
+      48 +**O₂** Life Support · **⚡** Power (battery) · **☢** Radiation 
+         +Dose (only goes up) · **★** Science points · 🏳 sets a memory fl
+         +ag · 🗺 map objects to highlight                                
+      49 +                                                               
+      50  > ⚠️ **All numbers are placeholder game-balancing values, not s
+          cientific measurements.** They get tuned in Phase 8 with the ba
+          lancing script.
+      51  
+      52  ---
+     ...
+      63  **Mission aborted if:** O₂ ≤ 15 · ⚡ ≤ 10 · ☢ ≥ 60
+      64  **Stars:** ★1 = 20 pts · ★2 = 45 · ★3 = 70 · ★4 = 95 · ★5 = 120
+      65  
+      66 +The HUD shows ☢ as a 0–100 % meter, where 100 % is the abort le
+         +vel (☢ 60).                                                    
+      67 +                                                               
+      68  ---
+      69  
+      70  ## 3. The 14 days
+     ...
+      72  ### ☀ DAY 1 — Wake Up the Outpost
+      73  🗺 `solar-array-01`, `solar-array-02`, `battery-storage`, `scien
+          ce-lab`
+      74  
+      54 -**Situation:** Welcome, Commander! Your crew has just landed. T
+         -he Sun is shining on the solar panels and the batteries are hal
+         -f full. What should the outpost do first?                      
+      75 +**Situation:** Welcome, Commander! Your crew has just landed. T
+         +he Sun is shining on the solar panels and the batteries are not
+         + full yet. What should the outpost do first?                   
+      76  
+      56 -| | Option A — **Start the science lab** | Option B — **Charge 
+         -the batteries** |                                              
+      77 +| | Option A — **Start the science lab** | Option B — **Aim the
+         + panels at the Sun** |                                         
+      78  |---|---|---|
+      58 -| Explanation | Turn on the lab right away and start research. 
+         -| Send all the sunlight power into the batteries first. |      
+      59 -| Effect | ⚡ −10 · ★ +10 | ⚡ +10 |                           
+      79 +| Explanation | Turn on the lab right away and start research. 
+         +| Two astronauts go outside and tilt the panels to catch more l
+         +ight. |                                                        
+      80 +| Effect | ★ +10 · ⚡ −10 | ⚡ +12 · O₂ −2 · ☢ +1 |            
+      81 +| Card shows | `★ ▲` `⚡ ▼▼` | `⚡ ▲▲` `O₂ ▼` `☢ ▲` |          
+      82  
+      61 -**Real Space Fact:** Solar panels only make electricity when th
+         -e Sun shines on them. On the real Moon, one day lasts about two
+         - Earth weeks, and so does one night! We made them shorter in th
+         -is game. *(Source: NASA Moon facts)*                           
+      83 +**Real Space Fact:** Solar panels only make electricity when su
+         +nlight hits them, and they work best when they face the Sun. On
+         + the real Moon, one day lasts about two Earth weeks, and so doe
+         +s one night! We made them shorter in this game. *(Source: NASA 
+         +Moon facts)*                                                   
+      84  
+      85  ---
+      86  
+     ...
+       92  | | Option A — **Go outside and clean them** | Option B — **Le
+           ave the dust for now** |
+       93  |---|---|---|
+       94  | Explanation | Two astronauts put on spacesuits and wipe the 
+           panels. | Stay safe inside. The panels will charge more slowly
+           . |
+       73 -| Effect | O₂ −6 · ☢ +3 · ⚡ +6 | 🏳 `dusty-panels`: daily char
+          -ging becomes +2 instead of +4 until night |                   
+       95 +| Effect | ⚡ +6 · O₂ −6 · ☢ +3 | 🏳 `dusty-panels` |          
+       96 +| Card shows | `⚡ ▲` `O₂ ▼` `☢ ▲` | `⏳` *"Panels will charge
+          + slower every day"* |                                         
+       97  
+       75 -**Real Space Fact:** Moon dust is sharp like tiny bits of glas
+          -s and sticks to everything. Apollo astronauts found it on thei
+          -r suits, tools and even inside their spacecraft. *(Source: NAS
+          -A Apollo mission reports)*                                    
+       98 +**Real Space Fact:** Moon dust is sharp like tiny bits of glas
+          +s and sticks to everything. Apollo astronauts found it on thei
+          +r suits, their tools and even inside their spacecraft. *(Sourc
+          +e: NASA Apollo mission reports)*                              
+       99  
+      100  ---
+      101  
+     ...
+      107  | | Option A — **Plant a space garden** | Option B — **Keep th
+           e seeds packed** |
+      108  |---|---|---|
+      109  | Explanation | Set up grow lights and plant the seeds. | Save
+            the power for other systems. |
+       87 -| Effect | ⚡ −8 · ★ +10 · 🏳 `garden-planted` | ⚡ +4 (lights 
+          -stay off) |                                                   
+      110 +| Effect | ★ +10 · ⚡ −8 · 🏳 `garden-planted` | ⚡ +4 |       
+      111 +| Card shows | `★ ▲` `⚡ ▼` `⏳` | `⚡ ▲` `⏳` *"No fresh food
+          + or oxygen later"* |                                          
+      112  
+       89 -**Real Space Fact:** In 2022, NASA-funded scientists grew smal
+          -l plants in real Moon soil brought back by Apollo astronauts. 
+          -On the Space Station, astronauts have grown and eaten their ow
+          -n lettuce! *(Source: NASA, Univ. of Florida study 2022; NASA V
+          -eggie experiment)*                                            
+      113 +**Real Space Fact:** In 2022, NASA-funded scientists grew smal
+          +l plants in real Moon soil that Apollo astronauts brought back
+          +. On the Space Station, astronauts have grown and eaten their 
+          +own lettuce! *(Source: NASA; Univ. of Florida study, 2022; NAS
+          +A Veggie experiment)*                                         
+      114  
+      115  ---
+      116  
+     ...
+      123  |---|---|---|
+      124  | Explanation | Use the rover to cover the shelter with thick 
+           Moon soil. | Use today to gather interesting rocks. |
+      125  | Effect | ⚡ −8 · O₂ −4 · ☢ +2 · 🏳 `shelter-shielded` | ★ +15
+            · O₂ −5 · ☢ +3 |
+      126 +| Card shows | `⚡ ▼` `O₂ ▼` `☢ ▲` `⏳` | `★ ▲▲` `O₂ ▼` `☢ ▲` 
+          +|                                                             
+      127  
+      103 -**Real Space Fact:** Earth's air and magnetic field block most
+          - space radiation. The Moon has neither. NASA is studying how a
+          - thick layer of Moon soil (called **regolith**) on top of a ba
+          -se could block radiation. *(Source: NASA)*                    
+      128 +**Real Space Fact:** On Earth, our air and magnetic field bloc
+          +k most space radiation. The Moon has neither. Radiation adds u
+          +p in your body over time, so NASA plans how long astronauts ca
+          +n spend outside. A thick layer of Moon soil (called **regolith
+          +**) on top of a base can help block it. *(Source: NASA)*      
+      129  
+      130  ---
+      131  
+     ...
+      138  |---|---|---|
+      139  | Explanation | A long rover trip to find the best rocks. | A 
+           short walk to collect rocks close by. |
+      140  | Effect | ★ +20 · ⚡ −10 · O₂ −6 · ☢ +4 | ★ +8 · O₂ −2 · ☢ +1
+            |
+      141 +| Card shows | `★ ▲▲` `⚡ ▼▼` `O₂ ▼` `☢ ▲` | `★ ▲` `O₂ ▼` `☢ ▲
+          +` |                                                           
+      142  
+      117 -**Real Space Fact:** Apollo astronauts brought 382 kg (842 lb)
+          - of Moon rocks back to Earth. That's about as heavy as a grand
+          - piano! Scientists are still studying them today. *(Source: NA
+          -SA Astromaterials)*                                           
+      143 +**Real Space Fact:** Apollo astronauts brought 382 kg (842 lb)
+          + of Moon rocks and soil back to Earth. That's about as heavy a
+          +s a grand piano! Scientists are still studying them today. *(S
+          +ource: NASA Astromaterials)*                                  
+      144  
+      145  ---
+      146  
+      121 -### ☀ DAY 6 — Solar Storm Warning! 🎲                         
+      147 +### ☀ DAY 6 — Solar Storm Warning! 🎲 Real NASA data          
+      148  🗺 `radiation-shelter`, `comms-antenna`
+      149  
+      124 -**Situation:** ⚠ Space weather alert! A big explosion on the S
+          -un called a **solar flare** has just happened. Fast radiation 
+          -particles might reach the Moon soon.                          
+      125 -**[Real event card]:** *Based on a real flare: {date}, class {
+          -class}. Data: NASA DONKI.* (picked at random from a curated li
+          -st of real DONKI events, so each playthrough can differ)      
+      150 +**Situation:** ⚠ Space weather alert! A big explosion on the S
+          +un, called a **solar flare**, has just happened. Fast radiatio
+          +n particles might reach the Moon soon.                        
+      151  
+      152 +**Real event card** (one random flare from §6):               
+      153 +> *This storm is based on a real solar flare: **{date}**, stre
+          +ngth **{class}**.*                                            
+      154 +> *X-class flares are the strongest kind. Archived data from N
+          +ASA DONKI.*                                                   
+      155 +                                                              
+      156  | | Option A — **Everyone to the shelter** | Option B — **Fini
+           sh the experiment outside** |
+      157  |---|---|---|
+      158  | Explanation | Stay safe inside the shelter until the storm p
+           asses. | Keep working. The experiment is almost done. |
+      130 -| Effect | ⚡ −4 · ☢ +1 | ★ +10 · ☢ +20 (+10 if 🏳 `shelter-shi
+          -elded`) |                                                     
+      159 +| Effect | ⚡ −4 · ☢ +1 | ★ +10 · ☢ +20 (only +10 if 🏳 `shelte
+          +r-shielded`) |                                                
+      160 +| Card shows | `⚡ ▼` `☢ ▲` | `★ ▲` `☢ ▲▲` |                  
+      161  
+      132 -**Real Space Fact:** In August 1972, a huge solar storm happen
+          -ed between the Apollo 16 and Apollo 17 missions. Luckily, no a
+          -stronauts were on the Moon. Today NASA watches the Sun all the
+          - time to warn astronauts. *(Source: NASA; DONKI)*             
+      162 +If 🏳 `shelter-shielded` is set, the result shows: *"Your soil 
+          +shield from Day 4 cut the radiation in half!"* This makes the 
+          +delayed consequence visible.                                  
+      163  
+      164 +**Real Space Fact:** In August 1972, a huge solar storm happen
+          +ed between the Apollo 16 and Apollo 17 missions. Luckily, no a
+          +stronauts were on the Moon. Today NASA watches the Sun all the
+          + time so it can warn astronauts. *(Source: NASA; DONKI)*      
+      165 +                                                              
+      166  ---
+      167  
+      168  ### ☀ DAY 7 — Last Day of Sunlight
+     ...
+      172  
+      173  | | Option A — **Fill the batteries** | Option B — **Finish ex
+           periments before dark** |
+      174  |---|---|---|
+      143 -| Explanation | Switch off the lab and store every bit of sunl
+          -ight. | Use the last sunlight to complete your research. |    
+      144 -| Effect | ⚡ +12 | ★ +12 · ⚡ −6 |                           
+      175 +| Explanation | Go outside to tilt the panels toward the low S
+          +un, and switch off the lab. | Use the last sunlight to complet
+          +e your research. |                                            
+      176 +| Effect | ⚡ +12 · O₂ −2 · ☢ +1 | ★ +12 · ⚡ −6 |            
+      177 +| Card shows | `⚡ ▲▲` `O₂ ▼` `☢ ▲` | `★ ▲▲` `⚡ ▼` |         
+      178  
+      146 -**Real Space Fact:** A Moon night can get colder than −130 °C 
+          -(−200 °F) near the equator. That's much colder than anywhere o
+          -n Earth! Machines need heaters to survive. *(Source: NASA Moon
+          - facts)*                                                      
+      179 +**Real Space Fact:** A Moon night can get colder than −130 °C 
+          +(−208 °F). That's colder than anywhere ever measured on Earth!
+          + Machines need heaters to survive. *(Source: NASA Moon facts)*
+      180  
+      181  ---
+      182  
+     ...
+      188  | | Option A — **Heat the whole outpost** | Option B — **Heat 
+           only the habitat** |
+      189  |---|---|---|
+      190  | Explanation | Keep the lab warm so night research can contin
+           ue. | Close the lab and keep the crew warm. |
+      158 -| Effect | ⚡ −10 · ★ +6 | ⚡ −4 |                            
+      191 +| Effect | ★ +6 · ⚡ −10 | ⚡ −4 |                            
+      192 +| Card shows | `★ ▲` `⚡ ▼▼` | `⚡ ▼` |                       
+      193  
+      194  **Real Space Fact:** Surviving the long lunar night is one of 
+           the hardest problems for a Moon base. NASA is developing small
+            nuclear power systems that can make electricity day and night
+           . *(Source: NASA Fission Surface Power project)*
+      195  
+     ...
+      203  | | Option A — **Install a new filter** | Option B — **Rest an
+           d breathe slowly** |
+      204  |---|---|---|
+      205  | Explanation | Put in a fresh filter. The fan needs extra pow
+           er. | The crew rests today so they make less CO₂. |
+      172 -| Effect | O₂ +6 · ⚡ −4 | O₂ −4 · ⚡ +3 |                    
+      206 +| Effect | O₂ +6 · ⚡ −4 | ⚡ +3 · O₂ −4 |                    
+      207 +| Card shows | `O₂ ▲` `⚡ ▼` | `⚡ ▲` `O₂ ▼` |                
+      208  
+      209  **Real Space Fact:** On Apollo 13, the air filters stopped wor
+           king. Engineers on Earth invented a fix using tape, plastic ba
+           gs and cardboard, and the astronauts built it in space! *(Sour
+           ce: NASA Apollo 13)*
+      210  
+     ...
+      219  
+      220  | | Option A — **Let them keep growing** | Option B — **Harves
+           t them for science** |
+      221  |---|---|---|
+      187 -| Explanation | Plants keep making fresh oxygen, but grow ligh
+          -ts use power. | Study how plants grow on the Moon. |          
+      188 -| Effect | O₂ +8 · ⚡ −4 | ★ +15 |                            
+      222 +| Explanation | Plants keep making fresh oxygen, but grow ligh
+          +ts use power. | Freeze the plants in the lab to study how they
+          + grew on the Moon. |                                          
+      223 +| Effect | O₂ +8 · ⚡ −4 | ★ +12 · ⚡ −2 |                    
+      224 +| Card shows | `O₂ ▲` `⚡ ▼` | `★ ▲▲` `⚡ ▼` |                
+      225  
+      226 +**Real Space Fact:** Plants take in the carbon dioxide we brea
+          +the out and give back oxygen. Future Moon and Mars bases will 
+          +need gardens for both food and air. *(Source: NASA plant resea
+          +rch)*                                                         
+      227 +                                                              
+      228  #### 10-B — Running Low on Air *(if no garden)*
+      229  🗺 `life-support`
+      230  
+      231  **Situation:** The oxygen tanks are emptying faster than plann
+           ed. Without plants, the crew has to make oxygen another way.
+      232  
+      195 -| | Option A — **Split water to make oxygen** | Option B — **C
+          -ut back on work** |                                           
+      233 +| | Option A — **Split water to make oxygen** | Option B — **R
+          +est in the warm habitat** |                                   
+      234  |---|---|---|
+      197 -| Explanation | A machine uses electricity to turn water into 
+          -oxygen. | Less work means the crew breathes less oxygen. |    
+      198 -| Effect | O₂ +10 · ⚡ −10 | O₂ +4 (no science today) |       
+      235 +| Explanation | A machine uses electricity to turn water into 
+          +oxygen. | Less work means less oxygen used, but the heaters ru
+          +n longer. |                                                   
+      236 +| Effect | O₂ +10 · ⚡ −10 | O₂ +5 · ⚡ −3 |                  
+      237 +| Card shows | `O₂ ▲▲` `⚡ ▼▼` | `O₂ ▲` `⚡ ▼` |              
+      238  
+      239  **Real Space Fact:** The International Space Station makes oxy
+           gen by using electricity to split water (H₂O) into hydrogen an
+           d oxygen. This is called **electrolysis**. *(Source: NASA ISS 
+           life support)*
+      240  
+     ...
+      245  #### 11-A — Moonquake!
+      246  🗺 `habitat`, `science-lab`
+      247  
+      209 -**Situation:** The ground is shaking! Your seismometer (a mach
+          -ine that feels vibrations) detected a **moonquake**.          
+      248 +**Situation:** The ground is shaking! Your **seismometer** (a 
+          +machine that feels vibrations) detected a **moonquake**.      
+      249  
+      250  | | Option A — **Check every module outside** | Option B — **S
+           tay inside and record data** |
+      251  |---|---|---|
+      252  | Explanation | Walk around the outpost to look for damage and
+            measure the shaking. | Let the instruments collect the data s
+           afely. |
+      253  | Effect | ★ +10 · O₂ −5 · ☢ +2 | ★ +4 · ⚡ −2 |
+      254 +| Card shows | `★ ▲▲` `O₂ ▼` `☢ ▲` | `★ ▲` `⚡ ▼` |           
+      255  
+      216 -**Real Space Fact:** Apollo astronauts left seismometers on th
+          -e Moon. They recorded moonquakes, and some lasted up to 10 min
+          -utes! *(Source: NASA)*                                        
+      256 +**Real Space Fact:** Apollo astronauts left seismometers on th
+          +e Moon. They recorded moonquakes, and some shook for up to 10 
+          +minutes! *(Source: NASA)*                                     
+      257  
+      258  #### 11-B — Tiny Space Rock Hit
+      259  🗺 `power-distribution` + cable from `battery-storage`
+     ...
+      263  | | Option A — **Repair it outside** | Option B — **Use the ba
+           ckup cable** |
+      264  |---|---|---|
+      265  | Explanation | An astronaut goes out in the cold and dark to 
+           fix it. | Send power through a longer backup cable, but some p
+           ower is lost. |
+      226 -| Effect | O₂ −5 · ☢ +3 · ⚡ +4 | ⚡ −6 |                     
+      266 +| Effect | ⚡ +4 · O₂ −5 · ☢ +3 | ⚡ −6 |                     
+      267 +| Card shows | `⚡ ▲` `O₂ ▼` `☢ ▲` | `⚡ ▼` |                 
+      268  
+      269  **Real Space Fact:** Without air to burn them up, tiny space r
+           ocks called **micrometeorites** hit the Moon's surface all the
+            time. *(Source: NASA)*
+      270  
+     ...
+      279  |---|---|---|
+      280  | Explanation | Scientists on Earth get all your discoveries. 
+           | Send only the most important results and save power. |
+      281  | Effect | ★ +10 · ⚡ −8 | ★ +3 · ⚡ −2 |
+      282 +| Card shows | `★ ▲▲` `⚡ ▼` | `★ ▲` `⚡ ▼` |                 
+      283  
+      242 -**Real Space Fact:** A radio message takes about 1.3 seconds t
+          -o travel from the Moon to Earth. From Mars it can take up to 2
+          -4 minutes, so Mars astronauts can't have a normal phone call w
+          -ith Earth! *(Source: NASA)*                                   
+      284 +**Real Space Fact:** A radio message takes about 1.3 seconds t
+          +o travel from the Moon to Earth. From Mars it takes about 5 to
+          + 20 minutes, so astronauts on Mars can't have a normal phone c
+          +all with Earth! *(Source: NASA)*                              
+      285  
+      286  ---
+      287  
+      288  ### ☾ DAY 13 — Ice in the Shadows
+      289  🗺 `rover`, `sample-area`
+      290  
+      249 -**Situation:** Data from a spacecraft orbiting the Moon shows 
+          -there may be frozen water in a dark crater nearby. Water could
+          - be used for drinking, oxygen and even rocket fuel!           
+      291 +**Situation:** A spacecraft circling the Moon found signs of f
+          +rozen water in a dark crater nearby. Water can be used for dri
+          +nking, making oxygen and even rocket fuel!                    
+      292  
+      293  | | Option A — **Drive to the crater and drill** | Option B — 
+           **Study the maps from inside** |
+      294  |---|---|---|
+      253 -| Explanation | A cold night trip with the rover to look for i
+          -ce. | Learn about the crater from orbit data, safe and warm. |
+      295 +| Explanation | A cold night trip with the rover to look for i
+          +ce. | Learn about the crater from spacecraft data, safe and wa
+          +rm. |                                                         
+      296  | Effect | ★ +20 · ⚡ −10 · O₂ −5 · ☢ +3 | ★ +6 · ⚡ −3 |
+      297 +| Card shows | `★ ▲▲` `⚡ ▼▼` `O₂ ▼` `☢ ▲` | `★ ▲` `⚡ ▼` |   
+      298  
+      299  **Real Space Fact:** In 2009, NASA's LCROSS mission crashed a 
+           rocket into a dark crater near the Moon's south pole and found
+            water ice in the cloud it kicked up! *(Source: NASA LCROSS)*
+      300  
+     ...
+      309  |---|---|---|
+      310  | Explanation | Use the remaining power for one more discovery
+           . | Pack the samples carefully and save power. |
+      311  | Effect | ★ +12 · ⚡ −8 | ★ +2 · ⚡ −2 |
+      312 +| Card shows | `★ ▲▲` `⚡ ▼` | `★ ▲` `⚡ ▼` |                 
+      313  
+      270 -**Real Space Fact:** NASA's Artemis program plans to send astr
+          -onauts to the Moon's south pole and build a base where crews c
+          -an live and work for longer missions. *(Source: NASA Artemis)*
+      314 +**Real Space Fact:** NASA's Artemis program plans to send astr
+          +onauts to the Moon's south pole, where they will live and work
+          + for longer missions. *(Source: NASA Artemis)*                
+      315  
+      316  ---
+      317  
+      318  ## 4. Memory flags (how branching works)
+      319  
+      276 -| Flag | Set on | Effect later |                              
+      277 -|---|---|---|                                                 
+      278 -| `dusty-panels` | Day 2, B | Daytime charging +4 → +2 per day
+          - (days 3–7) |                                                 
+      279 -| `garden-planted` | Day 3, A | Day 10 shows **Harvest Time!**
+          - instead of **Running Low on Air** |                          
+      280 -| `shelter-shielded` | Day 4, A | Day 6 Option B radiation +20
+          - → +10 |                                                      
+      320 +| Flag | Set on | Effect later | How the player sees it |     
+      321 +|---|---|---|---|                                             
+      322 +| `dusty-panels` | Day 2, B | Daytime charging +4 → +2 per day
+          + (days 3–7) | End-of-day note: *"Dusty panels made less power 
+          +today."* |                                                    
+      323 +| `garden-planted` | Day 3, A | Day 10 shows **Harvest Time!**
+          + instead of **Running Low on Air** | The scenario itself chang
+          +es |                                                          
+      324 +| `shelter-shielded` | Day 4, A | Day 6 Option B radiation +20
+          + → +10 | Result note: *"Your soil shield cut the radiation in 
+          +half!"* |                                                     
+      325  
+      282 -Random picks (decided when the mission starts and saved, so re
+          -loading the page doesn't re-roll them):                       
+      283 -- Day 6: one real flare from the curated DONKI list           
+      326 +Random picks are made when the mission starts and saved, so re
+          +loading the page doesn't re-roll them:                        
+      327 +- Day 6: one flare from §6                                    
+      328  - Day 11: 11-A or 11-B
+      329  
+      330  ---
+      331  
+      288 -## 5. Quick balance check (placeholder numbers)               
+      332 +## 5. Learning from failure: Mission Debrief                  
+      333  
+      290 -| Play style | Result |                                       
+      291 -|---|---|                                                     
+      292 -| **Science-greedy** (always the ★ option) | Power hits the ab
+          -ort level around **Day 12** → *Mission Aborted: Power*. Teache
+          -s that you can't do everything. |                             
+      293 -| **Reckless outdoors** (Day 2A, 4B, 5A, 6B unshielded, 11A, 1
+          -3A) | ☢ ≈ 63 → *Mission Aborted: Radiation* |                 
+      294 -| **Balanced** | Survives with ~3–4 ★ |                       
+      295 -| **Ultra-cautious** (never the ★ option) | Survives with ~1–2
+          - ★. Shows that survival alone doesn't make a great mission |  
+      334 +When a mission is aborted, the Aborted screen shows a short, f
+          +riendly debrief instead of just "You lost":                   
+      335  
+      297 -The balancing script (Phase 8) will check every possible path 
+          -and tune these numbers properly.                              
+      336 +> **Mission Aborted: Power ran out on Day 12**                
+      337 +> The crew got home safely, but the outpost had to shut down. 
+      338 +>                                                             
+      339 +> **What used the most power:**                               
+      340 +> ⚡ Day 5: Drove to the crater (▼▼)                          
+      341 +> ⚡ Day 8: Heated the whole outpost (▼▼)                     
+      342 +>                                                             
+      343 +> 💡 **Tip:** At night there's no sunlight to recharge. Try sa
+          +ving power before Day 8!                                      
+      344 +> **[ TRY AGAIN ]**                                           
+      345  
+      346 +- The 2 decisions that cost the failing resource the most are 
+          +pulled from the mission history.                              
+      347 +- There is one tip per resource (O₂ / ⚡ / ☢), stored in the m
+          +ission data file.                                             
+      348 +- "The crew got home safely" makes "abort" mean *coming home e
+          +arly*, not anything scary. That suits ages 7–12.              
+      349 +                                                              
+      350  ---
+      351  
+      301 -## 6. Real NASA data used                                     
+      352 +## 6. Real NASA data: curated solar flares for Day 6          
+      353  
+      303 -| Where | Data | Source | Plan |                              
+      354 +| # | Date (UTC) | Class | Note for kids |                    
+      355  |---|---|---|---|
+      305 -| Day 6 flare card | Real solar flare dates and classes | **NA
+          -SA DONKI** (Space Weather Database) | Curated list of ~10 real
+          - events embedded in the game, clearly labelled *"archived real
+          - data"*, not live |                                           
+      306 -| Day 6 fact | Radiation risk on the Moon | NASA / **OSDR** (a
+          -stronaut radiation research) | One kid-friendly fact on the Mi
+          -ssion Complete screen |                                       
+      307 -| All facts | Moon temperatures, Apollo, LCROSS, ISS electroly
+          -sis, comms delay | NASA public pages | A **"Science Sources"**
+          - screen listing every source with a link |                    
+      356 +| 1 | 6 Sep 2017 | **X9.3** | One of the biggest flares in ove
+          +r 10 years |                                                  
+      357 +| 2 | 10 Sep 2017 | **X8.2** | Sent fast particles all the way
+          + to Earth |                                                   
+      358 +| 3 | 3 Oct 2024 | **X9.0** | One of the strongest flares of t
+          +he current solar cycle |                                      
+      359 +| 4 | 14 May 2024 | **X8.7** | Came days after the big May 202
+          +4 storm that made auroras visible in many places |            
+      360 +| 5 | 9 Aug 2011 | **X6.9** | |                               
+      361 +| 6 | 7 Mar 2012 | **X5.4** | |                               
+      362 +| 7 | 24 Oct 2014 | **X3.1** | From a giant sunspot bigger tha
+          +n Jupiter |                                                   
+      363  
+      309 -**Every fact above must be checked against its NASA source bef
+          -ore launch.** I wrote them from known NASA information, but th
+          -e exact wording and numbers (−130 °C, 382 kg, 10 minutes, 1.3 
+          -s, August 1972) need a verification pass with links.          
+      364 +⚠️ **These come from well-documented events, but I couldn't co
+          +nfirm them against DONKI today.** NASA's `api.nasa.gov/DONKI` 
+          +endpoint returned *404*, and the direct server `kauai.ccmc.gsf
+          +c.nasa.gov` timed out. Before launch, each row will be checked
+          + in DONKI and stored with its `flrID` as proof. The finished g
+          +ame stores this list inside the app, so it doesn't depend on t
+          +he API being up, and labels it *"archived data"*, never *"live
+          +"*.                                                           
+      365 +                                                              
+      366 +### Other real data                                           
+      367 +| Where | What | Source |                                     
+      368 +|---|---|---|                                                 
+      369 +| Mission Complete screen | One astronaut-health fact, e.g. *"
+          +NASA studies how space radiation affects astronauts' bodies, l
+          +ike in the NASA Twins Study."* | NASA / **OSDR** |            
+      370 +| Every fact card | Moon temperatures, Apollo, LCROSS, ISS ele
+          +ctrolysis, comms delay | NASA public pages |                  
+      371 +| **Science Sources** screen | Every fact and dataset, with a 
+          +link | (from Pause menu and Mission Complete) |               
+      372 +                                                              
+      373 +**Stretch goal (post-MVP):** on the Mission Complete screen, *
+          +"Right now on the real Sun…"* would show the latest flare from
+          + DONKI, clearly labelled **live**, with the archived list as a
+          + fallback. That links the in-game shielding decision to real c
+          +urrent space weather, which the brief names as a stand-out fea
+          +ture. It needs a tiny server-side proxy (one Vercel function) 
+          +to hide the API key and cache results.                        
+      374 +                                                              
+      375 +### Facts still to verify with a link before launch           
+      376 +The −130 °C (−208 °F) night temperature, 382 kg of samples, 10
+          +-minute moonquakes, 1.3 s and 5–20 min radio delays, the Augus
+          +t 1972 storm, LCROSS 2009, the 2022 lunar-soil plants and the 
+          +2015 ISS lettuce. I'm confident in all of them, but judges wil
+          +l check sources, so each needs a NASA URL.                    
+      377 +                                                              
+      378 +---                                                           
+      379 +                                                              
+      380 +## 7. Glossary (shown in-game when a word first appears)      
+      381 +                                                              
+      382 +| Word | Kid-friendly meaning |                               
+      383 +|---|---|                                                     
+      384 +| Regolith | Moon soil: loose dust and broken rock covering th
+          +e Moon |                                                      
+      385 +| Solar flare | A giant flash of energy from the Sun |        
+      386 +| Radiation dose | How much space radiation your body has soak
+          +ed up. It adds up and doesn't go away |                       
+      387 +| Carbon dioxide (CO₂) | The gas we breathe out |             
+      388 +| Electrolysis | Using electricity to split water into hydroge
+          +n and oxygen |                                                
+      389 +| Seismometer | A machine that feels and measures shaking |   
+      390 +| Micrometeorite | A space rock smaller than a grain of sand o
+          +r a pea |                                                     
+      391 +| Lunar night | The time when the Sun isn't shining on your pa
+          +rt of the Moon |                                              
+      392 +                                                              
+      393 +---                                                           
+      394 +                                                              
+      395 +## 8. Quick balance check (placeholder numbers)               
+      396 +                                                              
+      397 +| Play style | Result |                                       
+      398 +|---|---|                                                     
+      399 +| **Science-greedy** (always the ★ option) | Power hits the ab
+          +ort level around **Day 12**. Teaches that you can't do everyth
+          +ing |                                                         
+      400 +| **Reckless outdoors** (Day 2A, 4B, 5A, 6B unshielded, 11A, 1
+          +3A) | ☢ ≈ 63 → *Aborted: Radiation* |                         
+      401 +| **Balanced** | Survives with ~3–4 ★ |                       
+      402 +| **Ultra-cautious** (never the ★ option) | Survives with ~1–2
+          + ★. Surviving isn't the same as a great mission |             
+      403 +                                                              
+      404 +These are hand estimates. The balancing script (Phase 8) will 
+          +check every path and tune the numbers.                        
+
+⏺ Now I'll update the plan and asset list to match.
+
+⏺ Update(docs/PROJECT_PLAN.md)
+  ⎿  Added 2 lines, removed 2 lines
+      296  
+      297  **Blocking**
+      298  - **Q1 (drafted, awaiting review): Scenario and decision data.
+           ** Your brief says they already exist, but they aren't in the 
+           project. Please add them (any format: doc, PDF, spreadsheet, t
+           ext) to `LunarQuest/scenarios/`. I need, per scenario: day, ti
+           tle, description, the 2 decisions (title + explanation), and i
+           f you have them, each decision's resource and science effects 
+           and which scenario comes next. Missing effects get labelled pl
+           aceholders that you approve.
+      299 -- **Q2: Mission 01 name.** "Lunar Outpost" (brief) or "Survive
+          - the Lunar Cycle" (Levels design)?                            
+      300 -- **Q3: Radiation display.** Should players see **Radiation ex
+          -posure** (rises; abort when too *high*) or **Shield integrity*
+          -* (falls; abort when too *low*), as in your design? I recommen
+          -d shield integrity in the UI: all three bars then mean "full i
+          -s good", which is easier for 7-year-olds. The engine still tra
+          -cks exposure internally.                                      
+      299 +- **Q2 ✅ decided:** "Mission 01 — Survive the Lunar Cycle". "
+          +Lunar Outpost" is the place name.                             
+      300 +- **Q3 ✅ decided:** **Radiation Dose**, a meter that fills up
+          + and never goes down. It's scientifically accurate (dose is cu
+          +mulative), which the challenge prioritises. Screen 3's "SHIELD
+          + INTEGRITY 94%" becomes "RADIATION DOSE 6%". Details in [SCENA
+          +RIOS_MISSION_01.md §0](SCENARIOS_MISSION_01.md).              
+      301  
+      302  **Important but not blocking**
+      303  - **Q4: Fonts.** Which fonts did UX Pilot use (check the desig
+           n's text settings)? If unknown, I'll match them as closely as 
+           possible from open fonts.
+
+⏺ Update(docs/ASSET_REQUESTS.md)
+  ⎿  Added 2 lines, removed 1 line
+      22  | ☐ | `07c-inspection-panel.png` | Small floating panel that op
+          ens when equipment is clicked. Example: **BATTERY STORAGE**, St
+          atus: Normal (green dot), Charge: 78% with a bar, "Connected to
+          :" list (Solar Array 01, Habitat, Life Support), close ✕. Show 
+          it on top of the map with the battery highlighted and its cable
+          s glowing |
+      23  | ☐ | `07d-pause-menu.png` | Pause overlay: RESUME, HOW TO PLAY
+          , RESTART MISSION, MISSION LEVELS |
+      24  | ☐ | `07e-day-transition.png` | Short banner between days, e.g
+          . "DAY 8 — LUNAR NIGHT BEGINS" (and a daylight version if it di
+          ffers) |
+      25 -| ☐ | `06-mission-overview.png` | "MISSION 01 — LUNAR OUTPOST",
+         - "14 Earth Days \| 7 Days of Daylight \| 7 Days of Night", the 
+         -description paragraph from the brief, two objective cards (**SU
+         -RVIVE** and **EXPLORE**), BEGIN MISSION button |               
+      25 +| ☐ | `03-learn-to-survive.png` | *(Small update to your existi
+         +ng design)* Radiation card: "SHIELD INTEGRITY 94%" becomes **"R
+         +ADIATION DOSE 6%"** (a low violet bar) with the text "Protect y
+         +our crew. Radiation adds up and never goes away." |            
+      26 +| ☐ | `06-mission-overview.png` | "MISSION 01 — SURVIVE THE LUN
+         +AR CYCLE" with "📍 LUNAR OUTPOST" under it, "14 Earth Days \| 7
+         + Days of Daylight \| 7 Days of Night", the description paragrap
+         +h from the brief, two objective cards (**SURVIVE** and **EXPLOR
+         +E**), BEGIN MISSION button |                                   
+      27  | ☐ | `04-how-to-play.png` | 4 steps: 1 Observe situations, 2 I
+          nspect the outpost, 3 Make decisions, 4 Discover & complete res
+          earch. Each with an icon or illustration. NEXT button |
+      28  | ☐ | `08-mission-aborted.png` | Failure screen: "MISSION ABORT
+          ED", which resource failed (e.g. "Oxygen reached a critical lev
+          el"), stats (day reached, final resource levels, decisions made
+          , stars), RETRY and MISSION LEVELS buttons. Friendly and encour
+          aging, not scary |
+      29  | ☐ | `09-mission-complete.png` | Success screen: "MISSION COMP
+          LETE", 1–5 stars earned (show e.g. 3 of 5 filled), final resour
+          ce levels, decisions made, NEXT MISSION and MISSION LEVELS butt
+          ons |
+
+⏺ Update(docs/ASSET_REQUESTS.md)
+  ⎿  Added 4 lines, removed 1 line
+      25  | ☐ | `03-learn-to-survive.png` | *(Small update to your existi
+          ng design)* Radiation card: "SHIELD INTEGRITY 94%" becomes **"R
+          ADIATION DOSE 6%"** (a low violet bar) with the text "Protect y
+          our crew. Radiation adds up and never goes away." |
+      26  | ☐ | `06-mission-overview.png` | "MISSION 01 — SURVIVE THE LUN
+          AR CYCLE" with "📍 LUNAR OUTPOST" under it, "14 Earth Days \| 7
+           Days of Daylight \| 7 Days of Night", the description paragrap
+          h from the brief, two objective cards (**SURVIVE** and **EXPLOR
+          E**), BEGIN MISSION button |
+      27  | ☐ | `04-how-to-play.png` | 4 steps: 1 Observe situations, 2 I
+          nspect the outpost, 3 Make decisions, 4 Discover & complete res
+          earch. Each with an icon or illustration. NEXT button |
+      28 -| ☐ | `08-mission-aborted.png` | Failure screen: "MISSION ABORT
+         -ED", which resource failed (e.g. "Oxygen reached a critical lev
+         -el"), stats (day reached, final resource levels, decisions made
+         -, stars), RETRY and MISSION LEVELS buttons. Friendly and encour
+         -aging, not scary |                                             
+      28 +| ☐ | `08-mission-aborted.png` | Failure screen: "MISSION ABORT
+         +ED", "Power ran out on Day 12", "The crew got home safely", a *
+         +*"What used the most power"** list with 2 past decisions, a 💡 
+         +tip box, stats (day reached, final resource levels, stars), TRY
+         + AGAIN and MISSION LEVELS buttons. Friendly and encouraging, no
+         +t scary (see SCENARIOS §5) |                                   
+      29 +| ☐ | `07f-fact-card.png` | Pop-up after each decision: a short
+         + "REAL SPACE FACT" card with an icon, 1–2 sentences, a small so
+         +urce line ("Source: NASA"), and a CONTINUE button |            
+      30 +| ☐ | `07g-solar-flare-alert.png` | Day 6 alert card: "⚠ SPACE 
+         +WEATHER ALERT", a real flare date + class (e.g. "6 Sep 2017 · X
+         +9.3"), and an "Archived NASA DONKI data" badge |               
+      31 +| ☐ | `10-science-sources.png` | Simple list screen: every fact
+         +/dataset with its NASA source name and link. Opened from Pause 
+         +and Mission Complete |                                         
+      32  | ☐ | `09-mission-complete.png` | Success screen: "MISSION COMP
+          LETE", 1–5 stars earned (show e.g. 3 of 5 filled), final resour
+          ce levels, decisions made, NEXT MISSION and MISSION LEVELS butt
+          ons |
+      33  | ☐ | `05-mission-levels-progress.png` | The existing Levels sc
+          reen in a later state: Level 01 **completed** (e.g. 3 gold star
+          s, "REPLAY" button), Level 02 **unlocked / next** (highlighted,
+           START) |
+      34  | ☐ | `01-welcome-continue.png` | *(Optional)* Welcome screen f
+          or a returning player: CONTINUE MISSION (main) and NEW GAME (se
+          condary) buttons |
+
+⏺ I've chosen both open questions based on what the challenge rewards, and
+  updated the scenarios to match. They're now v2 in
+  docs/SCENARIOS_MISSION_01.md. The two decisions:
+
+  Question: Mission name
+  Choice: Mission 01 — Survive the Lunar Cycle, with "📍 Lunar Outpost" as the
+    place name
+  Why judges will favour it: The title names the core trade-off: solar power by
+    day, battery survival by night. It also matches your Levels design, so that
+    screen doesn't change.
+  ────────────────────────────────────────
+  Question: Radiation
+  Choice: Radiation Dose: a meter that fills up and never goes down
+  Why judges will favour it: Radiation adds up in the body over a mission and
+    can't be undone. "Shield integrity" would teach something untrue, and the
+    brief says accuracy beats polish. Kids learn that every trip outside adds
+    radiation for good.
+
+  What I changed in the scenarios
+
+  - Every choice now has a visible cost. In v1, four options cost nothing, which
+    the brief warns against. I reworked them: on Days 1 and 7 the crew now goes
+    outside to tilt the panels, costing oxygen and radiation. Day 10 harvesting
+    now needs lab power, and resting on Day 10 costs heater power. Every card
+    shows at least one red ▼ or a ⏳ "matters later" badge.
+  - Decisions visibly come back later. On Day 6 the game says "Your soil shield
+    from Day 4 cut the radiation in half!" Leaving the panels dusty triggers a
+    daily note.
+  - Failing is gentler. A failed mission now opens a short debrief: "The crew
+    got home safely", the two decisions that used up the resource, a tip, then
+    Try Again. The brief asks for failure that doesn't feel like punishment.
+  - Day 6 uses real solar flares. The placeholder became a list of 7 real
+    X-class flares from 2011–2024, labelled as archived NASA data, never as
+    live.
+  - I added a glossary and a Science Sources screen, so players can see where
+    each fact comes from.
+  - I corrected two facts: the Moon night is −130 °C (−208 °F), and a radio
+    message from Mars takes about 5 to 20 minutes.
+
+  Something to know
+
+  I tried to check the flares against NASA's space weather database (DONKI) and
+  couldn't. The api.nasa.gov endpoint returned a 404 error and NASA's direct
+  server timed out. The 7 flares are well-documented events, but I've marked
+  each one to confirm against DONKI before launch. This also shows why the game
+  should store the flare list inside the app rather than call the API while
+  children play. A live "Right now on the real Sun" panel stays as an optional
+  extra for later.
+
+  What it means for your designs
+
+  I updated docs/ASSET_REQUESTS.md with:
+  - Learn to Survive screen: the Radiation card changes from "SHIELD INTEGRITY
+    94%" to "RADIATION DOSE 6%".
+  - Mission Overview: the new title.
+  - Mission Aborted: the debrief layout.
+  - Three new screens: the Real Space Fact pop-up, the solar flare alert, and
+    the Science Sources screen.
+
+  I also marked both questions as decided in docs/PROJECT_PLAN.md.
+
+  The scenario file is ready for your review. Once you approve it, I'll start
+  Phase 2: setting up the project and converting this file into the game's data.
+
+❯ <ide_opened_file>The user opened the file
+  /Users/admin/Desktop/LunarQuest/docs/SCENARIOS_MISSION_01.md in the IDE. This
+  may or may not be related to the current task.</ide_opened_file>
+❯ lets go and that now
+
+⏺ I'll treat that as approval and start Phase 2: setting up the project and
+  converting the scenarios into game data. First I'll check which tools are
+  installed.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Node 26 and npm are installed, but pnpm isn't. I'll use npm instead so I don't
+  change your global setup; it makes no practical difference here. Next I'll
+  set up git and the project files.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Everything installed with no vulnerabilities. TypeScript is now version 7 (the
+  rewritten compiler), so I'll check that its command still works as expected.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ TypeScript 7 works. Next I'll write the config files and the app shell.
+
+  Ran 2 shell commands (ctrl+o to expand)
+
+⏺ The router API is as expected. Now the core of Phase 2: the game data model.
+  I'll write the Zod schema, which validates the scenario files and gives us
+  TypeScript types from the same definitions.
+
+⏺ Write(src/game/schema.ts)
+  ⎿  Wrote 172 lines to src/game/schema.ts
+      1 /**
+      2  * Zod schemas for all game content (missions, scenarios, balance
+        ).
+      3  *
+      4  * Content lives in `src/data/` as plain data. These schemas are
+        the single
+      5  * definition of its shape: TypeScript types are inferred from th
+        em (see
+      6  * types.ts), and `loadMission()` validates the data at startup s
+        o a typo in a
+     … +166 lines (ctrl+o to expand)
+
+⏺ Write(src/game/types.ts)
+  ⎿  Wrote 67 lines to src/game/types.ts
+       1 /**
+       2  * Game types. Content types are inferred from the Zod schemas s
+         o the schema
+       3  * and the type can never drift apart. Runtime state types are d
+         efined here.
+       4  */
+       5 import type { z } from 'zod';
+       6 import type {
+       7   dayPlanSchema,
+       8   decisionSchema,
+     … +59 lines (ctrl+o to expand)
+
+⏺ Next is the mission content file. I'm copying the text word for word from the
+  approved scenario document.
+
+⏺ Write(src/data/missions/mission-01/content.json)
+  ⎿  Wrote 446 lines to src/data/missions/mission-01/content.json
+       1 {
+       2   "missionId": "mission-01",
+       3   "title": "Survive the Lunar Cycle",
+       4   "location": "Lunar Outpost",
+       5   "days": [
+       6     { "day": 1, "options": [{ "scenarioId": "d01-wake-up" }] },
+       7     { "day": 2, "options": [{ "scenarioId": "d02-dusty-panels" }
+         ] },
+       8     { "day": 3, "options": [{ "scenarioId": "d03-seeds" }] },
+       9     { "day": 4, "options": [{ "scenarioId": "d04-build-shield" }
+     … +438 lines (~19 KB) (ctrl+o to expand)
+
+⏺ Now the remaining data files: balance numbers, sources, real solar flares, the
+  15 levels, and the map equipment IDs.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The data files are written, and I'm building the loader next to check that the
+  pieces fit together. · summary
+
+⏺ Write(src/game/loadMission.ts)
+  ⎿  Wrote 131 lines to src/game/loadMission.ts
+       1 /**
+       2  * Turns raw mission data into a validated `Mission`.
+       3  *
+       4  * Two layers of checks:
+       5  * 1. Shape: Zod schemas (field types, required text, kebab-case
+          ids…).
+       6  * 2. References: things a schema can't see, e.g. every flag a s
+         cenario reads
+       7  *    must be set by some decision, and every day must resolve t
+         o a scenario.
+     … +124 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Now the Phase 2 tests. They also check that the game data still matches the
+  approved scenario document word for word, so the two can't drift apart.
+
+⏺ Write(src/data/missions/mission-01.test.ts)
+  ⎿  Wrote 106 lines to src/data/missions/mission-01.test.ts
+      1 import { readFileSync } from 'node:fs';
+      2 import { resolve } from 'node:path';
+      3 import { describe, expect, it } from 'vitest';
+      4 import { decisionHasCost, loadMission, MissionDataError } from '.
+        ./../game/loadMission';
+      5 import { EQUIPMENT_IDS } from '../maps/outpost-01';
+      6 import { sources } from '../sources';
+      7 import { balance } from './mission-01/balance';
+      8 import content from './mission-01/content.json';
+      9 import { getMission } from './index';
+     … +97 lines (ctrl+o to expand)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ All 10 tests passed. One tidy-up: the data has two ⏳ hint texts that the
+  document doesn't, for Day 3A and Day 4A. Rather than leave a test exception
+  for them, I'll add them to the document.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Now a minimal app shell, so the dev server runs and every screen has its
+  route. The screens are placeholders here; they get built properly in Phase 4.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The type check passes, all 10 tests pass, and the production build works. Last
+  check: the dev server actually serves the app.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The dev server works. I'll mark Phase 2 done in the plan.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Phase 2 is done: the project is set up and all 16 Mission 01 scenarios are
+  loaded as game data and checked. The type check, all 10 tests, the production
+  build and the dev server all work. The screens are still placeholders, so
+  there's nothing to look at yet beyond plain pages you can click through. The
+  real screens come in Phase 4.
+
+  What was built
+
+  - Project setup: git, Vite, React 19, TypeScript 7 and Tailwind v4, plus React
+    Router, Zustand, Zod and Motion. I used npm because pnpm isn't installed;
+    for a project this size that doesn't matter.
+  - Data model: src/game/schema.ts defines the shape of every scenario, decision
+    and resource effect, and src/game/types.ts gets its types from it. It also
+    defines the saved-game state that Phase 7 will store.
+  - Mission 01 data: content.json (src/data/missions/mission-01/content.json)
+    holds all 16 scenarios and their text. balance.ts
+    (src/data/missions/mission-01/balance.ts) holds every number, marked as
+    placeholders. Branching (Day 10), the random event (Day 11) and the flag
+    effects (dusty panels, soil shield) are all data, not code. Adding Mission
+    02 means adding a folder, with no screen changes.
+  - Checks when data loads: loadMission.ts (src/game/loadMission.ts) rejects
+    broken data with a list of every problem at once. That covers a missing day,
+    a flag used but never set, an unknown map object or source, a branching day
+    with no fallback, and radiation going down.
+  - Supporting data:
+    - levels.ts (src/data/levels.ts): the 15 levels from your design.
+    - solar-flares.ts (src/data/solar-flares.ts): the 7 real flares.
+    - sources.ts (src/data/sources.ts): the source list. The web addresses are
+      left empty on purpose rather than guessed.
+  - App shell: every screen has its own web address (route), with placeholders
+    you can click through from Welcome to Gameplay.
+
+  Tests (mission-01.test.ts (src/data/missions/mission-01.test.ts))
+
+  - The text matches word for word. Every title, situation, option and fact in
+    the game data is checked against SCENARIOS_MISSION_01.md
+    (docs/SCENARIOS_MISSION_01.md). If either one is edited without the other,
+    the test fails.
+  - No choice is free: every option has a cost or a ⏳ hint, as the challenge
+    requires.
+  - Six tests feed in deliberately broken data to confirm the checks catch it.
+
+  Small things I changed
+
+  - Two ⏳ hint texts were added to the scenario document: "Your garden will
+    grow later" (Day 3A) and "Protects the crew in a future storm" (Day 4A). The
+    cards needed text there.
+  - New: Mission Debrief tips. The Mission Aborted screen shows a tip for
+    whichever resource ran out. You'd only approved the power tip, so I wrote
+    these two; please check them:
+    - Oxygen: "Every trip outside uses extra oxygen. Fresh air filters and
+      plants can help!"
+    - Radiation: "Radiation adds up and never goes away. Stay in the shelter
+      during solar storms!"
+
+  What remains
+
+  - Nothing is committed yet. Git is set up, but I won't commit until you say
+    so. Shall I make the first commit?
+  - Phase 3 (styling and reusable components) is next. I'll pull the logo,
+    backgrounds, resource icons and level thumbnails out of your PDFs. Separate
+    exports of those images (section B of ASSET_REQUESTS.md
+    (docs/ASSET_REQUESTS.md)) would keep transparent backgrounds and full
+    quality. If you have them, send them before I start; if not, extracting from
+    the PDFs works fine.
+  - Font names are still needed. Check which fonts UX Pilot used. Otherwise I'll
+    pick the closest free fonts.
+
+❯ u can commit it.
+  and pls try to replicate by analyzing the image, there is no font i know
+  about heree
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The first commit is in. Next I'll identify the fonts. The PDFs may still
+  contain the embedded font files with their names, which is more reliable than
+  judging by eye, so I'll check there first.
+
+  Ran 1 shell command (ctrl+o to expand)
+⏺ The design's PDFs use one font throughout, Fredoka, with Helvetica appearing
+  only in the UX Pilot footer. I'm next checking which Fredoka weights the
+  headings and body text use. · summary
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Fredoka goes in at weight 700 for headings and buttons and 400 for body text,
+  bundled with the app since it's free. Next I'm pulling the images out using
+  PyMuPDF in a separate scratchpad environment. · summary
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ While that installs, I'm writing the extraction script to save each embedded
+  image with its transparency and record where it sits on the page. · summary
+
+  Made 1 scratchpad edit +53, read 1 file (ctrl+o to expand)
+
+⏺ The install is still running (most likely a slow download). I'll wait for it
+  to finish.
+
+⏺ Background command "Install PyMuPDF in an isolated scratchpad venv" completed
+(exit code 0)
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ I extracted 30 images. To identify them quickly I'll lay them out on one
+  contact sheet with their filenames.
+
+  Read 1 file, ran 1 shell command (ctrl+o to expand)
+
+⏺ I've mapped every asset: the welcome and briefing art, three transparent
+  resource icons, and the level thumbnails built from four repeating pictures.
+  I'll read exact text sizes, colours and positions from the PDFs rather than
+  estimating them from screenshots. · summary
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Every measurement converts to whole pixels at 1440 px, and every colour is a
+  stock Tailwind shade, so the same classes can rebuild the design. I'm reading
+  the remaining measurements next. · summary
+
+  Read 1 file (ctrl+o to expand)
+
+⏺ I have exact measurements for all four screens now. Next I'll check the size
+  of the extracted images and whether Chrome is installed, so I can compare my
+  build against your designs. · summary
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Chrome is available for screenshots, and I'll resize the 1–2.5 MB images to
+  twice their on-screen size with sips, keeping the full-size originals.
+  · summary
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The game's images went from 17 MB to 1.8 MB. Next I'll install the font and an
+  icon library.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ npm reported that a package wanted to run an install script and that it was
+  blocked. I'll check which one before going on.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The blocked script is an optional macOS watcher from Vite, so I'll leave it
+  blocked. Fredoka is installed at weights 300–700, and I'm moving on to the
+  design tokens from your PDFs. · summary
+
+⏺ Write(src/index.css)
+  ⎿  Added 85 lines, removed 10 lines
+       1  @import 'tailwindcss';
+       2 +@import '@fontsource-variable/fredoka';                        
+       3  
+       3 -/* Design tokens are finalised in Phase 3. Base only for now. *
+         -/                                                              
+       4 -html,                                                          
+       5 -body,                                                          
+       6 -#root {                                                        
+       7 -  height: 100%;                                                
+       4 +/*                                                             
+       5 + * LunarQuest design tokens.                                   
+       6 + *                                                             
+       7 + * Measured from the UX Pilot PDFs (image-assets/*.pdf). The de
+         +signs were built                                               
+       8 + * on a 1440px-wide canvas with Tailwind's default palette, so 
+         +most values map                                                
+       9 + * 1:1 to stock Tailwind classes (blue-600 buttons, slate-900 p
+         +anels, …).                                                     
+      10 + * Only values that are NOT stock Tailwind are defined here.   
+      11 + */                                                            
+      12 +@theme {                                                       
+      13 +  /* The only typeface in the designs: Fredoka 400 (body) and 7
+         +00 (headings, buttons). */                                     
+      14 +  --font-sans: 'Fredoka Variable', 'Fredoka', ui-rounded, syste
+         +m-ui, sans-serif;                                              
+      15 +                                                               
+      16 +  /* Page background, #050b1a in every design. */              
+      17 +  --color-space: #050b1a;                                      
+      18 +                                                               
+      19 +  /* Resource colours (Learn to Survive screen). */            
+      20 +  --color-life: var(--color-cyan-400);                         
+      21 +  --color-life-soft: var(--color-cyan-300);                    
+      22 +  --color-power: var(--color-yellow-400);                      
+      23 +  --color-power-soft: var(--color-yellow-300);                 
+      24 +  --color-radiation: var(--color-purple-400);                  
+      25 +  --color-radiation-soft: var(--color-purple-300);             
+      26 +  --color-star: var(--color-yellow-400);                       
+      27 +                                                               
+      28 +  /* Soft coloured glows used behind headings and buttons. */  
+      29 +  --shadow-glow-blue: 0 0 32px rgb(37 99 235 / 0.5);           
+      30 +  --shadow-glow-blue-lg: 0 0 48px rgb(30 58 138 / 0.6);        
+      31 +  --shadow-glow-panel: 0 0 64px rgb(30 58 138 / 0.4);          
+      32 +                                                               
+      33 +  --animate-twinkle: twinkle 4s ease-in-out infinite;          
+      34 +                                                               
+      35 +  @keyframes twinkle {                                         
+      36 +    0%,                                                        
+      37 +    100% {                                                     
+      38 +      opacity: 0.35;                                           
+      39 +    }                                                          
+      40 +    50% {                                                      
+      41 +      opacity: 1;                                              
+      42 +    }                                                          
+      43 +  }                                                            
+      44  }
+      45  
+      10 -body {                                                         
+      11 -  margin: 0;                                                   
+      12 -  background: #050a1a;                                         
+      13 -  color: #e6ecff;                                              
+      14 -  font-family: system-ui, sans-serif;                          
+      46 +@layer base {                                                  
+      47 +  html,                                                        
+      48 +  body,                                                        
+      49 +  #root {                                                      
+      50 +    min-height: 100%;                                          
+      51 +  }                                                            
+      52 +                                                               
+      53 +  body {                                                       
+      54 +    margin: 0;                                                 
+      55 +    background-color: var(--color-space);                      
+      56 +    color: var(--color-blue-100);                              
+      57 +    font-family: var(--font-sans);                             
+      58 +    -webkit-font-smoothing: antialiased;                       
+      59 +    -moz-osx-font-smoothing: grayscale;                        
+      60 +  }                                                            
+      61 +                                                               
+      62 +  /* Visible keyboard focus everywhere — required for accessibi
+         +lity. */                                                       
+      63 +  :focus-visible {                                             
+      64 +    outline: 3px solid var(--color-blue-300);                  
+      65 +    outline-offset: 3px;                                       
+      66 +  }                                                            
+      67  }
+      68 +                                                               
+      69 +@layer utilities {                                             
+      70 +  /* Glowing headline text, e.g. "THREE RESOURCES. ONE MISSION.
+         +" */                                                           
+      71 +  .text-glow {                                                 
+      72 +    text-shadow: 0 0 24px rgb(96 165 250 / 0.55);              
+      73 +  }                                                            
+      74 +                                                               
+      75 +  .text-glow-strong {                                          
+      76 +    text-shadow:                                               
+      77 +      0 0 16px rgb(96 165 250 / 0.6),                          
+      78 +      0 0 40px rgb(96 165 250 / 0.35);                         
+      79 +  }                                                            
+      80 +}                                                              
+      81 +                                                               
+      82 +@media (prefers-reduced-motion: reduce) {                      
+      83 +  *,                                                           
+      84 +  *::before,                                                   
+      85 +  *::after {                                                   
+      86 +    animation-duration: 0.01ms !important;                     
+      87 +    animation-iteration-count: 1 !important;                   
+      88 +    transition-duration: 0.01ms !important;                    
+      89 +  }                                                            
+      90 +}                                                              
+
+⏺ Before writing the components, one more measurement: the exact corner radius
+  of each panel and button, read from the vector paths in the PDFs.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ That method was wrong: corners are drawn as several small curve segments, so
+  measuring one segment underestimates the radius. A better measure is where the
+  straight top edge begins.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The control points still sit on the same edges, so the numbers are unreliable.
+  I'm rendering 3× close-ups of the corners from your designs to check
+  visually. · summary
+
+  Read 1 file, ran 1 shell command (ctrl+o to expand)
+
+⏺ Corner radii are 24 px for the picture frame, 16 px for panels and cards, 12
+  px for buttons and the locked level card, and 8 px for thumbnails; the active
+  card also gets a 2 px blue border and a soft ring. Next I'll look at the
+  reusable components. · summary
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The components are done, and I'm building your four designed screens with them
+  next so the design system gets tested against the PDFs. · summary
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ Now I'll connect the four screens to the router and type-check.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ The type check passes. Now the visual check: I'll screenshot each screen in
+  headless Chrome at your designs' size (1440×1024) and put each next to the
+  original.
+
+  Read 4 files, ran 3 shell commands (ctrl+o to expand)
+⏺ All four screens are close; I found three differences (briefing column width
+  and background glow, a slightly stronger title glow on Learn to Survive, and
+  dimmer locked rows on Levels), and I'll fix them and re-check. · summary
+
+  Read 1 file, ran 1 shell command (ctrl+o to expand)
+
+⏺ The CONTINUE button is 64 px against the design's 72 px, so I'm fixing that
+  and then checking tablet layouts. · summary
+
+  Read 1 file, ran 1 shell command (ctrl+o to expand)
+
+⏺ Tablet layouts are working, but on Briefing the stacked image pushes CONTINUE
+  to the bottom edge. I'm capping the image height on narrow screens before
+  running all the checks. · summary
+
+  Read 1 file, ran 1 shell command (ctrl+o to expand)
+
+⏺ The tablet layout now fits on one screen. I'll update the plan and asset list
+  to show what was extracted from your PDFs, since those assets no longer need
+  sending.
+
+  Ran 1 shell command (ctrl+o to expand)
+
+⏺ A new file has appeared in your folder: uxpilot-export-11-14-26 (2) copy.pdf.
+  I'll check whether it's a new design.
+
+  Read 1 file, ran 1 shell command (ctrl+o to expand)
+
+⏺ API Error: No response from API (waited 10m, then 10m on the retry).
+  If a proxy or gateway on your network holds responses until they
+  complete, raise API_TIMEOUT_MS or CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS
+  to wait longer.
+
+❯ keep going
+
+⏺ API Error: No response from API (waited 10m, then 10m on the retry).
+  If a proxy or gateway on your network holds responses until they
+  complete, raise API_TIMEOUT_MS or CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS
+  to wait longer.
+
+❯ keep going
+
+⏺ API Error: No response from API (waited 10m, then 10m on the retry).
+  If a proxy or gateway on your network holds responses until they
+  complete, raise API_TIMEOUT_MS or CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS
+  to wait longer.
+
+❯ continue pls. btw, I have added a couple of other uis as well, now in the
+  form of image
+
+⏺ API Error: No response from API (waited 10m, then 10m on the retry).
+  If a proxy or gateway on your network holds responses until they
+  complete, raise API_TIMEOUT_MS or CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS
+  to wait longer.
+
+❯ i have added a lots of ui so that you will fill free to coninue your job. and
+  most imortantly, don't forget to tell me other ui's that i have n't included
+  with their specification, i am here to help out with anythnig related to ui.
+
+⏺ API Error: No response from API (waited 10m, then 10m on the retry).
+  If a proxy or gateway on your network holds responses until they
+  complete, raise API_TIMEOUT_MS or CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS
+  to wait longer.
+
+❯ /model sonnet
+  ⎿  Set model to claude-sonnet-5-5
+
+❯ keep going
+
+⏺ API Error: No response from API (waited 10m, then 10m on the retry).
+  If a proxy or gateway on your network holds responses until they
+  complete, raise API_TIMEOUT_MS or CLAUDE_STREAM_FIRST_BYTE_TIMEOUT_MS
+  to wait longer.
+
+❯ keep going

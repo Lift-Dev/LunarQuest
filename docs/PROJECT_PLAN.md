@@ -219,15 +219,18 @@ Each phase ends with: a summary of what was done, what remains, checks run (`tsc
 - [x] Checks: `npm run typecheck` ✅ · `npm test` 10/10 ✅ · `npm run build` ✅ · `npm run dev` ✅
 - **Done when:** ✅ dev server runs and tests validate the real data, including a test that the data matches SCENARIOS_MISSION_01.md word for word
 
-### Phase 3: Design system and assets (~1–1.5 days)
-- [ ] Extract images from the 4 PDFs, or use your originals; organise them into `public/assets/<screen>/`
-- [ ] Design tokens (colours, radii, glows, spacing, fonts) in `tokens.css` + Tailwind theme
-- [ ] Components: `Button` (primary/secondary/pill), `Panel`, `Chip`, `ProgressBar` (cyan/amber/violet), `StarRating`, `Modal`, `ScreenBackground` (stars + glows), `Stage` (16:9 container)
-- [ ] A `/dev/components` page showing every component for visual review
-- **Done when:** you approve the component sheet side by side with your designs
+### ✅ Phase 3: Design system and assets (done 2026-11-15)
+- [x] **Font identified from the PDFs: Fredoka** (400 body, 700 headings/buttons), bundled via `@fontsource-variable/fredoka` (works offline)
+- [x] Exact sizes and colours read from the PDF vectors: the designs use a 1440px canvas and stock Tailwind colours, so they map 1:1 to Tailwind classes
+- [x] 30 embedded images extracted. Full-size originals are in `image-assets/extracted/`; optimised copies (2× display size, 17 MB → 1.8 MB) are in `public/assets/`
+- [x] Tokens in `src/index.css` (`@theme`): font, `space` background, resource colours, glows, reduced-motion support, focus rings
+- [x] Components in `src/design-system/`: `Button` (pill / primary / raised / ghost), `Panel` (card / solid / row / active), `Chip`, `ProgressBar`, `StarRating`, `ScreenBackground`
+- [x] The 4 designed screens were rebuilt to test the components: Welcome, Your Mission, Learn to Survive, Your Journey. Compared side by side with the PDFs at 1440×1024 and checked at tablet portrait 834×1194
+- [ ] Not done: a separate `/dev/components` page. The four real screens act as the component sheet. ESLint/Prettier are moved to Phase 8
+- **Done when:** you approve the side-by-side comparisons
 
-### Phase 4: Screens and navigation (~2 days)
-- [ ] Welcome, Your Mission, Learn to Survive, Mission Levels: pixel-matched to your PDFs
+### Phase 4: Screens and navigation (~1.5 days)
+- [x] Welcome, Your Mission, Learn to Survive, Mission Levels: pixel-matched to your PDFs (done early, in Phase 3)
 - [ ] How to Play, Mission Overview, Aborted, Complete: built from the references you send
 - [ ] Router + guards (locked mission → redirect to Levels)
 - [ ] Desktop 16:9 + tablet landscape/portrait layouts
